@@ -1,21 +1,41 @@
 import Image from "next/image";
-import data from '@/utils/musei.json'
 import TicketCard from "@/app/_components/TicketCard";
-import getLowerPrice from "@/helpers/price/getLowerPrice";
-import Link from "next/link";
 import TwoPartsDescription from "@/app/_components/TwoPartsDescription";
 import EventCard from "@/app/_components/EventCard";
+import {getExperiences} from "@/app/lib/domnia-experiences";
 
 export default async function MuseoCivico() {
-    let content;
+    let content, museums, filteredMuseums, bundle, standard, groups, schools, extra, contentEvents, events;
 
     try {
-        const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/museums/r1zzi0yzdpufn49yxpg9yjt2'+
-            '?populate[0]=immagine',
+        museums = await getExperiences('/');
+        filteredMuseums = museums.filter(el => el.tagIds.includes(12));
+        bundle = museums.filter(el => el.tagIds.includes(10) && el.slug.includes('cumulativo'))[0];
+        standard = filteredMuseums.filter(el => el.tagIds.includes(7))[0];
+        groups = filteredMuseums.filter(el => el.tagIds.includes(8))[0];
+        schools = filteredMuseums.filter(el => el.tagIds.includes(9))[0];
+        extra = filteredMuseums.filter(el => el.tagIds.includes(10))[0];
+        events = museums.filter(el => el.tagIds.includes(11));
+
+        const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/museums/r1zzi0yzdpufn49yxpg9yjt2?populate=*',
             {next: {revalidate: 1000}}
         );
         content = await data.json();
-        console.log(content)
+
+        const dataEvents = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/events?populate=*',
+            {next: {revalidate: 1000}}
+        );
+        contentEvents = await dataEvents.json();
+
+        for(const event of events) {
+            for(const contentEvent of contentEvents.data) {
+                if(event.slug === contentEvent.slug) {
+                    event.immagine = contentEvent.immagine
+                }
+            }
+        }
+    // tag:7/8/9/10
+    // tag:12
 
     } catch(e) {
         console.log(e);
@@ -27,10 +47,10 @@ export default async function MuseoCivico() {
                 // src='/placeholders/0-hero.jpg'
                 src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine.url}
                 alt="Cremona vista dall'alto" width={500} height={500}
-                className="w-full"
+                className="w-full h-[70dvh] object-cover"
             />
             {/*Lista biglietti*/}
-            <section className="w-[90%] mx-auto pt-8">
+            <section className="w-[90%] md:w-[85%] mx-auto pt-8">
                 <div className="mb-8">
                     <p className="text-sm mb-8 font-light">Home / {content.data.titolo}</p>
                     <h1 className="text-4xl mb-4 font-semibold">{content.data.titolo}</h1>
@@ -41,68 +61,68 @@ export default async function MuseoCivico() {
                     />
                 </div>
 
-                <div className="flex flex-col gap-4">
-                    <TicketCard el={{
+                <div className="flex flex-col md:flex-row w-full md:flex-wrap gap-4">
+                    <TicketCard
+                        layout="half"
+                        el={{
                         titolo: "Ticket",
-                        nome: "Ticket " + data[0].nome,
-                        descrizione: data[0].descrizione,
+                        nome: "Ticket " + standard?.title,
+                        descrizione: standard?.description?.replace(/<\/?[^>]+(>|$)/g, ""),
                         infoPrezzo: "A partire da:",
-                        prezzo: getLowerPrice(data[0].biglietti),
+                        prezzo: standard?.cheapest,
                         pic: "0-ticket",
-                        slug: content.data.slug,
+                        slug: standard?.slug,
                         immagine: content.data.immagine_biglietti_standard
                     }}/>
 
-                    <TicketCard el={{
+                    <TicketCard
+                        layout="half"
+                        el={{
                         titolo: "Esperienze",
-                        nome: "Un'opera al giorno",
-                        descrizione: "Un calendario di incontri con focus su opere selezionate, spiegate da chi le conosce al meglio.",
-                        infoPrezzo: "A partire da:",
-                        prezzo: new Intl.NumberFormat("de-DE", {
-                            style: "currency",
-                            currency: "EUR"
-                        }).format(5),
+                        nome: extra?.title,
+                        descrizione: extra?.description?.replace(/<\/?[^>]+(>|$)/g, ""),
+                        infoPrezzo: "",
+                        prezzo: extra?.cheapest,
                         pic: "evento",
-                        slug: content.data.slug,
+                        slug: extra?.slug,
                         immagine: content.data.immagine_biglietti_esperienze
                     }}/>
 
-                    <TicketCard el={{
+                    <TicketCard
+                        layout="third"
+                        el={{
                         titolo: "Ticket Cumulativo",
-                        nome: "Ticket Cumulativo: Museo “Ala Ponzone”, Museo “San Lorenzo”, Museo di Storia Naturale, Museo Il “Cambonino Vecchio”",
-                        descrizione: "",
+                        nome: bundle.title,
+                        descrizione: bundle.description?.replace(/<\/?[^>]+(>|$)/g, ""),
                         infoPrezzo: "",
-                        prezzo: new Intl.NumberFormat("de-DE", {
-                            style: "currency",
-                            currency: "EUR"
-                        }).format(12),
-                        pic: "cumulativo",
-                        slug: content.data.slug,
-                        immagine: content.data.immagine_biglietti_standard
+                        prezzo: bundle.cheapest,
+                        slug: bundle.slug,
+                        immagine: content.data.immagine_biglietto_cumulativo
                     }}/>
 
-                    <TicketCard el={{
+                    <TicketCard
+                        layout="third"
+                        el={{
                         titolo: "Gruppi",
-                        nome: "Museo Civico “Ala Ponzone” per gruppi",
-                        descrizione: "Prenota l'accesso per il tuo gruppo. Scopri i ticket ridotti per i gruppi di più di 15 persone.",
-                        infoPrezzo: "",
-                        prezzo: new Intl.NumberFormat("de-DE", {
-                            style: "currency",
-                            currency: "EUR"
-                        }).format(8),
-                        pic: "0-groups",
-                        slug: content.data.slug,
+                        nome: groups?.title,
+                        descrizione: groups?.description?.replace(/<\/?[^>]+(>|$)/g, ""),
+                        infoPrezzo: "A partire da:",
+                        prezzo: groups?.cheapest,
+                        pic: "cumulativo",
+                        slug: groups?.slug,
                         immagine: content.data.immagine_biglietti_gruppi
                     }}/>
 
-                    <TicketCard el={{
+                    <TicketCard
+                        layout="third"
+                        el={{
                         titolo: "Servizi educativi",
-                        nome: "Museo Civico \"Ala Ponzone\" | Ingresso gruppi scolastici",
-                        descrizione: "Prenota l'ingresso per il tuo gruppo scolastico.",
-                        infoPrezzo: "",
-                        prezzo: "Gratuito",
-                        pic: "servizi-educativi",
-                        slug: content.data.slug,
+                        nome: schools?.title,
+                        descrizione: schools?.description?.replace(/<\/?[^>]+(>|$)/g, ""),
+                        infoPrezzo: "A partire da:",
+                        prezzo: schools?.cheapest,
+                        pic: "cumulativo",
+                        slug: schools?.slug,
                         immagine: content.data.immagine_biglietti_scuole
                     }}/>
 
@@ -110,7 +130,7 @@ export default async function MuseoCivico() {
             </section>
 
             {/*Proposte educative*/}
-            <section className="w-[90%] mx-auto pt-8">
+            <section className="w-[90%] md:w-[85%] mx-auto pt-8">
                 <div className="flex flex-col gap-8 p-4 mt-2 w-full text-white rounded-xl gradient">
                     <h3 className="text-2xl font-semibold mt-2 prime-text">Proposte educative</h3>
                     <p>Dalle scuole dell'infanzia, fino agli adulti lavoriamo per aprire le porte dei musei e renderli accessibili al più ampio numero possibile di persone.</p>
@@ -124,9 +144,9 @@ export default async function MuseoCivico() {
             </section>
 
             {/*Eventi*/}
-            <section className="w-[90%] mx-auto pt-8">
+            <section className="w-[90%] md:w-[85%] mx-auto pt-8">
                 <h2 className="text-2xl font-semibold mt-4 mb-8">Eventi</h2>
-                <EventCard/>
+                <EventCard events={events} limit={3}/>
             </section>
         </>
     )

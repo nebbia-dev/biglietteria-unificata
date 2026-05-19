@@ -180,6 +180,7 @@ function enrichExperiences(
             if (
                 productId === undefined ||
                 value === undefined ||
+                value === 0 ||
                 !connectedProducts.has(productId.toString())
             ) {
                 return lowest;
@@ -190,7 +191,7 @@ function enrichExperiences(
             }
 
             return lowest;
-        }, productGroup.cheapest);
+        }, undefined);
 
         return {
             ...productGroup,

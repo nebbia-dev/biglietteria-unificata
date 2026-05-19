@@ -15,7 +15,6 @@ export default async function Faq(){
             {next: {revalidate: 1000}}
         );
         content = await data.json();
-        console.log(content)
 
     } catch(e) {
         unstable_rethrow(e);
@@ -25,7 +24,7 @@ export default async function Faq(){
     return(
         <>
             {/*FAQs*/}
-            <section className="w-[90%] mx-auto pt-8">
+            <section className="w-[90%] md:w-[85%] mx-auto pt-8">
                 <p className="text-sm mb-8 font-light">Home / FAQ</p>
                 <h1 className="text-4xl mb-8 font-semibold">FAQ</h1>
 
@@ -33,12 +32,12 @@ export default async function Faq(){
                     content.data.map(el => {
                         return(
                             <Accordion key={el.documentId}>
-                                <AccordionSummary expandIcon={<Plus/>}
+                                <AccordionSummary expandIcon={<Plus />}
                                                   aria-controls={`${el.documentId}-content`}
                                                   id={`${el.documentId}-header`}
                                                   sx={{
                                                       fontWeight: 500,
-                                                      fontSize: "1.125rem",
+                                                      fontSize: "1rem",
                                                       gap: "32px",
                                                       padding: "0 24px",
                                                       '& .MuiAccordionSummary-content': {
@@ -69,24 +68,29 @@ export default async function Faq(){
                 }
             </section>
             {/*Contact form*/}
-            <section className="w-[90%] mx-auto pt-8">
-                <h2 className="text-3xl font-semibold my-8">Hai bisogno di info specifiche? Scrivici!</h2>
+            <section className="w-[90%] md:w-[85%] mx-auto pt-8 mt-4">
+                <h2 className="text-3xl font-semibold mb-8">Hai bisogno di info specifiche? Scrivici!</h2>
 
                 <form className="bg-white rounded-xl flex flex-col gap-4 p-4">
-                    <label aria-label="Nome" className="text-sm" htmlFor="name">Nome
-                        <input type="text" id="name" name="name" className="w-full rounded-xl bg-[#ecf0f2] h-[48px] p-2"/>
+                    <label htmlFor="name" className="text-sm">Nome *
+                        <input id="name" name="name" placeholder="Nome (obbligatorio)" type="text"
+                               className="w-full rounded-xl bg-[#ecf0f2] h-[48px] p-2"/>
                     </label>
-                    <label aria-label="Cognome" className="text-sm" htmlFor="lastname">Cognome
-                        <input type="text" id="lastname" name="lastname" className="w-full rounded-xl bg-[#ecf0f2] h-[48px] p-2"/>
+                    <label htmlFor="lastname" className="text-sm">Cognome *
+                        <input id="lastname" name="lastname" placeholder="Cognome (obbligatorio)" type="text"
+                               className="w-full rounded-xl bg-[#ecf0f2] h-[48px] p-2"/>
                     </label>
-                    <label aria-label="Indirizzo email" className="text-sm" htmlFor="newsletter-email">Email
-                        <input type="email" id="newsletter-email" name="newsletter-email" className="w-full rounded-xl bg-[#ecf0f2] h-[48px] p-2"/>
+                    <label htmlFor="info-email" className="text-sm">Email *
+                        <input id="info-email" name="info-email" placeholder="Indirizzo email (obbligatorio)"
+                               type="email" className="w-full rounded-xl bg-[#ecf0f2] h-[48px] p-2"/>
                     </label>
-                    <label aria-label="Contenuto della richiesta" className="text-sm" htmlFor="message">Messaggio
-                        <textarea id="message" name="message" className="w-full rounded-xl bg-[#ecf0f2] h-[48px] p-2"/>
+                    <label htmlFor="message" className="text-sm">Messaggio *
+                        <textarea id="message" name="message" placeholder="Messaggio (obbligatorio)"
+                                  className="w-full rounded-xl bg-[#ecf0f2] h-[48px] p-2"/>
                     </label>
-                    <div className="text-black w-full font-medium text-sm">
-                        <button type="submit" className="w-full text-center prime-bg rounded-full px-4 py-2">Invia
+                    <div className="text-black w-full md:flex md:justify-end font-medium text-sm">
+                        <button type="submit"
+                                className="w-full md:w-fit text-center prime-bg rounded-full px-4 py-2">Invia
                         </button>
                     </div>
                 </form>

@@ -96,7 +96,7 @@ export default function Menu() {
 
     return (
         <>
-            <header id="header" className="bg-black flex justify-between items-center w-full px-4 py-4">
+            <header id="header" className="bg-black flex justify-between items-center w-full px-4 md:px-12 py-4">
                 <Link href="/">
                     <Image src='/icons/logo.png'
                            alt="museo civici cremona logo" width={48} height={48}
@@ -118,7 +118,7 @@ export default function Menu() {
                 <nav
                     id="mainMenu"
                     className="hidden md:block text-white">
-                    <ul className="flex gap-4">
+                    <ul className="flex items-center gap-8">
                         <li className="flex flex-col relative">
                             <button type="button"
                                     onPointerDown={() => {
@@ -132,13 +132,13 @@ export default function Menu() {
                                         toggleMuseumsMenu();
                                     }}
                                     id="museumsButton"
-                                    className="min-w-[100px] border-b border-black/50 cursor-pointer pr-4 flex justify-between items-center">
+                                    className="min-w-[64px] border-b border-black/50 cursor-pointer flex justify-between items-center">
                                 <span className="font-semibold">Musei</span>
                                 <span
                                     className={`${showMuseumsMenu === 'open' ? 'rotate-90' : 'rotate-0'} transition-all duration-500 origin-center`}>&gt;</span>
                             </button>
                             <ul id="museumsSubmenu" inert={showMuseumsMenu === 'close'}
-                                className={`${showMuseumsMenu === 'open' ? 'max-h-[1000px]' : 'max-h-0'} w-[250px] right-[15%] top-[48px] pl-4 transition-all duration-500 absolute bg-black`}>
+                                className={`${showMuseumsMenu === 'open' ? 'max-h-[1000px]' : 'max-h-0'} w-[250px] right-[15%] top-[48px] pl-4 transition-all duration-500 absolute bg-black z-100`}>
                                 <li className={`${showMuseumsMenu === 'open' ? 'block' : 'hidden'} py-3`}>
                                     <Link
                                         href="/museo-civico-ala-ponzone"
@@ -186,13 +186,13 @@ export default function Menu() {
                                         pointerFocusRef.current = false;
                                         toggleVisitMenu();
                                     }}
-                                    className="min-w-[100px] border-b border-black/50 cursor-pointer pr-4 flex justify-between items-center">
+                                    className="min-w-[64px] border-b border-black/50 cursor-pointer flex justify-between items-center">
                                 <span className="font-semibold">Visita</span>
                                 <span
                                     className={`${showVisitMenu === 'open' ? 'rotate-90' : 'rotate-0'} transition-all duration-500 origin-center`}>&gt;</span>
                             </button>
                             <ul id="visitSubmenu" inert={showVisitMenu === 'close'}
-                                className={`${showVisitMenu === 'open' ? 'max-h-[1000px]' : 'max-h-0'} w-[200px] top-[48px] pl-4 transition-all duration-500 absolute bg-black`}>
+                                className={`${showVisitMenu === 'open' ? 'max-h-[1000px]' : 'max-h-0'} w-[200px] top-[48px] pl-4 transition-all duration-500 absolute bg-black z-100`}>
                                 <li className={`${showVisitMenu === 'open' ? 'block' : 'hidden'} py-3`}>
                                     <Link
                                         href="/info-gruppi"
@@ -255,6 +255,22 @@ export default function Menu() {
                                 Contatti
                             </Link>
                         </li>
+
+                        <ul>
+
+                            <li className="flex gap-2">
+                                <a aria-label="Vai alla pagina Facebook dei Musei Civici" href="https://www.facebook.com/cremonamusei/" target="_blank"
+                                   rel="noopener noreferrer" className="w-6">
+                                    <Image src="/icons/hugeicons_facebook-02.webp" alt="facebook logo" width={48}
+                                           height={48}/>
+                                </a>
+                                <a aria-label="Vai alla pagina Instagram dei Musei Civici" href="https://www.instagram.com/cremonamusei/" target="_blank"
+                                   rel="noopener noreferrer" className="w-6">
+                                    <Image src="/icons/logo-instagram.webp" alt="instagram logo" width={48}
+                                           height={48}/>
+                                </a>
+                            </li>
+                        </ul>
 
                     </ul>
                 </nav>

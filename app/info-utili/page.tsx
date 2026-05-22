@@ -34,11 +34,11 @@ export default async function InfoUtili() {
             {content.data &&
                 content.data.map(el => {
                     return (
-                        <section className="w-full md:w-[85%] md:mx-auto" key={el.documentId}>
+                        <section className="w-full md:w-[85%] md:mx-auto md:mt-8" key={el.documentId}>
                             <Image
-                                className="w-full h-[200px] object-cover md:rounded-xl"
+                                className="w-full h-[200px] object-cover md:rounded-t-xl"
                                 src={process.env.NEXT_PUBLIC_BASE_URL + el.immagine.url} alt="interno museo" width={300} height={200}/>
-                            <div className="w-[90%] mx-auto pt-8">
+                            <div className="w-[90%] md:w-full mx-auto pt-8 md:px-12 md:pb-4 md:bg-white md:rounded-b-xl">
                                 <h2 className="text-2xl mb-4 font-semibold">{el.titolo}</h2>
 
                                     {el.intero === 0 && el.ridotto === 0
@@ -63,7 +63,7 @@ export default async function InfoUtili() {
                                 <h3 className="text-xl mt-4 mb-2 font-semibold">Contatti</h3>
                                 <p>{el.titolo}<br/>{el.indirizzo}</p>
                                 <h4 className="font-medium mt-2 mb-1">Biglietteria:</h4>
-                                <ul>
+                                <ul className="mb-4">
                                     <li>{el.biglietteria_telefono}</li>
                                     <li className="break-all underline"><a href={`mailto:${el.biglietteria_email}`}>{el.biglietteria_email}</a></li>
                                 </ul>
@@ -76,8 +76,9 @@ export default async function InfoUtili() {
                                                       aria-controls={`${el.documentId}-hours-content`}
                                                       id={`${el.documentId}-hours-header`}
                                                       sx={{
-                                                          fontWeight: 500,
+                                                          fontWeight: 600,
                                                           fontSize: "1.25rem",
+                                                          color: '#904E14',
                                                           gap: "32px",
                                                           padding: "0 24px",
                                                           '& .MuiAccordionSummary-content': {
@@ -106,8 +107,9 @@ export default async function InfoUtili() {
                                                       aria-controls={`${el.documentId}-accessibility-content`}
                                                       id={`${el.documentId}-accessibility-header`}
                                                       sx={{
-                                                          fontWeight: 500,
+                                                          fontWeight: 600,
                                                           fontSize: "1.25rem",
+                                                          color: '#904E14',
                                                           gap: "32px",
                                                           padding: "0 24px",
                                                           '& .MuiAccordionSummary-content': {

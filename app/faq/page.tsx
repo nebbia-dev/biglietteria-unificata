@@ -1,9 +1,9 @@
 import {Accordion, AccordionDetails, AccordionSummary} from "@mui/material";
-import {Plus} from "@/app/_components/_icons/Plus";
 import {CircledArrow} from "@/app/_components/_icons/CircledArrow";
 import Link from "next/link";
 import {unstable_rethrow} from "next/navigation";
 import Markdown from "react-markdown";
+import {AccordionArrow} from "@/app/_components/_icons/AccordionArrow";
 
 export default async function Faq(){
 
@@ -15,6 +15,7 @@ export default async function Faq(){
             {next: {revalidate: 1000}}
         );
         content = await data.json();
+        console.log(content.data)
 
     } catch(e) {
         unstable_rethrow(e);
@@ -32,7 +33,7 @@ export default async function Faq(){
                     content.data.map(el => {
                         return(
                             <Accordion key={el.documentId}>
-                                <AccordionSummary expandIcon={<Plus />}
+                                <AccordionSummary expandIcon={<AccordionArrow />}
                                                   aria-controls={`${el.documentId}-content`}
                                                   id={`${el.documentId}-header`}
                                                   sx={{
@@ -41,25 +42,30 @@ export default async function Faq(){
                                                       gap: "32px",
                                                       padding: "0 24px",
                                                       '& .MuiAccordionSummary-content': {
-                                                          margin: "16px 0"
+                                                          margin: "16px 0",
                                                       }
                                                   }}
                                 >
                                     {el.domanda}
                                 </AccordionSummary>
-                                <AccordionDetails id={`${el.documentId}-content`}>
+                                <AccordionDetails
+                                    id={`${el.documentId}-content`}
+                                    sx={{
+                                        padding: "4px 24px 24px 24px",
+                                    }}
+                                >
                                     <div className="markdown whitespace-pre-line">
                                         <Markdown>
                                             {el.risposta}
                                         </Markdown>
                                     </div>
                                     <div className="w-full flex justify-end mt-8">
-                                        <Link
-                                            className="w-fit flex items-center gap-2 text-lg font-medium prime-bg rounded-full px-4 py-2"
+                                        {el.link && <Link
+                                            className="w-fit flex items-center gap-2 font-medium prime-bg rounded-full px-4 py-2"
                                             href={el.link}>
                                             Vai alla sezione
                                             <CircledArrow width={28} height={28}/>
-                                        </Link>
+                                        </Link>}
                                     </div>
                                 </AccordionDetails>
                             </Accordion>

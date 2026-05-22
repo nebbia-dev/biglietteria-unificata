@@ -18,11 +18,11 @@ export default async function Home() {
         bundle = museums.filter(el => el.tagIds.includes(10) && el.slug.includes('cumulativo'))[0];
         events = museums.filter(el => el.tagIds.includes(11));
 
-        const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/homepage'+
-            '?populate[0]=immagine',
+        const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/homepage?populate=*',
             {next: {revalidate: 1000}}
         );
         content = await data.json();
+        console.log(content.data)
 
         const dataMuseums = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/museums?populate=*',
             {next: {revalidate: 1000}})
@@ -59,19 +59,29 @@ export default async function Home() {
         console.log(e)
     }
 
+    const homepage = content.data;
+    const mobileTitle = homepage.titolo_mobile || homepage.titolo;
+    const mobileDescription = homepage.descrizione_mobile || homepage.descrizione;
+
   return (
     <>
-      <Image
-          src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine.url}
-          alt="Cremona vista dall'alto" width={500} height={500}
-          className="w-full h-[70dvh] object-cover object-top block md:hidden"
-      />
+      {/*<Image*/}
+      {/*    src={process.env.NEXT_PUBLIC_BASE_URL + homepage.immagine.url}*/}
+      {/*    alt="Cremona vista dall'alto" width={500} height={500}*/}
+      {/*    className="w-full h-[70dvh] object-cover object-top block md:hidden"*/}
+      {/*/>*/}
         <Carousel pics={pics}/>
         {/*Lista musei*/}
         <section className="w-[90%] md:w-[85%] mx-auto pt-8 md:pt-20">
             <div className="mb-8 md:mb-12">
-                <h1 className="text-4xl mb-4 font-semibold">{content.data.titolo}</h1>
-                <p className="text-xl">{content.data.descrizione}</p>
+                <h1 className="text-4xl mb-4 font-semibold">
+                    <span className="md:hidden">{mobileTitle}</span>
+                    <span className="hidden md:inline">{homepage.titolo}</span>
+                </h1>
+                <p className="text-xl">
+                    <span className="md:hidden">{mobileDescription}</span>
+                    <span className="hidden md:inline">{homepage.descrizione}</span>
+                </p>
             </div>
 
             <div className="flex flex-col md:flex-row gap-4">
@@ -86,8 +96,10 @@ export default async function Home() {
                                     src={process.env.NEXT_PUBLIC_BASE_URL + el.heroImage.url} alt={el.heroImage.alternativeText} width={300} height={200}/>
                             </div>
                             <div className="p-4 mt-2">
-                                <h3 className="text-2xl md:text-xl font-medium">{el.title}</h3>
-                                <p className="text-sm">{getAddress(el.locations[0]?.label)}</p>
+                                <div className="h-[80px]">
+                                    <h3 className="text-2xl md:text-lg font-medium">{el.title}</h3>
+                                    <p className="text-sm">{getAddress(el.locations[0]?.label)}</p>
+                                </div>
 
                                 <div className="flex flex-col gap-4 bg-white rounded-xl text-black p-4 mt-8 mb-4">
                                     <Image
@@ -178,7 +190,7 @@ export default async function Home() {
                     <h2 className="text-2xl font-semibold mt-4 prime-text">Ticket per Gruppi</h2>
                     <Image
                         className="w-full h-[200px] object-cover rounded-xl"
-                        src="/placeholders/gruppi.jpg" alt="Gruppi turistici" width={300} height={200}/>
+                        src={process.env.NEXT_PUBLIC_BASE_URL + homepage.immagine_gruppi.url} alt="Gruppi turistici" width={300} height={200}/>
 
                     <p className="text-xl md:text-base">Prenota l&apos;accesso per il tuo gruppo.
                         Scopri i ticket ridotti per i gruppi di più di 15 persone.</p>
@@ -194,7 +206,7 @@ export default async function Home() {
                     <h2 className="text-2xl font-semibold mt-4 prime-text">Servizi educativi</h2>
                     <Image
                         className="w-full h-[200px] object-cover rounded-xl"
-                        src="/placeholders/servizi-educativi.jpg" alt="Gruppi turistici" width={300} height={200}/>
+                        src={process.env.NEXT_PUBLIC_BASE_URL + homepage.immagine_scuole.url} alt="Gruppi turistici" width={300} height={200}/>
 
                     <p className="text-xl md:text-base">Clicca qui se vuoi prenotare l&apos;accesso ai musei con il tuo gruppo scolastico.</p>
                     <div className="mb-4 text-black w-full font-medium text-lg md:flex md:justify-end">
@@ -233,8 +245,8 @@ export default async function Home() {
             <div className="w-full md:1/2 pt-8 md:h-full">
                 <div className="flex flex-col gap-8 p-4 mt-2 w-full rounded-xl gradient md:h-full">
                     <h3 className="text-2xl font-semibold mt-2 prime-text">Musei Italiani</h3>
-                    <Image src='/placeholders/208e38853214a0a081337718e1f188871b74f24b.png'
-                           alt="Logo di Musei Italiani" width={48} height={48}
+                    <Image src='/placeholders/card_musei italiani.webp'
+                           alt="Logo di Musei Italiani" width={200} height={300}
                            className="w-full h-[300px] object-cover rounded-4xl p-4 hidden md:block rounded"
 
                     />

@@ -3,7 +3,8 @@ import Image from "next/image";
 import {Hamburger} from "@/app/_components/_icons/Hamburger";
 import Link from "next/link";
 import {Close} from "@/app/_components/_icons/Close";
-import {useEffect, useRef, useState} from "react";
+import {useCallback, useEffect, useRef, useState} from "react";
+import {usePathname} from "next/navigation";
 
 export default function Menu() {
 
@@ -11,20 +12,35 @@ export default function Menu() {
     const [showMuseumsMenu, setShowMuseumsMenu] = useState<string>('close');
     const [showVisitMenu, setShowVisitMenu] = useState<string>('close');
     const pointerFocusRef = useRef(false);
+    const pathname = usePathname();
+    const [activeMenuPathname, setActiveMenuPathname] = useState(pathname);
+    const isMainMenuOpen = showMenu === 'open' && activeMenuPathname === pathname;
+    const isMuseumsMenuOpen = showMuseumsMenu === 'open' && activeMenuPathname === pathname;
+    const isVisitMenuOpen = showVisitMenu === 'open' && activeMenuPathname === pathname;
+    const desktopSubmenuClasses = "top-[48px] pl-4 transition-[max-height,opacity] duration-500 ease-in-out overflow-hidden absolute bg-black z-100";
+    const openSubmenuClasses = "max-h-[1000px] opacity-100 pointer-events-auto";
+    const closedSubmenuClasses = "max-h-0 opacity-0 pointer-events-none";
+
+    const closeAllMenus = useCallback(() => {
+        setShowMenu(current => current === 'open' ? 'close' : current);
+        setShowMuseumsMenu('close');
+        setShowVisitMenu('close');
+    }, []);
 
     function toggleMenu(action:'open'|'close') {
-        if(action === 'open' && (showMenu === 'close' || showMenu === 'initial')) {
+        if(action === 'open' && !isMainMenuOpen) {
+            setActiveMenuPathname(pathname);
             setShowMenu('open');
-        } else if(action === 'close' && showMenu === 'open') {
-            setShowMenu('close');
-            setShowMuseumsMenu('close');
-            setShowVisitMenu('close');
+        } else if(action === 'close') {
+            closeAllMenus();
         }
     }
 
     function toggleMuseumsMenu() {
-        if(showMuseumsMenu === 'close') {
+        if(!isMuseumsMenuOpen) {
+            setActiveMenuPathname(pathname);
             setShowMuseumsMenu('open');
+            setShowVisitMenu('close');
         } else {
             setShowMuseumsMenu('close');
         }
@@ -38,11 +54,14 @@ export default function Menu() {
 
         setShowMuseumsMenu('open');
         setShowVisitMenu('close');
+        setActiveMenuPathname(pathname);
     }
 
     function toggleVisitMenu() {
-        if(showVisitMenu === 'close') {
+        if(!isVisitMenuOpen) {
+            setActiveMenuPathname(pathname);
             setShowVisitMenu('open');
+            setShowMuseumsMenu('close');
         } else {
             setShowVisitMenu('close');
         }
@@ -56,6 +75,7 @@ export default function Menu() {
 
         setShowVisitMenu('open');
         setShowMuseumsMenu('close');
+        setActiveMenuPathname(pathname);
     }
 
     useEffect(() => {
@@ -64,13 +84,13 @@ export default function Menu() {
         const footer = document.getElementById('footer');
         // const iubenda = document.getElementById('iubenda');
         if(main && header && footer) {
-            if(showMenu === 'open') {
+            if(isMainMenuOpen) {
                 main.setAttribute('inert', 'inert');
                 header.setAttribute('inert', 'inert');
                 footer.setAttribute('inert', 'inert');
                 // iubenda.setAttribute('inert', 'inert');
                 document.getElementById('museumsButton')!.focus();
-            } else if(showMenu === 'close') {
+            } else if(showMenu !== 'initial') {
                 main.removeAttribute('inert');
                 header.removeAttribute('inert');
                 footer.removeAttribute('inert');
@@ -78,12 +98,12 @@ export default function Menu() {
                 document.getElementById('hamburgerButton')!.focus();
             }
         }
-    }, [showMenu])
+    }, [isMainMenuOpen, showMenu])
 
     useEffect(() => {
         function handleEscapeKeyDown(e: KeyboardEvent) {
-           if (e.key === 'Escape' && (showMenu === 'open' || showMenu === 'initial')) {
-                setShowMenu('close');
+           if (e.key === 'Escape') {
+                closeAllMenus();
             }
         }
 
@@ -92,11 +112,11 @@ export default function Menu() {
         return () => {
             window.removeEventListener('keydown', handleEscapeKeyDown);
         };
-    }, [showMenu]);
+    }, [closeAllMenus]);
 
     return (
         <>
-            <header id="header" className="bg-black flex justify-between items-center w-full px-4 md:px-12 py-4">
+            <header id="header" className="fixed z-100 bg-black flex justify-between items-center w-full px-4 md:px-12 py-4">
                 <Link href="/">
                     <Image src='/icons/logo.png'
                            alt="museo civici cremona logo" width={48} height={48}
@@ -106,7 +126,7 @@ export default function Menu() {
                 </Link>
                 <div className="flex gap-4">
                     <button type="button"
-                            aria-controls="mainMenu" aria-expanded={showMenu === 'open'}
+                            aria-controls="mainMenu" aria-expanded={isMainMenuOpen}
                             aria-label="Apri il menu"
                             id="hamburgerButton"
                             onClick={() => toggleMenu('open')}
@@ -125,7 +145,7 @@ export default function Menu() {
                                         pointerFocusRef.current = true;
                                     }}
                                     onFocus={openMuseumsMenuOnFocus}
-                                    aria-expanded={showMuseumsMenu === 'open'}
+                                    aria-expanded={isMuseumsMenuOpen}
                                     aria-controls="museumsSubmenu"
                                     onClick={() => {
                                         pointerFocusRef.current = false;
@@ -135,38 +155,38 @@ export default function Menu() {
                                     className="min-w-[64px] border-b border-black/50 cursor-pointer flex justify-between items-center">
                                 <span className="font-semibold">Musei</span>
                                 <span
-                                    className={`${showMuseumsMenu === 'open' ? 'rotate-90' : 'rotate-0'} transition-all duration-500 origin-center`}>&gt;</span>
+                                    className={`${isMuseumsMenuOpen ? 'rotate-90' : 'rotate-0'} transition-all duration-500 origin-center`}>&gt;</span>
                             </button>
-                            <ul id="museumsSubmenu" inert={showMuseumsMenu === 'close'}
-                                className={`${showMuseumsMenu === 'open' ? 'max-h-[1000px]' : 'max-h-0'} w-[250px] right-[15%] top-[48px] pl-4 transition-all duration-500 absolute bg-black z-100`}>
-                                <li className={`${showMuseumsMenu === 'open' ? 'block' : 'hidden'} py-3`}>
+                            <ul id="museumsSubmenu" inert={!isMuseumsMenuOpen}
+                                className={`${isMuseumsMenuOpen ? openSubmenuClasses : closedSubmenuClasses} ${desktopSubmenuClasses} w-[250px] right-[15%]`}>
+                                <li className="py-3">
                                     <Link
                                         href="/museo-civico-ala-ponzone"
-                                        onNavigate={() => toggleMenu('close')}
+                                        onNavigate={closeAllMenus}
                                     >
                                         Museo Civico &quot;Ala Ponzone&quot;
                                     </Link>
                                 </li>
-                                <li className={`${showMuseumsMenu === 'open' ? 'block' : 'hidden'} py-3`}>
+                                <li className="py-3">
                                     <Link
                                         href="/museo-archeologico-san-lorenzo"
-                                        onNavigate={() => toggleMenu('close')}
+                                        onNavigate={closeAllMenus}
                                     >
                                         Museo Archeologico &quot;San Lorenzo&quot;
                                     </Link>
                                 </li>
-                                <li className={`${showMuseumsMenu === 'open' ? 'block' : 'hidden'} py-3`}>
+                                <li className="py-3">
                                     <Link
                                         href="/museo-di-storia-naturale"
-                                        onNavigate={() => toggleMenu('close')}
+                                        onNavigate={closeAllMenus}
                                     >
                                         Museo di Storia Naturale
                                     </Link>
                                 </li>
-                                <li className={`${showMuseumsMenu === 'open' ? 'block' : 'hidden'} py-3`}>
+                                <li className="py-3">
                                     <Link
                                         href="/museo-della-civilta-contadina"
-                                        onNavigate={() => toggleMenu('close')}
+                                        onNavigate={closeAllMenus}
                                     >
                                         Museo della civiltà contadina &quot;Il Cambonino Vecchio&quot;
                                     </Link>
@@ -180,7 +200,7 @@ export default function Menu() {
                                         pointerFocusRef.current = true;
                                     }}
                                     onFocus={openVisitMenuOnFocus}
-                                    aria-expanded={showVisitMenu === 'open'}
+                                    aria-expanded={isVisitMenuOpen}
                                     aria-controls="visitSubmenu"
                                     onClick={() => {
                                         pointerFocusRef.current = false;
@@ -189,38 +209,38 @@ export default function Menu() {
                                     className="min-w-[64px] border-b border-black/50 cursor-pointer flex justify-between items-center">
                                 <span className="font-semibold">Visita</span>
                                 <span
-                                    className={`${showVisitMenu === 'open' ? 'rotate-90' : 'rotate-0'} transition-all duration-500 origin-center`}>&gt;</span>
+                                    className={`${isVisitMenuOpen ? 'rotate-90' : 'rotate-0'} transition-all duration-500 origin-center`}>&gt;</span>
                             </button>
-                            <ul id="visitSubmenu" inert={showVisitMenu === 'close'}
-                                className={`${showVisitMenu === 'open' ? 'max-h-[1000px]' : 'max-h-0'} w-[200px] top-[48px] pl-4 transition-all duration-500 absolute bg-black z-100`}>
-                                <li className={`${showVisitMenu === 'open' ? 'block' : 'hidden'} py-3`}>
+                            <ul id="visitSubmenu" inert={!isVisitMenuOpen}
+                                className={`${isVisitMenuOpen ? openSubmenuClasses : closedSubmenuClasses} ${desktopSubmenuClasses} w-[200px]`}>
+                                <li className="py-3">
                                     <Link
                                         href="/info-gruppi"
-                                        onNavigate={() => toggleMenu('close')}
+                                        onNavigate={closeAllMenus}
                                     >
                                         Info gruppi
                                     </Link>
                                 </li>
-                                <li className={`${showVisitMenu === 'open' ? 'block' : 'hidden'} py-3`}>
+                                <li className="py-3">
                                     <Link
                                         href="/servizi-educativi"
-                                        onNavigate={() => toggleMenu('close')}
+                                        onNavigate={closeAllMenus}
                                     >
                                         Servizi educativi
                                     </Link>
                                 </li>
-                                <li className={`${showVisitMenu === 'open' ? 'block' : 'hidden'} py-3`}>
+                                <li className="py-3">
                                     <Link
                                         href="/info-utili"
-                                        onNavigate={() => toggleMenu('close')}
+                                        onNavigate={closeAllMenus}
                                     >
                                         Info utili
                                     </Link>
                                 </li>
-                                <li className={`${showVisitMenu === 'open' ? 'block' : 'hidden'} py-3`}>
+                                <li className="py-3">
                                     <Link
                                         href="/faq"
-                                        onNavigate={() => toggleMenu('close')}
+                                        onNavigate={closeAllMenus}
                                     >
                                         FAQ
                                     </Link>
@@ -231,7 +251,7 @@ export default function Menu() {
                         <li className="font-semibold border-b border-black/50 cursor-pointer">
                             <Link
                                 href="/news-eventi"
-                                onNavigate={() => toggleMenu('close')}
+                                onNavigate={closeAllMenus}
                             >
                                 News ed eventi
                             </Link>
@@ -250,7 +270,7 @@ export default function Menu() {
                         <li className="font-semibold border-b border-black/50 cursor-pointer">
                             <Link
                                 href="/contatti"
-                                onNavigate={() => toggleMenu('close')}
+                                onNavigate={closeAllMenus}
                             >
                                 Contatti
                             </Link>
@@ -277,12 +297,12 @@ export default function Menu() {
             </header>
 
             <div
-                className={`md:hidden block overlay ${showMenu === 'open' ? 'visible' : ''}`} aria-hidden>
+                className={`md:hidden block overlay ${isMainMenuOpen ? 'visible' : ''}`} aria-hidden>
             </div>
 
             <div
-                inert={showMenu !== 'open'}
-                className={`${showMenu === 'open' ? 'appear' : showMenu === 'close' ? 'disappear' : 'w-0'} md:hidden block max-w-full h-screen fixed bg-white z-200 right-0 top-0`}>
+                inert={!isMainMenuOpen}
+                className={`${isMainMenuOpen ? 'appear' : showMenu !== 'initial' ? 'disappear' : 'w-0'} md:hidden block max-w-full h-screen fixed bg-white z-200 right-0 top-0`}>
                 <div className="w-full px-8 pb-2 md:pb-8 pt-4 flex items-center justify-between">
                     <Image
                         src='/icons/logo_black.png'
@@ -295,7 +315,7 @@ export default function Menu() {
                             type="button"
                             onClick={() => toggleMenu('close')}
                             id="closeMenuButton"
-                            aria-controls="mainMenuMobile" aria-expanded={showMenu === 'open'}
+                            aria-controls="mainMenuMobile" aria-expanded={isMainMenuOpen}
                             className="md:hidden block"
                     >
                         <Close aria-hidden={true} className="w-4 h-4 cursor-pointer"/>
@@ -312,7 +332,7 @@ export default function Menu() {
                                         pointerFocusRef.current = true;
                                     }}
                                     onFocus={openMuseumsMenuOnFocus}
-                                    aria-expanded={showMuseumsMenu === 'open'}
+                                    aria-expanded={isMuseumsMenuOpen}
                                     aria-controls="museumsSubmenu"
                                     onClick={() => {
                                         pointerFocusRef.current = false;
@@ -322,14 +342,14 @@ export default function Menu() {
                                     className="border-b border-black/50 cursor-pointer pr-4 py-3 flex justify-between items-center">
                                 <span className="text-2xl font-semibold">Musei</span>
                                 <span
-                                    className={`${showMuseumsMenu === 'open' ? 'rotate-90' : 'rotate-0'} transition-all duration-500 origin-center`}>&gt;</span>
+                                    className={`${isMuseumsMenuOpen ? 'rotate-90' : 'rotate-0'} transition-all duration-500 origin-center`}>&gt;</span>
                             </button>
-                            <ul id="museumsSubmenu" inert={showMuseumsMenu === 'close'}
-                                className={`${showMuseumsMenu === 'open' ? 'max-h-[1000px]' : 'max-h-0'} pl-4 transition-all duration-500 overflow-hidden`}>
+                            <ul id="museumsSubmenu" inert={!isMuseumsMenuOpen}
+                                className={`${isMuseumsMenuOpen ? 'max-h-[1000px]' : 'max-h-0'} pl-4 transition-all duration-500 overflow-hidden`}>
                                 <li className="py-3">
                                     <Link
                                         href="/museo-civico-ala-ponzone"
-                                        onNavigate={() => toggleMenu('close')}
+                                        onNavigate={closeAllMenus}
                                     >
                                         Museo Civico &quot;Ala Ponzone&quot;
                                     </Link>
@@ -337,7 +357,7 @@ export default function Menu() {
                                 <li className="py-3">
                                     <Link
                                         href="/museo-archeologico-san-lorenzo"
-                                        onNavigate={() => toggleMenu('close')}
+                                        onNavigate={closeAllMenus}
                                     >
                                         Museo Archeologico &quot;San Lorenzo&quot;
                                     </Link>
@@ -345,7 +365,7 @@ export default function Menu() {
                                 <li className="py-3">
                                     <Link
                                         href="/museo-di-storia-naturale"
-                                        onNavigate={() => toggleMenu('close')}
+                                        onNavigate={closeAllMenus}
                                     >
                                         Museo di Storia Naturale
                                     </Link>
@@ -353,7 +373,7 @@ export default function Menu() {
                                 <li className="py-3">
                                     <Link
                                         href="/museo-della-civilta-contadina"
-                                        onNavigate={() => toggleMenu('close')}
+                                        onNavigate={closeAllMenus}
                                     >
                                         Museo della civiltà contadina &quot;Il Cambonino Vecchio&quot;
                                     </Link>
@@ -368,7 +388,7 @@ export default function Menu() {
                                         pointerFocusRef.current = true;
                                     }}
                                     onFocus={openVisitMenuOnFocus}
-                                    aria-expanded={showVisitMenu === 'open'}
+                                    aria-expanded={isVisitMenuOpen}
                                     aria-controls="visitSubmenu"
                                     onClick={() => {
                                         pointerFocusRef.current = false;
@@ -377,14 +397,14 @@ export default function Menu() {
                                     className="border-b border-black/50 cursor-pointer pr-4 py-3 flex justify-between items-center">
                                 <span className="text-2xl font-semibold">Visita</span>
                                 <span
-                                    className={`${showVisitMenu === 'open' ? 'rotate-90' : 'rotate-0'} transition-all duration-500 origin-center`}>&gt;</span>
+                                    className={`${isVisitMenuOpen ? 'rotate-90' : 'rotate-0'} transition-all duration-500 origin-center`}>&gt;</span>
                             </button>
-                            <ul id="visitSubmenu" inert={showVisitMenu === 'close'}
-                                className={`${showVisitMenu === 'open' ? 'max-h-[1000px]' : 'max-h-0'} pl-4 transition-all duration-500 overflow-hidden`}>
+                            <ul id="visitSubmenu" inert={!isVisitMenuOpen}
+                                className={`${isVisitMenuOpen ? 'max-h-[1000px]' : 'max-h-0'} pl-4 transition-all duration-500 overflow-hidden`}>
                                 <li className="py-3">
                                     <Link
                                         href="/info-gruppi"
-                                        onNavigate={() => toggleMenu('close')}
+                                        onNavigate={closeAllMenus}
                                     >
                                         Info gruppi
                                     </Link>
@@ -392,7 +412,7 @@ export default function Menu() {
                                 <li className="py-3">
                                     <Link
                                         href="/servizi-educativi"
-                                        onNavigate={() => toggleMenu('close')}
+                                        onNavigate={closeAllMenus}
                                     >
                                         Servizi educativi
                                     </Link>
@@ -400,7 +420,7 @@ export default function Menu() {
                                 <li className="py-3">
                                     <Link
                                         href="/info-utili"
-                                        onNavigate={() => toggleMenu('close')}
+                                        onNavigate={closeAllMenus}
                                     >
                                         Info utili
                                     </Link>
@@ -408,7 +428,7 @@ export default function Menu() {
                                 <li className="py-3">
                                     <Link
                                         href="/faq"
-                                        onNavigate={() => toggleMenu('close')}
+                                        onNavigate={closeAllMenus}
                                     >
                                         FAQ
                                     </Link>
@@ -419,7 +439,7 @@ export default function Menu() {
                         <li className="py-3 text-2xl font-semibold border-b border-black/50 cursor-pointer">
                             <Link
                                 href="/news-eventi"
-                                onNavigate={() => toggleMenu('close')}
+                                onNavigate={closeAllMenus}
                             >
                                 News ed eventi
                             </Link>
@@ -438,7 +458,7 @@ export default function Menu() {
                         <li className="py-3 text-2xl font-semibold border-b border-black/50 cursor-pointer">
                             <Link
                                 href="/contatti"
-                                onNavigate={() => toggleMenu('close')}
+                                onNavigate={closeAllMenus}
                             >
                                 Contatti
                             </Link>

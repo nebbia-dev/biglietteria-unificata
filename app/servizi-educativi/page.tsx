@@ -25,10 +25,23 @@ export default async function ServiziEducativi() {
 
                 if(museum.slug === contentMuseum.slug_scuole) {
                     museum.ticketImage = contentMuseum.immagine_biglietti_scuole;
+                    museum.ordine = contentMuseum.ordine;
                     break;
                 }
             }
         }
+
+        //     HERE
+        function sortFilteredMuseumsByOrder() {
+            filteredMuseums.sort((a, b) => {
+                const orderA = Number(a.ordine ?? Number.MAX_SAFE_INTEGER);
+                const orderB = Number(b.ordine ?? Number.MAX_SAFE_INTEGER);
+
+                return orderA - orderB;
+            });
+        }
+
+        sortFilteredMuseumsByOrder();
 
     } catch(e) {
         console.log(e);
@@ -83,7 +96,7 @@ export default async function ServiziEducativi() {
                             </p>
                             <h3 className="text-xl font-semibold mt-4 mb-2">Diritto di prenotazione</h3>
                             <p>
-                                L'ingresso per gli studenti è gratuito, si applica la tariffa di 2€ a persona come diritto
+                                L&apos;ingresso per gli studenti è gratuito, si applica la tariffa di 2€ a persona come diritto
                                 di prenotazione.
                             </p>
                         </div>

@@ -56,7 +56,7 @@ export default async function NewsEventi() {
                     className="w-full h-[200px] object-cover rounded-xl mb-4"
                     src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine.url} alt={content.data.immagine.alternativeText} width={300} height={200}/>
 
-                <div className="mb-4 text-black w-full font-medium text-lg">
+                <div className="text-black w-full md:flex md:justify-end font-medium text-sm pt-4">
                     <Link href="/" className="w-auto block text-center prime-bg rounded-full px-4 py-2">Vai a tutte le news</Link>
                 </div>
             </section>

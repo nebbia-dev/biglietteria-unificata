@@ -27,7 +27,7 @@ export default function EventCard({card, limit, events} : {card?: undefined|bool
                                         <div className="flex items-center justify-between mt-4">
                                             <p className="md:text-base text-xl font-medium">Gratuito</p>
                                             <a target="_blank" rel="noopener noreferrer"
-                                               className="flex items-center gap-2 text-lg font-medium prime-bg rounded-full px-4 py-2"
+                                               className="flex items-center gap-2 text-lg md:text-base font-medium prime-bg rounded-full px-4 py-2 md:px-3 md:py-1"
                                                href={`https://multishop-cremona.collaudo.domniapass.com/it/products/${el.slug}`}>
                                                 Prenota
                                                 <CircledArrow width={28} height={28}/>

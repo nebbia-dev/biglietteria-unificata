@@ -44,7 +44,7 @@ export default function Carousel({pics}:{pics:any}) {
     }, [slide]);
 
    return(
-       <div className="flex flex-col items-center gap-4 w-full max-w-[100%]">
+       <div className="flex flex-col items-center gap-4 w-full max-w-[100%] pt-[80px]">
            <div className="flex items-center w-full h-[70dvh] relative max-w-[100%]">
                <PrevSlide aria-hidden={true} setSlide={() => setCurrentSlide('sub')}/>
                {pics &&

@@ -4,6 +4,7 @@ import Link from "next/link";
 import {unstable_rethrow} from "next/navigation";
 import Markdown from "react-markdown";
 import {AccordionArrow} from "@/app/_components/_icons/AccordionArrow";
+import ContactForm from "@/app/_components/ContactForm";
 
 export default async function Faq(){
 
@@ -74,33 +75,7 @@ export default async function Faq(){
                 }
             </section>
             {/*Contact form*/}
-            <section className="w-[90%] md:w-[85%] mx-auto pt-8 mt-4">
-                <h2 className="text-3xl font-semibold mb-8">Hai bisogno di info specifiche? Scrivici!</h2>
-
-                <form className="bg-white rounded-xl flex flex-col gap-4 p-4">
-                    <label htmlFor="name" className="text-sm">Nome *
-                        <input id="name" name="name" placeholder="Nome (obbligatorio)" type="text"
-                               className="w-full rounded-xl bg-[#ecf0f2] h-[48px] p-2"/>
-                    </label>
-                    <label htmlFor="lastname" className="text-sm">Cognome *
-                        <input id="lastname" name="lastname" placeholder="Cognome (obbligatorio)" type="text"
-                               className="w-full rounded-xl bg-[#ecf0f2] h-[48px] p-2"/>
-                    </label>
-                    <label htmlFor="info-email" className="text-sm">Email *
-                        <input id="info-email" name="info-email" placeholder="Indirizzo email (obbligatorio)"
-                               type="email" className="w-full rounded-xl bg-[#ecf0f2] h-[48px] p-2"/>
-                    </label>
-                    <label htmlFor="message" className="text-sm">Messaggio *
-                        <textarea id="message" name="message" placeholder="Messaggio (obbligatorio)"
-                                  className="w-full rounded-xl bg-[#ecf0f2] h-[48px] p-2"/>
-                    </label>
-                    <div className="text-black w-full md:flex md:justify-end font-medium text-sm">
-                        <button type="submit"
-                                className="w-full md:w-fit text-center prime-bg rounded-full px-4 py-2">Invia
-                        </button>
-                    </div>
-                </form>
-            </section>
+            <ContactForm text="Hai bisogno di info specifiche? Scrivici!"/>
         </>
     )
 }

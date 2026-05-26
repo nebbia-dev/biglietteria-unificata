@@ -6,6 +6,7 @@ import EventCard from "@/app/_components/EventCard";
 import {getExperiences} from "@/app/lib/domnia-experiences";
 import Carousel from "@/app/_components/Carousel";
 import getAddress from "@/helpers/address/getAddress";
+import ContactForm from "@/app/_components/ContactForm";
 export default async function Home() {
 
     let museums, content, contentMuseums, filteredMuseums, bundle, contentEvents, events;
@@ -258,27 +259,7 @@ export default async function Home() {
         </section>
 
         {/*Contact form*/}
-        <section className="w-[90%] md:w-[85%] mx-auto pt-8">
-            <h2 className="text-3xl font-semibold my-8">Scrivici una mail</h2>
-
-            <form className="bg-white rounded-xl flex flex-col gap-4 p-4">
-                <label className="text-sm">Nome
-                    <input placeholder="Nome (obbligatorio)" type="text" className="w-full rounded-xl bg-[#ecf0f2] h-[48px] p-2"/>
-                </label>
-                <label className="text-sm">Cognome
-                    <input placeholder="Cognome (obbligatorio)" type="text" className="w-full rounded-xl bg-[#ecf0f2] h-[48px] p-2"/>
-                </label>
-                <label className="text-sm">Email
-                    <input placeholder="Email (obbligatorio)" type="email" className="w-full rounded-xl bg-[#ecf0f2] h-[48px] p-2"/>
-                </label>
-                <label className="text-sm">Messaggio
-                    <textarea placeholder="Messaggio (obbligatorio)" className="w-full rounded-xl bg-[#ecf0f2] md:h-[200px] h-[48px] p-2"/>
-                </label>
-                <div className="text-black w-full md:flex md:justify-end font-medium text-sm pt-4">
-                    <button type="submit" className="md:w-fit w-full text-center prime-bg rounded-full px-4 py-2">Invia</button>
-                </div>
-            </form>
-        </section>
+        <ContactForm text="Scrivici una mail"/>
 
     </>
   );

@@ -1,15 +1,17 @@
 'use client'
-import React, {useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 import NextSlide from "@/app/_components/NextSlide";
 import PrevSlide from "@/app/_components/PrevSlide";
 import Image from "next/image";
 import {CircledArrow} from "@/app/_components/_icons/CircledArrow";
 import Link from "next/link";
+import type { CarouselImage } from "@/app/lib/strapi-types";
 
-export default function Carousel({pics}:{pics:any}) {
+export default function Carousel({pics}:{pics: CarouselImage[]}) {
 
     const [slide, setSlide] = useState<number>(0);
     const [placeholder, setPlaceholder] = useState<number>(slide);
+
     function setCurrentSlide(fn:string) {
         document.getElementById('prevBtn')?.setAttribute('disabled', 'disabled');
         document.getElementById('nextBtn')?.setAttribute('disabled', 'disabled');
@@ -42,6 +44,10 @@ export default function Carousel({pics}:{pics:any}) {
             setPlaceholder(slide);
         }, 1500)
     }, [slide]);
+
+    if (pics.length === 0) {
+        return null;
+    }
 
    return(
        <div className="flex flex-col items-center gap-4 w-full max-w-[100%] pt-[80px]">
@@ -90,7 +96,7 @@ export default function Carousel({pics}:{pics:any}) {
            </div>
            <div aria-hidden={true} className="flex gap-2">
                {pics &&
-                   pics.map((pic: any, i: number) => {
+                   pics.map((pic, i) => {
                        return(
                             <div key={pic.name}
                                  className={`w-2 h-2 rounded-full ${slide === i ? 'bg-orange-500' : 'bg-gray-300'}`}></div>

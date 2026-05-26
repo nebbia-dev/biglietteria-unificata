@@ -20,8 +20,8 @@ const transporter = nodemailer.createTransport({
 
 export async function sendMail({sendTo, subject, text, html, replyTo}: {sendTo: string; subject: string; text: string; html?: string; replyTo?:string }) {
     try {
-        const isVerified = await transporter.verify();
-        const info = await transporter.sendMail({
+        await transporter.verify();
+        await transporter.sendMail({
             from: `"Visit Cremona" ${SITE_MAIL_SENDER}`,
             to: sendTo,
             subject: subject,

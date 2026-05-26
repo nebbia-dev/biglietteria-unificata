@@ -1,20 +1,27 @@
 import {unstable_rethrow} from "next/navigation";
+import type {
+    StrapiCollectionResponse,
+    StrapiContacts,
+    StrapiMuseum,
+    StrapiSingleResponse,
+} from "@/app/lib/strapi-types";
 
 export default async function Contatti() {
 
-    let content, contentContacts;
+    let content: StrapiCollectionResponse<StrapiMuseum> = { data: [] };
+    let contentContacts = { data: {} as StrapiContacts } as StrapiSingleResponse<StrapiContacts>;
 
     try {
 
         const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/museums',
             {next: {revalidate: 1000}}
         );
-        content = await data.json();
+        content = await data.json() as StrapiCollectionResponse<StrapiMuseum>;
 
         const dataContacts = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/contatti',
             {next: {revalidate: 1000}}
         );
-        contentContacts = await dataContacts.json();
+        contentContacts = await dataContacts.json() as StrapiSingleResponse<StrapiContacts>;
 
 
     } catch(e) {
@@ -31,7 +38,7 @@ export default async function Contatti() {
 
             <div className="flex flex-col gap-4">
                 {content.data &&
-                    content.data.map(el => {
+                    content.data.map((el) => {
                         return (
                             <div key={el.documentId}>
                                 <h2 className="text-2xl font-semibold">{el.titolo}</h2>

@@ -1,7 +1,13 @@
 import Image from "next/image";
 import {CircledArrow} from "@/app/_components/_icons/CircledArrow";
+import type { TicketCardData } from "@/app/lib/strapi-types";
 
-export default function TicketCard({el, layout}: {el:any, layout:string}) {
+type TicketCardLayout = 'fourth' | 'half' | 'third';
+
+export default function TicketCard({el, layout}: {el: TicketCardData, layout: TicketCardLayout}) {
+    if (!el.immagine) {
+        return null;
+    }
 
     return (
             <div className={`w-full ${layout === 'half' ? 'md:w-[calc(50%-0.5rem)]' : layout === 'third' ? 'md:w-[calc(33%-0.5rem)]' : 'md:w-[calc(25%-0.75rem)]'} text-white rounded-xl gradient`}>
@@ -34,7 +40,7 @@ export default function TicketCard({el, layout}: {el:any, layout:string}) {
                                 }
                                 <a target="_blank" rel="noopener noreferrer"
                                    className="flex items-center gap-2 text-lg font-medium prime-bg rounded-full px-4 py-2"
-                                   href={`https://multishop-cremona.collaudo.domniapass.com/it/products/${el.slug}`}>
+                                   href={`https://multishop-cremona.collaudo.domniapass.com/it/products/${el.slug ?? ''}`}>
                                     Prenota
                                     <CircledArrow width={28} height={28}/>
                                 </a>

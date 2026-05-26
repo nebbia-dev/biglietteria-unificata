@@ -88,6 +88,10 @@ export default async function Home() {
             <div className="flex flex-col md:flex-row gap-4">
             { filteredMuseums &&
                 filteredMuseums.map((el) => {
+                    if (!el.heroImage || !el.ticketImage) {
+                        return null;
+                    }
+
                     return(
                         <div className="w-full md:w-1/4 text-white rounded-xl gradient"
                             key={el.title}>
@@ -144,6 +148,7 @@ export default async function Home() {
         </section>
 
         {/*Biglietto cumulativo*/}
+        {bundle && (
         <section className="w-[90%] md:w-[85%] mx-auto pt-8">
             <div className="w-full text-white rounded-xl gradient">
                 <div className="p-4 md:p-8 mt-2 flex flex-col md:flex-row md:items-center md:gap-8">
@@ -172,6 +177,7 @@ export default async function Home() {
                 </div>
             </div>
         </section>
+        )}
 
         {/*Search bar*/}
         {/*<section className="w-[90%] mx-auto pt-8">*/}

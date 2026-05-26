@@ -2,14 +2,16 @@ import Image from "next/image";
 import TicketCard from "@/app/_components/TicketCard";
 import Link from "next/link";
 import {getExperiences} from "@/app/lib/domnia-experiences";
+import type { ExperienceCardData } from "@/app/lib/domnia-types";
 
 export default async function InfoGruppi() {
 
-    let content, contentMuseums, museums, filteredMuseums;
+    let content, contentMuseums;
+    let filteredMuseums: ExperienceCardData[] = [];
 
     try {
-        museums = await getExperiences('/');
-        filteredMuseums = museums.filter(el => el.tagIds.includes(8));
+        const museums = await getExperiences('/');
+        filteredMuseums = museums.filter(el => el.tagIds?.includes(8));
 
         const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/info-gruppi'+
             '?populate[0]=immagine',
@@ -65,7 +67,7 @@ export default async function InfoGruppi() {
                 <div className="flex flex-col md:flex-row w-full md:flex-wrap gap-4">
                     {
                         filteredMuseums &&
-                        filteredMuseums.map(el => {
+                        filteredMuseums.map((el) => {
                             return(
                                 <TicketCard key={el.documentId} layout="fourth" el={{
                                     titolo: "",

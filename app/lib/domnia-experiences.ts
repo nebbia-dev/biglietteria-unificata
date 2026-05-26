@@ -8,13 +8,13 @@ import {
 import mockProductGroupsResponse from '@/app/lib/mocks/domnia-product-groups.json';
 import { getMockDomniaSalableProducts } from '@/app/lib/domnia-products';
 import type {
+    DomniaId,
+    DomniaProductGroupResponse,
     ExperienceCardData,
+    ExperienceDescription,
     ProductResponse,
+    ProductGroupResponse,
 } from '@/app/lib/domnia-types';
-
-type ProductGroupResponse = {
-    data: ExperienceCardData[];
-};
 
 const mockProductGroupLocations = [
     'Via Ugolani Dati, 4, Cremona',
@@ -27,6 +27,62 @@ const mockProductGroupLocations = [
     'Via Ugolani Dati, 4, Cremona',
     'Via Castelleone, 51, Cremona',
 ];
+
+function normalizeExperienceDescription(
+    description?: ExperienceDescription,
+) {
+    if (typeof description === 'string') {
+        return description;
+    }
+
+    if (!Array.isArray(description)) {
+        return undefined;
+    }
+
+    return description
+        .flatMap((block) => block.children ?? [])
+        .map((child) => child.text)
+        .filter((text): text is string => Boolean(text))
+        .join('\n');
+}
+
+function normalizeProductGroup(
+    productGroup: DomniaProductGroupResponse,
+    index: number,
+): ExperienceCardData {
+    const locations = Array.isArray(productGroup.locations)
+        ? productGroup.locations
+            .map((location) => ({
+                ...location,
+                label:
+                    typeof location.label === 'string' && location.label.length > 0
+                        ? location.label
+                        : 'Cremona',
+            }))
+        : [];
+
+    return {
+        ...productGroup,
+        connectedProducts: Array.isArray(productGroup.connectedProducts)
+            ? productGroup.connectedProducts
+            : [],
+        description: normalizeExperienceDescription(productGroup.description),
+        documentId:
+            typeof productGroup.documentId === 'string'
+                ? productGroup.documentId
+                : `domnia-product-group-${index}`,
+        locations,
+        slug: typeof productGroup.slug === 'string' ? productGroup.slug : '',
+        tagIds: Array.isArray(productGroup.tagIds) ? productGroup.tagIds : [],
+        title: typeof productGroup.title === 'string' ? productGroup.title : '',
+    };
+}
+
+function normalizeProductGroups(productGroups: DomniaProductGroupResponse[]) {
+    return productGroups.map((productGroup, index) =>
+        normalizeProductGroup(productGroup, index),
+    );
+}
 
 async function fetchDomniaJson<T>(path: string, accessToken: string): Promise<T> {
     const response = await fetch(`${DOMNIA_API_BASE_URL}${path}`, {
@@ -45,41 +101,46 @@ async function fetchDomniaJson<T>(path: string, accessToken: string): Promise<T>
 function getMockProductGroups() {
     const mockProductIds = getMockDomniaSalableProducts()
         .map((product) => product.base_price?.product_id)
-        .filter((productId) => productId !== undefined);
+        .filter((productId): productId is DomniaId => productId !== undefined);
 
     return (
         Array.isArray(mockProductGroupsResponse.data)
             ? mockProductGroupsResponse.data
             : []
-    ).map((productGroup, index) => ({
-        ...productGroup,
-        connectedProducts:
-            Array.isArray(productGroup.connectedProducts) &&
-            productGroup.connectedProducts.length > 0
-                ? productGroup.connectedProducts
-                : mockProductIds[index % mockProductIds.length] !== undefined
-                    ? [mockProductIds[index % mockProductIds.length]!]
-                    : [],
-        locations: Array.isArray(productGroup.locations) &&
-            productGroup.locations.length > 0
-            ? productGroup.locations.map((location, locationIndex) => ({
-                ...location,
-                label:
-                    'label' in location && typeof location.label === 'string'
-                        ? location.label
-                        : mockProductGroupLocations[
-                            (index + locationIndex) % mockProductGroupLocations.length
-                        ],
-            }))
-            : [
-                {
-                    label:
-                        mockProductGroupLocations[
-                            index % mockProductGroupLocations.length
-                        ],
-                },
-            ],
-    })) as ExperienceCardData[];
+    ).map((productGroup, index) =>
+        normalizeProductGroup(
+            {
+                ...productGroup,
+                connectedProducts:
+                    Array.isArray(productGroup.connectedProducts) &&
+                    productGroup.connectedProducts.length > 0
+                        ? productGroup.connectedProducts
+                        : mockProductIds[index % mockProductIds.length] !== undefined
+                            ? [mockProductIds[index % mockProductIds.length]!]
+                            : [],
+                locations: Array.isArray(productGroup.locations) &&
+                    productGroup.locations.length > 0
+                    ? productGroup.locations.map((location, locationIndex) => ({
+                        ...location,
+                        label:
+                            'label' in location && typeof location.label === 'string'
+                                ? location.label
+                                : mockProductGroupLocations[
+                                    (index + locationIndex) % mockProductGroupLocations.length
+                                ],
+                    }))
+                    : [
+                        {
+                            label:
+                                mockProductGroupLocations[
+                                    index % mockProductGroupLocations.length
+                                ],
+                        },
+                    ],
+            },
+            index,
+        ),
+    );
 }
 
 function attachFallbackConnectedProducts(
@@ -127,7 +188,7 @@ async function fetchProductGroupsWithFallback(accessToken: string) {
         );
 
         return {
-            data: Array.isArray(response.data) ? response.data : [],
+            data: normalizeProductGroups(Array.isArray(response.data) ? response.data : []),
             isFallback: false,
         };
     } catch (error) {

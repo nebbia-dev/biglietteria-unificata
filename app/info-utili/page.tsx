@@ -5,10 +5,11 @@ import Link from "next/link";
 import {unstable_rethrow} from "next/navigation";
 import Markdown from "react-markdown";
 import ContactForm from "@/app/_components/ContactForm";
+import type { StrapiCollectionResponse, StrapiMuseum } from "@/app/lib/strapi-types";
 
 export default async function InfoUtili() {
 
-    let content;
+    let content: StrapiCollectionResponse<StrapiMuseum> = { data: [] };
 
     try {
 
@@ -17,7 +18,7 @@ export default async function InfoUtili() {
             ,
             {next: {revalidate: 1000}}
         );
-        content = await data.json();
+        content = await data.json() as StrapiCollectionResponse<StrapiMuseum>;
         console.log(content)
 
     } catch(e) {
@@ -33,7 +34,7 @@ export default async function InfoUtili() {
             </section>
 
             {content.data &&
-                content.data.map(el => {
+                content.data.map((el) => {
                     return (
                         <section className="w-full md:w-[85%] md:mx-auto md:mt-8" key={el.documentId}>
                             <Image
@@ -49,13 +50,13 @@ export default async function InfoUtili() {
                                                 new Intl.NumberFormat("de-DE", {
                                                     style: "currency",
                                                     currency: "EUR"
-                                                }).format(el.intero)
+                                                }).format(el.intero ?? 0)
                                             }</li>
                                             <li>Ridotto {
                                                 new Intl.NumberFormat("de-DE", {
                                                 style: "currency",
                                                 currency: "EUR"
-                                            }).format(el.ridotto)
+                                            }).format(el.ridotto ?? 0)
                                             }</li></ul>
                                 }
 

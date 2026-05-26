@@ -1,16 +1,15 @@
 'use client'
 import send from "@/lib/send";
-import {useState} from "react";
+import {type FormEvent, useState} from "react";
 
 export default function FooterContactForm() {
 
     const [error, setError] = useState<boolean>(false);
 
-    function checkAndSend(e:any) {
+    function checkAndSend(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         const error = document.getElementById('errors')!;
-        const form = e.target;
-        const formData = new FormData(form);
+        const formData = new FormData(e.currentTarget);
         if(!formData.get('name')) {
             error.textContent = 'Inserisci il nome';
             setError(true);
@@ -62,7 +61,7 @@ export default function FooterContactForm() {
                         <label htmlFor="marketing-consent" className="text-sm flex gap-2 items-start mt-2">
                             <input type="checkbox" id="marketing-consent" name="marketing-consent"
                                    className="mt-[3px]"/>
-                            Autorizzo l'invio di materiale marketing promozionale e offerte speciali tramite
+                            Autorizzo l&apos;invio di materiale marketing promozionale e offerte speciali tramite
                             email
                         </label>
                     </div>

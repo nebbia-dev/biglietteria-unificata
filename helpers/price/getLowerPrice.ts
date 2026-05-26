@@ -1,4 +1,8 @@
-export default   function getLowerPrice(el: any[]) {
+type PricedTicket = {
+    prezzo: number;
+};
+
+export default function getLowerPrice(el: PricedTicket[]) {
     const tickets:number[] = [];
     el.forEach(ticket => {
         tickets.push(ticket.prezzo);

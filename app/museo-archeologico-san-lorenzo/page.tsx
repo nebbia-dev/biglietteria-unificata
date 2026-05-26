@@ -10,12 +10,12 @@ export default async function MuseoArcheologico() {
 
     try {
         museums = await getExperiences('/');
-        filteredMuseums = museums.filter(el => el.tagIds.includes(13));
-        bundle = museums.filter(el => el.tagIds.includes(10) && el.slug.includes('cumulativo'))[0];
-        standard = filteredMuseums.filter(el => el.tagIds.includes(7))[0];
-        groups = filteredMuseums.filter(el => el.tagIds.includes(8))[0];
-        schools = filteredMuseums.filter(el => el.tagIds.includes(9))[0];
-        events = museums.filter(el => el.tagIds.includes(11));
+        filteredMuseums = museums.filter(el => el.tagIds?.includes(13));
+        bundle = museums.filter(el => el.tagIds?.includes(10) && el.slug?.includes('cumulativo'))[0];
+        standard = filteredMuseums.filter(el => el.tagIds?.includes(7))[0];
+        groups = filteredMuseums.filter(el => el.tagIds?.includes(8))[0];
+        schools = filteredMuseums.filter(el => el.tagIds?.includes(9))[0];
+        events = museums.filter(el => el.tagIds?.includes(11));
 
         const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/museums/u0mwtez9c4m0axyk796qfuz2?populate=*',
             {next: {revalidate: 1000}}
@@ -79,11 +79,11 @@ export default async function MuseoArcheologico() {
                         layout="third"
                         el={{
                         titolo: "Ticket Cumulativo",
-                        nome: bundle.title,
-                        descrizione: bundle.description?.replace(/<\/?[^>]+(>|$)/g, ""),
+                        nome: bundle?.title,
+                        descrizione: bundle?.description?.replace(/<\/?[^>]+(>|$)/g, ""),
                         infoPrezzo: "",
-                        prezzo: bundle.cheapest,
-                        slug: bundle.slug,
+                        prezzo: bundle?.cheapest,
+                        slug: bundle?.slug,
                         immagine: content.data.immagine_biglietto_cumulativo
                     }}/>
 
@@ -126,7 +126,7 @@ export default async function MuseoArcheologico() {
                     />
                     <div>
                         <h3 className="text-2xl font-semibold mt-2 prime-text">Proposte educative</h3>
-                        <p>Dalle scuole dell'infanzia, fino agli adulti lavoriamo per aprire le porte dei musei e
+                        <p>Dalle scuole dell&apos;infanzia, fino agli adulti lavoriamo per aprire le porte dei musei e
                             renderli
                             accessibili al più ampio numero possibile di persone.</p>
                         <div className="mb-4 md:mt-8 text-black w-full text-end font-medium text-lg md:text-base">

@@ -1,16 +1,15 @@
 'use client'
 import send from "@/lib/send";
-import {useState} from "react";
+import {type FormEvent, useState} from "react";
 
 export default function ContactForm({text}:{text:string}) {
 
     const [error, setError] = useState<boolean>(false);
 
-    function checkAndSendCF(e:any) {
+    function checkAndSendCF(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         const error = document.getElementById('errors')!;
-        const form = e.target;
-        const formData = new FormData(form);
+        const formData = new FormData(e.currentTarget);
 
         if(!formData.get('info-name')) {
             error.textContent = 'Inserisci il nome';

@@ -19,7 +19,7 @@ export default function Footer() {
                         <li>Uffici: 0372 407269</li>
                         <li><a className="underline" href="mailto:museo.alaponzone@cremona.comune.it">museo.alaponzone@cremona.comune.it</a></li>
                     </ul>
-                    <p>Per inviare segnalazioni riguardanti l'accessibilità,<br/>scrivici a <a
+                    <p>Per inviare segnalazioni riguardanti l&apos;accessibilità,<br/>scrivici a <a
                         aria-label="Scrivi una mail per fare una segnalazione riguardante l'accessibilità del sito"
                         className="underline" href="mailto:museo.alaponzone@cremona.comune.it" target="_blank"
                         rel="noopener noreferrer">museo.alaponzone@cremona.comune.it</a>

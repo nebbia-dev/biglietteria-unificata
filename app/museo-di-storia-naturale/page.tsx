@@ -80,11 +80,11 @@ export default async function MuseoStoriaNaturale() {
                             layout="third"
                             el={{
                                 titolo: "Ticket Cumulativo",
-                                nome: bundle.title,
-                                descrizione: bundle.description?.replace(/<\/?[^>]+(>|$)/g, ""),
+                                nome: bundle?.title,
+                                descrizione: bundle?.description?.replace(/<\/?[^>]+(>|$)/g, ""),
                                 infoPrezzo: "",
-                                prezzo: bundle.cheapest,
-                                slug: bundle.slug,
+                                prezzo: bundle?.cheapest,
+                                slug: bundle?.slug,
                                 immagine: content.data.immagine_biglietto_cumulativo
                             }}/>
 
@@ -128,7 +128,7 @@ export default async function MuseoStoriaNaturale() {
                     />
                     <div>
                         <h3 className="text-2xl font-semibold mt-2 prime-text">Proposte educative</h3>
-                        <p>Dalle scuole dell'infanzia, fino agli adulti lavoriamo per aprire le porte dei musei e
+                        <p>Dalle scuole dell&apos;infanzia, fino agli adulti lavoriamo per aprire le porte dei musei e
                             renderli
                             accessibili al più ampio numero possibile di persone.</p>
                         <div className="mb-4 md:mt-8 text-black w-full text-end font-medium text-lg md:text-base">

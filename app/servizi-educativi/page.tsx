@@ -2,13 +2,15 @@ import Image from "next/image";
 import TicketCard from "@/app/_components/TicketCard";
 import Link from "next/link";
 import {getExperiences} from "@/app/lib/domnia-experiences";
+import type { ExperienceCardData } from "@/app/lib/domnia-types";
 
 export default async function ServiziEducativi() {
 
-    let content, contentMuseums, museums, filteredMuseums;
+    let content, contentMuseums;
+    let filteredMuseums: ExperienceCardData[] = [];
 
     try {
-        museums = await getExperiences('/');
+        const museums = await getExperiences('/');
         filteredMuseums = museums.filter(el => el.tagIds.includes(9));
 
         const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/servizi-educativi',

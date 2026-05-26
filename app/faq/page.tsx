@@ -5,17 +5,18 @@ import {unstable_rethrow} from "next/navigation";
 import Markdown from "react-markdown";
 import {AccordionArrow} from "@/app/_components/_icons/AccordionArrow";
 import ContactForm from "@/app/_components/ContactForm";
+import type { StrapiCollectionResponse, StrapiFaq } from "@/app/lib/strapi-types";
 
 export default async function Faq(){
 
-    let content;
+    let content: StrapiCollectionResponse<StrapiFaq> = { data: [] };
 
     try {
 
         const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/faqs',
             {next: {revalidate: 1000}}
         );
-        content = await data.json();
+        content = await data.json() as StrapiCollectionResponse<StrapiFaq>;
         console.log(content.data)
 
     } catch(e) {
@@ -31,7 +32,7 @@ export default async function Faq(){
                 <h1 className="text-4xl mb-8 font-semibold">FAQ</h1>
 
                 {content.data &&
-                    content.data.map(el => {
+                    content.data.map((el) => {
                         return(
                             <Accordion key={el.documentId}>
                                 <AccordionSummary expandIcon={<AccordionArrow />}

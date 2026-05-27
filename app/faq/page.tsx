@@ -7,6 +7,8 @@ import {AccordionArrow} from "@/app/_components/_icons/AccordionArrow";
 import ContactForm from "@/app/_components/ContactForm";
 import type { StrapiCollectionResponse, StrapiFaq } from "@/app/lib/strapi-types";
 
+export const dynamic = 'force-dynamic';
+
 export default async function Faq(){
 
     let content: StrapiCollectionResponse<StrapiFaq> = { data: [] };
@@ -27,7 +29,7 @@ export default async function Faq(){
     return(
         <>
             {/*FAQs*/}
-            <section className="w-[90%] md:w-[85%] mx-auto pt-8">
+            <section className="w-[90%] md:w-[85%] mx-auto pt-[128px] md:pt-[148px]">
                 <p className="text-sm mb-8 font-light">Home / FAQ</p>
                 <h1 className="text-4xl mb-8 font-semibold">FAQ</h1>
 

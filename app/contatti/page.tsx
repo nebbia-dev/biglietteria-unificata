@@ -6,31 +6,57 @@ import type {
     StrapiSingleResponse,
 } from "@/app/lib/strapi-types";
 
+export const dynamic = 'force-dynamic';
+
+const emptyContacts: StrapiContacts = {
+    documentId: 'empty-contacts',
+    indirizzo: '',
+};
+
+async function fetchCmsJson<T>(path: string, fallback: T): Promise<T> {
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+
+    if (!baseUrl) {
+        console.warn(`CMS base URL unavailable for ${path}`);
+        return fallback;
+    }
+
+    const response = await fetch(`${baseUrl}${path}`, {
+        cache: 'no-store',
+    });
+
+    if (!response.ok) {
+        console.warn(`CMS request failed for ${path} with status ${response.status}`);
+        return fallback;
+    }
+
+    return response.json() as Promise<T>;
+}
+
 export default async function Contatti() {
 
     let content: StrapiCollectionResponse<StrapiMuseum> = { data: [] };
-    let contentContacts = { data: {} as StrapiContacts } as StrapiSingleResponse<StrapiContacts>;
+    let contentContacts: StrapiSingleResponse<StrapiContacts> = {
+        data: emptyContacts,
+    };
 
     try {
-
-        const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/museums',
-            {next: {revalidate: 1000}}
+        content = await fetchCmsJson<StrapiCollectionResponse<StrapiMuseum>>(
+            '/api/museums',
+            { data: [] },
         );
-        content = await data.json() as StrapiCollectionResponse<StrapiMuseum>;
 
-        const dataContacts = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/contatti',
-            {next: {revalidate: 1000}}
+        contentContacts = await fetchCmsJson<StrapiSingleResponse<StrapiContacts>>(
+            '/api/contatti',
+            { data: emptyContacts },
         );
-        contentContacts = await dataContacts.json() as StrapiSingleResponse<StrapiContacts>;
-
-
     } catch(e) {
         unstable_rethrow(e);
         console.log(e)
     }
 
     return(
-        <section className="w-[90%] md:w-[85%] mx-auto pt-8">
+        <section className="w-[90%] md:w-[85%] mx-auto pt-[128px] md:pt-[148px]">
             <div className="mb-8">
                 <p className="text-sm mb-8 font-light">Home / Contatti</p>
                 <h1 className="text-4xl mb-4 font-semibold">Contatti</h1>
@@ -61,7 +87,7 @@ export default async function Contatti() {
                     })}
 
 
-                <div>
+                {contentContacts.data.indirizzo && <div>
                     <h2 className="text-2xl font-semibold">Uffici del Sistema Museale</h2>
                     <p className="mb-4">{contentContacts.data.indirizzo}</p>
 
@@ -95,7 +121,7 @@ export default async function Contatti() {
                         <li>{contentContacts.data.comunicazione_telefono}</li>
                         <li className="break-all underline"><a href={`mailto:${contentContacts.data.comunicazione_email}`}>{contentContacts.data.comunicazione_email}</a></li>
                     </ul>
-                </div>
+                </div>}
             </div>
         </section>
     )

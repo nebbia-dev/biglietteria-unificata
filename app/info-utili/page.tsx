@@ -7,6 +7,8 @@ import Markdown from "react-markdown";
 import ContactForm from "@/app/_components/ContactForm";
 import type { StrapiCollectionResponse, StrapiMuseum } from "@/app/lib/strapi-types";
 
+export const dynamic = 'force-dynamic';
+
 export default async function InfoUtili() {
 
     let content: StrapiCollectionResponse<StrapiMuseum> = { data: [] };
@@ -28,7 +30,7 @@ export default async function InfoUtili() {
 
     return(
         <>
-            <section className="w-[90%] md:w-[85%] mx-auto pt-8">
+            <section className="w-[90%] md:w-[85%] mx-auto pt-[128px] md:pt-[148px]">
                 <p className="text-sm mb-8 font-light">Home / Info utili</p>
                 <h1 className="text-4xl mb-8 font-semibold">Info utili</h1>
             </section>

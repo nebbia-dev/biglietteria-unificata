@@ -7,6 +7,9 @@ import {getExperiences} from "@/app/lib/domnia-experiences";
 import Carousel from "@/app/_components/Carousel";
 import getAddress from "@/helpers/address/getAddress";
 import ContactForm from "@/app/_components/ContactForm";
+
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
 
     let museums, content, contentMuseums, filteredMuseums, bundle, contentEvents, events;

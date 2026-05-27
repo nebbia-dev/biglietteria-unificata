@@ -4,6 +4,8 @@ import Link from "next/link";
 import {getExperiences} from "@/app/lib/domnia-experiences";
 import type { ExperienceCardData } from "@/app/lib/domnia-types";
 
+export const dynamic = 'force-dynamic';
+
 export default async function ServiziEducativi() {
 
     let content, contentMuseums;
@@ -52,7 +54,7 @@ export default async function ServiziEducativi() {
     return(
         <>
             {/*Lista biglietti*/}
-            <section className="w-[90%] md:w-[85%] mx-auto pt-8">
+            <section className="w-[90%] md:w-[85%] mx-auto pt-[128px] md:pt-[148px]">
                 <div className="mb-8">
                     <p className="text-sm mb-8 font-light">Home / {content.data.titolo}</p>
                     <h1 className="text-4xl mb-4 font-semibold">{content.data.titolo}</h1>

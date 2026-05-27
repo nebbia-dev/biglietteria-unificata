@@ -4,6 +4,8 @@ import TwoPartsDescription from "@/app/_components/TwoPartsDescription";
 import EventCard from "@/app/_components/EventCard";
 import {getExperiences} from "@/app/lib/domnia-experiences";
 
+export const dynamic = 'force-dynamic';
+
 export default async function MuseoCivico() {
     let content, museums, filteredMuseums, bundle, standard, groups, schools, extra, contentEvents, events;
 

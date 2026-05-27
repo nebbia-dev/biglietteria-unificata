@@ -3,6 +3,8 @@ import EventCard from "@/app/_components/EventCard";
 import {getExperiences} from "@/app/lib/domnia-experiences";
 import Image from "next/image";
 
+export const dynamic = 'force-dynamic';
+
 export default async function NewsEventi() {
 
     let museums, content, contentEvents, events;
@@ -37,7 +39,7 @@ export default async function NewsEventi() {
     return(
         <>
             {/*Lista biglietti*/}
-            <section className="w-[90%] mx-auto pt-8">
+            <section className="w-[90%] mx-auto pt-[128px] md:pt-[148px]">
                 <div className="mb-8">
                     <p className="text-sm mb-8 font-light">Home / {content.data.titolo}</p>
                     <h1 className="text-4xl mb-4 font-semibold">{content.data.titolo}</h1>

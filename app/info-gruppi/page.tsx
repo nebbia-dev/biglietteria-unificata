@@ -4,6 +4,8 @@ import Link from "next/link";
 import {getExperiences} from "@/app/lib/domnia-experiences";
 import type { ExperienceCardData } from "@/app/lib/domnia-types";
 
+export const dynamic = 'force-dynamic';
+
 export default async function InfoGruppi() {
 
     let content, contentMuseums;

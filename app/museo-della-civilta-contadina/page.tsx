@@ -19,7 +19,7 @@ export default async function MuseoCambonino() {
         schools = filteredMuseums.filter(el => el.tagIds.includes(9))[0];
         events = museums.filter(el => el.tagIds.includes(11));
 
-        const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/museums/wgo5xv2w21fbpg0c9dj6cmha?populate=*',
+        const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/museums/' + process.env.NEXT_CAMBONINO +'?populate=*',
             {next: {revalidate: 1000}}
         );
         content = await data.json();

@@ -19,7 +19,7 @@ export default async function MuseoCivico() {
         extra = filteredMuseums.filter(el => el.tagIds.includes(10))[0];
         events = museums.filter(el => el.tagIds.includes(11));
 
-        const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/museums/r1zzi0yzdpufn49yxpg9yjt2?populate=*',
+        const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/museums/' + process.env.NEXT_ALA_PONZONE +'?populate=*',
             {next: {revalidate: 1000}}
         );
         content = await data.json();

@@ -19,7 +19,7 @@ export default async function MuseoStoriaNaturale() {
         schools = filteredMuseums.filter(el => el.tagIds.includes(9))[0];
         events = museums.filter(el => el.tagIds.includes(11));
 
-        const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/museums/sz2giy8w64pjatfgik1s4zqi?populate=*',
+        const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/museums/' + process.env.NEXT_STORIA_NATURALE +'?populate=*',
             {next: {revalidate: 1000}}
         );
         content = await data.json();

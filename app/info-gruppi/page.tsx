@@ -54,8 +54,8 @@ export default async function InfoGruppi() {
         <>
             <Image
                 src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine.url}
-                alt="Cremona vista dall'alto" width={500} height={500}
-                className="w-full h-[70dvh] object-cover"
+                alt="Cremona vista dall'alto" width={2000} height={1000}
+                className="w-full h-[70dvh] object-cover pt-[80px]"
             />
             {/*Lista biglietti*/}
             <section className="w-[90%] md:w-[85%] mx-auto pt-8">

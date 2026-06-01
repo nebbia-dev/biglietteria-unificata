@@ -54,8 +54,8 @@ export default async function MuseoCambonino() {
             <Image
                 // src='/placeholders/0-hero.jpg'
                 src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine.url}
-                alt={content.data.immagine.alternativeText} width={500} height={500}
-                className="w-full h-[70dvh] object-cover"
+                alt={content.data.immagine.alternativeText} width={2000} height={1000}
+                className="w-full h-[70dvh] object-cover pt-[80px]"
             />
             {/*Lista biglietti*/}
             <section className="w-[90%] md:w-[85%] mx-auto pt-8">

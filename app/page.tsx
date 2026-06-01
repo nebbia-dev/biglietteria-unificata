@@ -26,7 +26,6 @@ export default async function Home() {
             {next: {revalidate: 1000}}
         );
         content = await data.json();
-        console.log(content.data)
 
         const dataMuseums = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/museums?populate=*',
             {next: {revalidate: 1000}})
@@ -74,6 +73,12 @@ export default async function Home() {
       {/*    alt="Cremona vista dall'alto" width={500} height={500}*/}
       {/*    className="w-full h-[70dvh] object-cover object-top block md:hidden"*/}
       {/*/>*/}
+        <div className="md:hidden block w-full pt-[80px]">
+            <Image
+                className="w-full h-full object-cover rounded-t-xl"
+                src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine.url}
+                alt={content.data.immagine.alternativeText} width={300} height={200}/>
+        </div>
         <Carousel pics={pics}/>
         {/*Lista musei*/}
         <section className="w-[90%] md:w-[85%] mx-auto pt-8 md:pt-20">
@@ -118,7 +123,7 @@ export default async function Home() {
                                             alt={`Interno del ${el.title}`} width={300} height={200}/>
                                         <div className="flex flex-col gap-2">
                                             <h4 className="text-xl md:text-base font-medium md:line-clamp-2">Ticket {el.title}</h4>
-                                            <p className="line-clamp-6 md:text-sm">
+                                            <p className="line-clamp-6 md:text-sm lato">
                                                 {el.description?.replace(/<\/?[^>]+(>|$)/g, "")}
                                             </p>
                                             <div className="flex items-center justify-between mt-4 h-[64px]">
@@ -168,9 +173,9 @@ export default async function Home() {
                         <p className="text-xl md:text-base font-medium mt-2">Scoprire un museo è bello, ma visitarne più di uno è meglio. Il ticket cumulativo ti consente l&apos;accesso a tutti i Musei del Polo Civico con tariffa agevolata.</p>
                     </div>
                     <div className="flex flex-col gap-4 bg-white rounded-xl text-black p-4 mt-8 mb-4">
-                        <Image
+                        <Image src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine_biglietto_cumulativo.url}
                             className="w-full h-[200px] object-cover rounded-xl"
-                            src="/placeholders/cumulativo.jpg" alt="Interno di un museo" width={300} height={200}/>
+                             alt={content.data.immagine_biglietto_cumulativo.alternativeText} width={300} height={200}/>
                         <div className="flex flex-col gap-2">
                             <h3 className="text-xl md:text-base font-medium">{bundle.title}</h3>
                             <div className="w-full flex items-center justify-end mt-4">
@@ -210,7 +215,7 @@ export default async function Home() {
                         className="w-full h-[200px] object-cover rounded-xl"
                         src={process.env.NEXT_PUBLIC_BASE_URL + homepage.immagine_gruppi.url} alt={homepage.immagine_gruppi.alternativeText} width={300} height={200}/>
 
-                    <p className="text-xl md:text-base">Prenota l&apos;accesso per il tuo gruppo.
+                    <p className="text-xl md:text-base md:h-[64px]">Prenota l&apos;accesso per il tuo gruppo.
                         Scopri i ticket ridotti per i gruppi di più di 15 persone.</p>
                     <div className="mb-4 text-black w-full font-medium text-lg md:flex md:justify-end">
                         <Link aria-label="Vai alla pagine con le informazioni sulle visite dei gruppi" href="/info-gruppi" className="md:text-base w-auto block text-center prime-bg rounded-full px-4 py-2 md:w-fit">Scopri di più</Link>
@@ -226,7 +231,7 @@ export default async function Home() {
                         className="w-full h-[200px] object-cover rounded-xl"
                         src={process.env.NEXT_PUBLIC_BASE_URL + homepage.immagine_scuole.url} alt={homepage.immagine_scuole.alternativeText} width={300} height={200}/>
 
-                    <p className="text-xl md:text-base">Clicca qui se vuoi prenotare l&apos;accesso ai musei con il tuo gruppo scolastico.</p>
+                    <p className="text-xl md:text-base md:h-[64px]">Clicca qui se vuoi prenotare l&apos;accesso ai musei con il tuo gruppo scolastico.</p>
                     <div className="mb-4 text-black w-full font-medium text-lg md:flex md:justify-end">
                         <Link aria-label="Vai alla pagine con le informazioni sulle visite dei gruppi scolastici" href="/servizi-educativi" className="md:text-base w-auto block text-center prime-bg rounded-full px-4 py-2 md:w-fit">Scopri di più</Link>
                     </div>

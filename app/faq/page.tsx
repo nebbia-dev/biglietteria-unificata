@@ -58,7 +58,7 @@ export default async function Faq(){
                                         padding: "4px 24px 24px 24px",
                                     }}
                                 >
-                                    <div className="markdown whitespace-pre-line">
+                                    <div className="markdown lato whitespace-pre-line">
                                         <Markdown>
                                             {el.risposta}
                                         </Markdown>

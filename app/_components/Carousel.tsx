@@ -77,7 +77,7 @@ export default function Carousel({pics}:{pics: CarouselImage[]}) {
     const placeholderSlide = prefersReducedMotion ? slide : placeholder;
 
    return(
-       <div className="flex flex-col items-center gap-4 w-full max-w-[100%] pt-[80px]">
+       <div className="hidden md:flex flex-col items-center gap-4 w-full max-w-[100%] pt-[80px]">
            <div className="flex items-center w-full h-[70dvh] relative max-w-[100%]">
                <PrevSlide aria-hidden={true} setSlide={() => setCurrentSlide('sub')}/>
                {pics &&
@@ -98,7 +98,7 @@ export default function Carousel({pics}:{pics: CarouselImage[]}) {
                            fill={true}
                        />
 
-                       <div className="hidden md:block rounded-xl gradient absolute bottom-5 right-[7.5%] z-10 text-white font-bold text-xl p-8">
+                       <div className="hidden md:block rounded-xl gradient absolute bottom-5 left-[7.5%] z-10 text-white font-bold text-xl p-8">
                            <h2>{pics[slide].titolo}</h2>
                            <div className="w-full flex justify-end">
                                <Link

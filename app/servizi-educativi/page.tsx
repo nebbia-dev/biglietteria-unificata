@@ -14,7 +14,7 @@ export default async function ServiziEducativi() {
         const museums = await getExperiences('/');
         filteredMuseums = museums.filter(el => el.tagIds.includes(9));
 
-        const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/servizi-educativi',
+        const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/servizi-educativi?populate=*',
             {next: {revalidate: 1000}}
         );
         content = await data.json();
@@ -57,7 +57,7 @@ export default async function ServiziEducativi() {
                 <div className="mb-8">
                     <p className="text-sm mb-8 font-light">Home / {content.data.titolo}</p>
                     <h1 className="text-4xl mb-4 font-semibold">{content.data.titolo}</h1>
-                    <p className="text-xl">{content.data.descrizione}</p>
+                    <p className="text-xl lato">{content.data.descrizione}</p>
                 </div>
 
                 <div className="flex flex-col md:flex-row w-full md:flex-wrap gap-4">
@@ -90,8 +90,8 @@ export default async function ServiziEducativi() {
                 <div
                     className="flex flex-col md:flex-row md:items-center gap-8 p-4 md:p-8 mt-2 w-full text-white md:text-base rounded-xl gradient">
                     <Image
-                        className="w-full h-[200px] md:h-[300px] object-cover rounded-xl"
-                        src="/placeholders/proposte.jpg" alt="Gruppi turistici" width={300} height={200}/>
+                        className="w-full md:w-2/4 h-[200px] md:h-[300px] object-cover rounded-xl"
+                        src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine_proposte_educative.url} alt={content.data.immagine_proposte_educative.alternativeText} width={300} height={200}/>
                     <div>
                         <div>
                             <p>Le nostre proposte educative permettono di arricchire la tua visita.
@@ -104,7 +104,7 @@ export default async function ServiziEducativi() {
                             </p>
                         </div>
                         <div className="md:mt-8 text-black w-full md:flex md:justify-end font-medium text-sm">
-                            <a aria-label="Vai alla pagine delle proposte educative" target="_blank" rel="noopener noreferrer" href="https://musei.comune.cremona.it/it/servizi-educativi" className="w-auto block text-center prime-bg rounded-full px-4 py-2">Vai al
+                            <a aria-label="Vai alla pagine delle proposte educative" target="_blank" rel="noopener noreferrer" href="https://musei.comune.cremona.it/it/servizi-educativi/informazioni-didattica" className="w-auto block text-center prime-bg rounded-full px-4 py-2">Vai al
                                 sito</a>
                         </div>
                     </div>

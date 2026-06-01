@@ -1,7 +1,15 @@
 @import "tailwindcss";
 
+:root {
+    --font-lato: var(--font-lato);
+}
+
 body {
     background-color: #ecf0f2 !important;
+}
+
+.lato {
+    font-family: var(--font-lato), sans-serif;
 }
 
 .gradient {

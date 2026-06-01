@@ -7,7 +7,7 @@ import {getExperiences} from "@/app/lib/domnia-experiences";
 export const dynamic = 'force-dynamic';
 
 export default async function MuseoCivico() {
-    let content, museums, filteredMuseums, bundle, standard, groups, schools, extra, contentEvents, events;
+    let content, museums, filteredMuseums, bundle, standard, groups, schools, extra, contentEvents, events, contentEduImg;
 
     try {
         museums = await getExperiences('/');
@@ -36,6 +36,11 @@ export default async function MuseoCivico() {
                 }
             }
         }
+
+        const dataEduImg = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/info-gruppi?populate=*',
+            {next: {revalidate: 1000}}
+        );
+        contentEduImg = await dataEduImg.json();
     // tag:7/8/9/10
     // tag:12
 
@@ -48,7 +53,7 @@ export default async function MuseoCivico() {
             <Image
                 // src='/placeholders/0-hero.jpg'
                 src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine.url}
-                alt="Cremona vista dall'alto" width={500} height={500}
+                alt={content.data.immagine.alternativeText} width={500} height={500}
                 className="w-full h-[70dvh] object-cover"
             />
             {/*Lista biglietti*/}
@@ -56,7 +61,7 @@ export default async function MuseoCivico() {
                 <div className="mb-8">
                     <p className="text-sm mb-8 font-light">Home / {content.data.titolo}</p>
                     <h1 className="text-4xl mb-4 font-semibold">{content.data.titolo}</h1>
-                    <h2 className="text-2xl font-medium mb-2">{content.data.sottotitolo}</h2>
+                    {content.data.sottotitolo && <h2 className="text-2xl font-medium mb-2">{content.data.sottotitolo}</h2>}
                     <TwoPartsDescription
                         partOne={content.data.descrizione_1}
                         partTwo={content.data.descrizione_2}
@@ -134,18 +139,18 @@ export default async function MuseoCivico() {
             {/*Proposte educative*/}
             <section className="w-[90%] md:w-[85%] mx-auto pt-8">
                 <div
-                    className="flex flex-col md:flex-row md:items-center h-[300px] gap-8 p-4 mt-2 w-full text-white rounded-xl gradient">
-                    <Image src="/placeholders/card_servizi educativi.webp"
-                           alt="Bambini e genitori in una biblioteca"
+                    className="flex flex-col md:flex-row md:items-center md:h-[300px] gap-8 p-4 mt-2 w-full text-white rounded-xl gradient">
+                    <Image src={process.env.NEXT_PUBLIC_BASE_URL + contentEduImg.data.immagine_proposte_educative.url}
+                           alt={contentEduImg.data.immagine_proposte_educative.alternativeText}
                            width={200} height={100}
-                           className="md:w-2/4 md:h-full rounded-xl"
+                           className="w-full object-cover md:w-2/4 md:h-full rounded-xl"
                     />
-                    <div>
+                    <div className="md:pr-8">
                         <h3 className="text-2xl font-semibold mt-2 prime-text">Proposte educative</h3>
                         <p>Dalle scuole dell&apos;infanzia, fino agli adulti lavoriamo per aprire le porte dei musei e
                             renderli
                             accessibili al più ampio numero possibile di persone.</p>
-                        <div className="mb-4 md:mt-8 text-black w-full text-end font-medium text-lg md:text-base">
+                        <div className="mb-4 mt-8 text-black w-full text-end font-medium text-lg md:text-base">
                             <a
                                 aria-label="Vai alla pagina dedicata alle nostre proposte educative"
                                 target="_blank" rel="noopener noreferrer"

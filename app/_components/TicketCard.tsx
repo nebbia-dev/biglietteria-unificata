@@ -20,7 +20,7 @@ export default function TicketCard({el, layout}: {el: TicketCardData, layout: Ti
                             src={process.env.NEXT_PUBLIC_BASE_URL + el.immagine.url} alt={el.immagine.alternativeText} width={300} height={200}/>
                         <div className="flex flex-col gap-2">
                             <h4 className="text-xl font-medium md:line-clamp-1">{el.nome}</h4>
-                            <p className={`${layout === 'fourth' ? 'text-sm' : ''} line-clamp-4`}>{el.descrizione}</p>
+                            <p className={`${layout === 'fourth' ? 'text-sm' : ''} line-clamp-4 lato`}>{el.descrizione}</p>
                             <div className="flex items-center justify-between mt-4">
                                 {el.prezzo
                                     ? <div>

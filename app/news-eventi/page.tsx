@@ -1,4 +1,3 @@
-import Link from "next/link";
 import EventCard from "@/app/_components/EventCard";
 import {getExperiences} from "@/app/lib/domnia-experiences";
 import Image from "next/image";
@@ -54,12 +53,22 @@ export default async function NewsEventi() {
             {/*News*/}
             <section className="w-[90%] mx-auto pt-8">
                 <h2 className="text-2xl font-semibold mt-4 mb-8">News</h2>
-                <Image
-                    className="w-full h-[200px] object-cover rounded-xl mb-4"
-                    src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine.url} alt={content.data.immagine.alternativeText} width={300} height={200}/>
+                <div className="w-full md:1/2">
+                    <div className="flex flex-col gap-4 p-4 w-full rounded-xl gradient">
+                        <h3 className="px-4 text-2xl font-semibold mt-2 prime-text">Leggi le ultime
+                            novità</h3>
+                        <Image
+                            className="w-full h-[300px] object-cover rounded-4xl p-4"
+                            src="/placeholders/news.jpg" alt="Interno" width={300} height={200}/>
 
-                <div className="text-black w-full md:flex md:justify-end font-medium text-sm pt-4">
-                    <Link href="/" className="w-auto block text-center prime-bg rounded-full px-4 py-2">Vai a tutte le news</Link>
+                        <div className="text-black w-full md:flex md:justify-end font-medium text-sm p-4">
+                            <a target="_blank"
+                               rel="noopener noreferrer" aria-label="Vai alla pagina con le news"
+                               href="https://musei.comune.cremona.it/it/notizie-e-avvisi"
+                               className="w-auto block text-center prime-bg rounded-full px-4 py-2">Vai a tutte le
+                                news</a>
+                        </div>
+                    </div>
                 </div>
             </section>
         </>

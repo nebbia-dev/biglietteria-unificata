@@ -15,8 +15,7 @@ export default async function InfoGruppi() {
         const museums = await getExperiences('/');
         filteredMuseums = museums.filter(el => el.tagIds?.includes(8));
 
-        const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/info-gruppi'+
-            '?populate[0]=immagine',
+        const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/info-gruppi?populate=*',
             {next: {revalidate: 1000}}
         );
         content = await data.json();
@@ -63,7 +62,7 @@ export default async function InfoGruppi() {
                 <div className="mb-8">
                     <p className="text-sm mb-8 font-light">Home / {content.data.titolo}</p>
                     <h1 className="text-4xl mb-4 font-semibold">{content.data.titolo}</h1>
-                    <p className="text-xl">{content.data.descrizione}</p>
+                    <p className="text-xl lato">{content.data.descrizione}</p>
                 </div>
 
                 <div className="flex flex-col md:flex-row w-full md:flex-wrap gap-4">
@@ -98,7 +97,7 @@ export default async function InfoGruppi() {
                         <h3 className="text-2xl font-semibold my-4 prime-text">Servizi educativi</h3>
                         <Image
                             className="w-full h-[200px] object-cover rounded-xl"
-                            src="/placeholders/servizi-educativi.jpg" alt="Gruppi turistici" width={300} height={200}/>
+                            src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine_servizi_educativi.url} alt={content.data.immagine_servizi_educativi.alternativeText} width={300} height={200}/>
 
                         <p className="h-[100px] mt-8 text-xl md:text-base">Clicca qui se vuoi prenotare l&apos;accesso ai musei con il tuo gruppo scolastico.</p>
                         <div className="flex items-center h-[64px] text-black w-full md:flex md:justify-end font-medium text-sm">
@@ -110,13 +109,13 @@ export default async function InfoGruppi() {
                         <h3 className="text-2xl font-semibold my-4 prime-text">Proposte educative</h3>
                         <Image
                             className="w-full h-[200px] object-cover rounded-xl"
-                            src="/placeholders/servizi-educativi.jpg" alt="Gruppi turistici" width={300} height={200}/>
+                            src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine_proposte_educative.url} alt={content.data.immagine_proposte_educative.alternativeText} width={300} height={200}/>
                         <p className="h-[100px] mt-8 text-xl md:text-base">Dalle scuole dell&apos;infanzia, fino agli adulti lavoriamo per aprire le porte dei musei e
                             renderli accessibili al più ampio numero possibile di persone.
                         </p>
                         <div className="flex items-center h-[64px] text-black w-full md:flex md:justify-end font-medium text-sm">
                             <a aria-label="Vai alla pagine delle proposte educative" target="_blank"
-                               rel="noopener noreferrer" href="https://musei.comune.cremona.it/it/servizi-educativi"
+                               rel="noopener noreferrer" href="https://musei.comune.cremona.it/it/servizi-educativi/informazioni-didattica"
                                className="h-fit w-auto block text-center prime-bg rounded-full px-4 py-2">Vai al
                                 sito</a>
                         </div>

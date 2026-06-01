@@ -1,13 +1,35 @@
 import Image from "next/image";
 import {Accordion, AccordionDetails, AccordionSummary} from "@mui/material";
-import {Plus} from "@/app/_components/_icons/Plus";
 import Link from "next/link";
 import {unstable_rethrow} from "next/navigation";
 import Markdown from "react-markdown";
 import ContactForm from "@/app/_components/ContactForm";
 import type { StrapiCollectionResponse, StrapiMuseum } from "@/app/lib/strapi-types";
+import {AccordionArrow} from "@/app/_components/_icons/AccordionArrow";
 
 export const dynamic = 'force-dynamic';
+
+function getMuseumOrder(museum: StrapiMuseum) {
+    const order = Number(museum.ordine ?? Number.MAX_SAFE_INTEGER);
+
+    return Number.isFinite(order) ? order : Number.MAX_SAFE_INTEGER;
+}
+
+function sortMuseumsByOrder(museums: StrapiMuseum[]) {
+    return [...museums].sort((a, b) => getMuseumOrder(a) - getMuseumOrder(b));
+}
+
+const accordionSx = {
+    backgroundColor: "transparent",
+    boxShadow: "none",
+    borderBottom: "1px solid rgba(0, 0, 0, 0.5)",
+    '&::before': {
+        display: "none",
+    },
+    '&.Mui-expanded': {
+        margin: 0,
+    },
+};
 
 export default async function InfoUtili() {
 
@@ -21,6 +43,10 @@ export default async function InfoUtili() {
             {next: {revalidate: 1000}}
         );
         content = await data.json() as StrapiCollectionResponse<StrapiMuseum>;
+        content = {
+            ...content,
+            data: sortMuseumsByOrder(content.data),
+        };
         console.log(content)
 
     } catch(e) {
@@ -46,8 +72,8 @@ export default async function InfoUtili() {
                                 <h2 className="text-2xl mb-4 font-semibold">{el.titolo}</h2>
 
                                     {el.intero === 0 && el.ridotto === 0
-                                        ? <p>Ingresso gratuito</p>
-                                        : <ul>
+                                        ? <p className="lato">Ingresso gratuito</p>
+                                        : <ul className="lato">
                                             <li>Intero {
                                                 new Intl.NumberFormat("de-DE", {
                                                     style: "currency",
@@ -62,21 +88,18 @@ export default async function InfoUtili() {
                                             }</li></ul>
                                 }
 
-                                    {el.note && <p className="text-sm mt-2">{el.note}</p>}
+                                    {el.note && <p className="text-sm mt-2 lato">{el.note}</p>}
 
                                 <h3 className="text-xl mt-4 mb-2 font-semibold">Contatti</h3>
-                                <p>{el.titolo}<br/>{el.indirizzo}</p>
+                                <p className="lato">{el.titolo}<br/>{el.indirizzo}</p>
                                 <h4 className="font-medium mt-2 mb-1">Biglietteria:</h4>
-                                <ul className="mb-4">
+                                <ul className="mb-4 lato">
                                     <li>{el.biglietteria_telefono}</li>
                                     <li className="break-all underline"><a href={`mailto:${el.biglietteria_email}`}>{el.biglietteria_email}</a></li>
                                 </ul>
 
-                                <Accordion sx={{
-                                    backgroundColor: "transparent",
-                                    boxShadow: "none",
-                                }}>
-                                    <AccordionSummary expandIcon={<Plus width={24} height={24}/>}
+                                <Accordion sx={accordionSx}>
+                                    <AccordionSummary expandIcon={<AccordionArrow />}
                                                       aria-controls={`${el.documentId}-hours-content`}
                                                       id={`${el.documentId}-hours-header`}
                                                       sx={{
@@ -93,7 +116,7 @@ export default async function InfoUtili() {
                                         Orari
                                     </AccordionSummary>
                                     <AccordionDetails>
-                                        <div className="markdown">
+                                        <div className="markdown lato">
                                             <Markdown>
                                                 {el.orari}
                                             </Markdown>
@@ -101,13 +124,8 @@ export default async function InfoUtili() {
                                     </AccordionDetails>
                                 </Accordion>
 
-                                <div className="w-full h-[1px] bg-black"></div>
-
-                                <Accordion sx={{
-                                    backgroundColor: "transparent",
-                                    boxShadow: "none",
-                                }}>
-                                    <AccordionSummary expandIcon={<Plus width={24} height={24}/>}
+                                <Accordion sx={accordionSx}>
+                                    <AccordionSummary expandIcon={<AccordionArrow />}
                                                       aria-controls={`${el.documentId}-accessibility-content`}
                                                       id={`${el.documentId}-accessibility-header`}
                                                       sx={{
@@ -124,7 +142,7 @@ export default async function InfoUtili() {
                                         Accessibilità
                                     </AccordionSummary>
                                     <AccordionDetails>
-                                        <div className="markdown">
+                                        <div className="markdown lato">
                                             <Markdown>
                                                 {el.accessibilita}
                                             </Markdown>
@@ -132,15 +150,10 @@ export default async function InfoUtili() {
                                     </AccordionDetails>
                                 </Accordion>
 
-                                <div className="w-full h-[1px] bg-black"></div>
-
                                 {el.riduzioni &&
                                     <>
-                                    <Accordion sx={{
-                                        backgroundColor: "transparent",
-                                        boxShadow: "none",
-                                    }}>
-                                        <AccordionSummary expandIcon={<Plus width={24} height={24}/>}
+                                    <Accordion sx={accordionSx}>
+                                        <AccordionSummary expandIcon={<AccordionArrow />}
                                                           aria-controls={`${el.documentId}-reductions-content`}
                                                           id={`${el.documentId}-reductions-header`}
                                                           sx={{
@@ -160,25 +173,21 @@ export default async function InfoUtili() {
                                             </p>
                                         </AccordionSummary>
                                         <AccordionDetails>
-                                            <div className="markdown">
+                                            <div className="markdown lato">
                                                 <Markdown>
                                                     {el.riduzioni}
                                                 </Markdown>
                                             </div>
                                         </AccordionDetails>
                                     </Accordion>
-                                    <div className="w-full h-[1px] bg-black"></div>
                                     </>
                                 }
 
 
                                 {el.gratuita &&
                                     <>
-                                        <Accordion sx={{
-                                            backgroundColor: "transparent",
-                                            boxShadow: "none",
-                                        }}>
-                                            <AccordionSummary expandIcon={<Plus width={24} height={24}/>}
+                                        <Accordion sx={accordionSx}>
+                                            <AccordionSummary expandIcon={<AccordionArrow />}
                                                               aria-controls={`${el.documentId}-free-content`}
                                                               id={`${el.documentId}-free-header`}
                                                               sx={{
@@ -198,14 +207,13 @@ export default async function InfoUtili() {
                                                 </p>
                                             </AccordionSummary>
                                             <AccordionDetails>
-                                                <div className="markdown">
+                                                <div className="markdown lato">
                                                     <Markdown>
                                                         {el.gratuita}
                                                     </Markdown>
                                                 </div>
                                             </AccordionDetails>
                                         </Accordion>
-                                        <div className="w-full h-[1px] bg-black"></div>
                                     </>
                                 }
 

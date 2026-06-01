@@ -8,11 +8,11 @@ export default function TwoPartsDescription({partOne, partTwo} : {partOne:string
 
     return(
         <>
-            <p className="text-xl">
+            <p className="text-xl lato">
                 {partOne}
             </p>
 
-            <p id="secondPart" className={`text-xl ${showPartTwo ? 'max-h-[1000px]' : 'max-h-0'} transition-all duration-500 overflow-hidden`}>
+            <p id="secondPart" className={`lato text-xl ${showPartTwo ? 'max-h-[1000px]' : 'max-h-0'} transition-all duration-500 overflow-hidden`}>
                 {partTwo}
             </p>
 

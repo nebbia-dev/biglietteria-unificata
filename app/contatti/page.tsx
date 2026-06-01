@@ -13,6 +13,16 @@ const emptyContacts: StrapiContacts = {
     indirizzo: '',
 };
 
+function getMuseumOrder(museum: StrapiMuseum) {
+    const order = Number(museum.ordine ?? Number.MAX_SAFE_INTEGER);
+
+    return Number.isFinite(order) ? order : Number.MAX_SAFE_INTEGER;
+}
+
+function sortMuseumsByOrder(museums: StrapiMuseum[]) {
+    return [...museums].sort((a, b) => getMuseumOrder(a) - getMuseumOrder(b));
+}
+
 async function fetchCmsJson<T>(path: string, fallback: T): Promise<T> {
     const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
@@ -45,6 +55,10 @@ export default async function Contatti() {
             '/api/museums',
             { data: [] },
         );
+        content = {
+            ...content,
+            data: sortMuseumsByOrder(content.data),
+        };
 
         contentContacts = await fetchCmsJson<StrapiSingleResponse<StrapiContacts>>(
             '/api/contatti',
@@ -68,20 +82,20 @@ export default async function Contatti() {
                         return (
                             <div key={el.documentId}>
                                 <h2 className="text-2xl font-semibold">{el.titolo}</h2>
-                                <p className="mb-4">{el.indirizzo}</p>
+                                <p className="mb-4 lato">{el.indirizzo}</p>
 
                                 <h3 className="font-medium mt-2 mb-1">Biglietteria:</h3>
-                                <ul>
+                                <ul className="lato">
                                     <li>{el.biglietteria_telefono}</li>
                                     <li className="break-all underline"><a href={`mailto:${el.biglietteria_email}`}>{el.biglietteria_email}</a></li>
                                 </ul>
 
                                 <h3 className="font-medium mt-2 mb-1">Prenotazione gruppi:</h3>
-                                <p className="break-all underline"><a href={`mailto:${el.gruppi_email}`}>{el.gruppi_email}</a>
+                                <p className="break-all underline lato"><a href={`mailto:${el.gruppi_email}`}>{el.gruppi_email}</a>
                                 </p>
 
                                 <h3 className="font-medium mt-2 mb-1">Conservatore:</h3>
-                                <p className="pb-8">{el.conservatore_nome} {el.conservatore_telefono} – <a className="break-all underline" href={`mailto:${el.conservatore_email}`}>{el.conservatore_email}</a></p>
+                                <p className="pb-8 lato">{el.conservatore_nome} {el.conservatore_telefono} – <a className="break-all underline" href={`mailto:${el.conservatore_email}`}>{el.conservatore_email}</a></p>
                             </div>
                         )
                     })}

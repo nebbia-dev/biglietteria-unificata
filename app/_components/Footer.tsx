@@ -8,13 +8,13 @@ export default function Footer() {
             <footer
                 className="md:w-[85%] md:mx-auto md:min-h-[200px] md:text-sm text-white p-8 md:mt-6 flex flex-col md:flex-row gap-8 md:gap-12 md:justify-between">
                 <Image src='/icons/logo.png'
-                       alt="museo civici cremona logo" width={48} height={48}
+                       alt="Logo dei Musei Civici di Cremona" width={48} height={48}
                        className="w-12 h-12 hidden md:block"
 
                 />
 
                 <div className="break-all">
-                    <h4 className="prime-text font-semibold mb-1">Contatti</h4>
+                    <h3 className="prime-text font-semibold mb-1">Contatti</h3>
                     <ul className="mb-2">
                         <li>Uffici: 0372 407269</li>
                         <li><a className="underline" href="mailto:museo.alaponzone@cremona.comune.it">museo.alaponzone@cremona.comune.it</a></li>
@@ -27,7 +27,7 @@ export default function Footer() {
                 </div>
 
                 <div>
-                    <h4 className="prime-text font-semibold mb-1">Link utili</h4>
+                    <h3 className="prime-text font-semibold mb-1">Link utili</h3>
                     <ul>
                         <li>
                             <a aria-label="Vai alla pagina di Art Bonus"
@@ -35,12 +35,12 @@ export default function Footer() {
                         <li className="flex gap-2 mt-2">
                             <a aria-label="Vai alla pagina Facebook dei Musei Civici" href="https://www.facebook.com/cremonamusei/" target="_blank"
                                rel="noopener noreferrer" className="w-6">
-                                <Image src="/icons/hugeicons_facebook-02.webp" alt="facebook logo" width={48}
+                                <Image src="/icons/hugeicons_facebook-02.webp" aria-hidden alt="facebook logo" width={48}
                                        height={48}/>
                             </a>
                             <a aria-label="Vai alla pagina Instagram dei Musei Civici" href="https://www.instagram.com/cremonamusei/" target="_blank"
                                rel="noopener noreferrer" className="w-6">
-                                <Image src="/icons/logo-instagram.webp" alt="instagram logo" width={48} height={48}/>
+                                <Image src="/icons/logo-instagram.webp" aria-hidden alt="instagram logo" width={48} height={48}/>
                             </a>
                         </li>
                     </ul>

@@ -138,7 +138,7 @@ export default async function MuseoStoriaNaturale() {
                                 aria-label="Vai alla pagina dedicata alle nostre proposte educative"
                                 target="_blank" rel="noopener noreferrer"
                                 href="https://musei.comune.cremona.it/it/servizi-educativi/informazioni-didattica"
-                                className="w-fit prime-bg rounded-full px-4 py-2">Scopri di più</a>
+                                className="w-fit prime-bg rounded-full px-4 py-2 md:text-sm">Scopri di più</a>
                         </div>
                     </div>
                 </div>

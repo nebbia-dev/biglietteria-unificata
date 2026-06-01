@@ -20,6 +20,12 @@ export default function Menu() {
     const desktopSubmenuClasses = "top-[48px] pl-4 transition-[max-height,opacity] duration-500 ease-in-out overflow-hidden absolute bg-black z-100";
     const openSubmenuClasses = "max-h-[1000px] opacity-100 pointer-events-auto";
     const closedSubmenuClasses = "max-h-0 opacity-0 pointer-events-none";
+    const desktopMuseumsButtonId = 'desktopMuseumsButton';
+    const desktopMuseumsSubmenuId = 'desktopMuseumsSubmenu';
+    const desktopVisitSubmenuId = 'desktopVisitSubmenu';
+    const mobileMuseumsButtonId = 'mobileMuseumsButton';
+    const mobileMuseumsSubmenuId = 'mobileMuseumsSubmenu';
+    const mobileVisitSubmenuId = 'mobileVisitSubmenu';
 
     const closeAllMenus = useCallback(() => {
         setShowMenu(current => current === 'open' ? 'close' : current);
@@ -89,13 +95,13 @@ export default function Menu() {
                 header.setAttribute('inert', 'inert');
                 footer.setAttribute('inert', 'inert');
                 // iubenda.setAttribute('inert', 'inert');
-                document.getElementById('museumsButton')!.focus();
+                document.getElementById(mobileMuseumsButtonId)?.focus();
             } else if(showMenu !== 'initial') {
                 main.removeAttribute('inert');
                 header.removeAttribute('inert');
                 footer.removeAttribute('inert');
                 // iubenda.removeAttribute('inert');
-                document.getElementById('hamburgerButton')!.focus();
+                document.getElementById('hamburgerButton')?.focus();
             }
         }
     }, [isMainMenuOpen, showMenu])
@@ -146,18 +152,18 @@ export default function Menu() {
                                     }}
                                     onFocus={openMuseumsMenuOnFocus}
                                     aria-expanded={isMuseumsMenuOpen}
-                                    aria-controls="museumsSubmenu"
+                                    aria-controls={desktopMuseumsSubmenuId}
                                     onClick={() => {
                                         pointerFocusRef.current = false;
                                         toggleMuseumsMenu();
                                     }}
-                                    id="museumsButton"
+                                    id={desktopMuseumsButtonId}
                                     className="min-w-[64px] border-b border-black/50 cursor-pointer flex justify-between items-center">
                                 <span className="font-semibold">Musei</span>
                                 <span
                                     className={`${isMuseumsMenuOpen ? 'rotate-90' : 'rotate-0'} transition-all duration-500 origin-center`}>&gt;</span>
                             </button>
-                            <ul id="museumsSubmenu" inert={!isMuseumsMenuOpen}
+                            <ul id={desktopMuseumsSubmenuId} inert={!isMuseumsMenuOpen}
                                 className={`${isMuseumsMenuOpen ? openSubmenuClasses : closedSubmenuClasses} ${desktopSubmenuClasses} w-[250px] right-[15%]`}>
                                 <li className="py-3">
                                     <Link
@@ -201,7 +207,7 @@ export default function Menu() {
                                     }}
                                     onFocus={openVisitMenuOnFocus}
                                     aria-expanded={isVisitMenuOpen}
-                                    aria-controls="visitSubmenu"
+                                    aria-controls={desktopVisitSubmenuId}
                                     onClick={() => {
                                         pointerFocusRef.current = false;
                                         toggleVisitMenu();
@@ -211,7 +217,7 @@ export default function Menu() {
                                 <span
                                     className={`${isVisitMenuOpen ? 'rotate-90' : 'rotate-0'} transition-all duration-500 origin-center`}>&gt;</span>
                             </button>
-                            <ul id="visitSubmenu" inert={!isVisitMenuOpen}
+                            <ul id={desktopVisitSubmenuId} inert={!isVisitMenuOpen}
                                 className={`${isVisitMenuOpen ? openSubmenuClasses : closedSubmenuClasses} ${desktopSubmenuClasses} w-[200px]`}>
                                 <li className="py-3">
                                     <Link
@@ -276,21 +282,18 @@ export default function Menu() {
                             </Link>
                         </li>
 
-                        <ul>
-
-                            <li className="flex gap-2">
-                                <a aria-label="Vai alla pagina Facebook dei Musei Civici" href="https://www.facebook.com/cremonamusei/" target="_blank"
-                                   rel="noopener noreferrer" className="w-6">
-                                    <Image src="/icons/hugeicons_facebook-02.webp" alt="facebook logo" width={48}
-                                           height={48}/>
-                                </a>
-                                <a aria-label="Vai alla pagina Instagram dei Musei Civici" href="https://www.instagram.com/cremonamusei/" target="_blank"
-                                   rel="noopener noreferrer" className="w-6">
-                                    <Image src="/icons/logo-instagram.webp" alt="instagram logo" width={48}
-                                           height={48}/>
-                                </a>
-                            </li>
-                        </ul>
+                        <li className="flex gap-2">
+                            <a aria-label="Vai alla pagina Facebook dei Musei Civici" href="https://www.facebook.com/cremonamusei/" target="_blank"
+                               rel="noopener noreferrer" className="w-6">
+                                <Image src="/icons/hugeicons_facebook-02.webp" aria-hidden alt="facebook logo" width={48}
+                                       height={48}/>
+                            </a>
+                            <a aria-label="Vai alla pagina Instagram dei Musei Civici" href="https://www.instagram.com/cremonamusei/" target="_blank"
+                               rel="noopener noreferrer" className="w-6">
+                                <Image src="/icons/logo-instagram.webp" aria-hidden alt="instagram logo" width={48}
+                                       height={48}/>
+                            </a>
+                        </li>
 
                     </ul>
                 </nav>
@@ -333,18 +336,18 @@ export default function Menu() {
                                     }}
                                     onFocus={openMuseumsMenuOnFocus}
                                     aria-expanded={isMuseumsMenuOpen}
-                                    aria-controls="museumsSubmenu"
+                                    aria-controls={mobileMuseumsSubmenuId}
                                     onClick={() => {
                                         pointerFocusRef.current = false;
                                         toggleMuseumsMenu();
                                     }}
-                                    id="museumsButton"
+                                    id={mobileMuseumsButtonId}
                                     className="border-b border-black/50 cursor-pointer pr-4 py-3 flex justify-between items-center">
                                 <span className="text-2xl font-semibold">Musei</span>
                                 <span
                                     className={`${isMuseumsMenuOpen ? 'rotate-90' : 'rotate-0'} transition-all duration-500 origin-center`}>&gt;</span>
                             </button>
-                            <ul id="museumsSubmenu" inert={!isMuseumsMenuOpen}
+                            <ul id={mobileMuseumsSubmenuId} inert={!isMuseumsMenuOpen}
                                 className={`${isMuseumsMenuOpen ? 'max-h-[1000px]' : 'max-h-0'} pl-4 transition-all duration-500 overflow-hidden`}>
                                 <li className="py-3">
                                     <Link
@@ -389,7 +392,7 @@ export default function Menu() {
                                     }}
                                     onFocus={openVisitMenuOnFocus}
                                     aria-expanded={isVisitMenuOpen}
-                                    aria-controls="visitSubmenu"
+                                    aria-controls={mobileVisitSubmenuId}
                                     onClick={() => {
                                         pointerFocusRef.current = false;
                                         toggleVisitMenu();
@@ -399,7 +402,7 @@ export default function Menu() {
                                 <span
                                     className={`${isVisitMenuOpen ? 'rotate-90' : 'rotate-0'} transition-all duration-500 origin-center`}>&gt;</span>
                             </button>
-                            <ul id="visitSubmenu" inert={!isVisitMenuOpen}
+                            <ul id={mobileVisitSubmenuId} inert={!isVisitMenuOpen}
                                 className={`${isVisitMenuOpen ? 'max-h-[1000px]' : 'max-h-0'} pl-4 transition-all duration-500 overflow-hidden`}>
                                 <li className="py-3">
                                     <Link

@@ -94,25 +94,31 @@ export default async function InfoGruppi() {
             <section className="w-[90%] md:w-[85%] mx-auto pt-8">
                 <h2 className="text-2xl font-semibold mt-4 mb-8">Gruppi scolastici</h2>
                 <div className="md:flex md:gap-4">
-                    <div className="flex flex-col md:w-[calc(50%-0.5rem)] gap-8 p-4 mt-2 w-full text-white rounded-xl gradient">
-                        <h3 className="text-2xl font-semibold mt-4 prime-text">Servizi educativi</h3>
+                    <div className="md:w-[calc(50%-0.5rem)] p-4 mt-4 md:mt-2 w-full text-white rounded-xl gradient">
+                        <h3 className="text-2xl font-semibold my-4 prime-text">Servizi educativi</h3>
                         <Image
                             className="w-full h-[200px] object-cover rounded-xl"
                             src="/placeholders/servizi-educativi.jpg" alt="Gruppi turistici" width={300} height={200}/>
 
-                        <p className="text-xl md:text-base">Clicca qui se vuoi prenotare l&apos;accesso ai musei con il tuo gruppo scolastico.</p>
-                        <div className="text-black w-full md:flex md:justify-end font-medium text-sm">
-                            <Link href="/" className="w-auto block text-center prime-bg rounded-full px-4 py-2">Scopri di più</Link>
+                        <p className="h-[100px] mt-8 text-xl md:text-base">Clicca qui se vuoi prenotare l&apos;accesso ai musei con il tuo gruppo scolastico.</p>
+                        <div className="flex items-center h-[64px] text-black w-full md:flex md:justify-end font-medium text-sm">
+                            <Link aria-label="Vai alla pagina dei servizi educativi" href="/servizi-educativi" className="h-fit w-auto block text-center prime-bg rounded-full px-4 py-2">Scopri di più</Link>
                         </div>
                     </div>
 
-                    <div className="flex flex-col md:w-[calc(50%-0.5rem)] gap-8 p-4 mt-4 md:mt-2 w-full text-white rounded-xl gradient">
-                        <h3 className="text-2xl font-semibold mt-2 prime-text">Proposte educative</h3>
-                        <p>Dalle scuole dell&apos;infanzia, fino agli adulti lavoriamo per aprire le porte dei musei e
+                    <div className="md:w-[calc(50%-0.5rem)] p-4 mt-4 md:mt-2 w-full text-white rounded-xl gradient">
+                        <h3 className="text-2xl font-semibold my-4 prime-text">Proposte educative</h3>
+                        <Image
+                            className="w-full h-[200px] object-cover rounded-xl"
+                            src="/placeholders/servizi-educativi.jpg" alt="Gruppi turistici" width={300} height={200}/>
+                        <p className="h-[100px] mt-8 text-xl md:text-base">Dalle scuole dell&apos;infanzia, fino agli adulti lavoriamo per aprire le porte dei musei e
                             renderli accessibili al più ampio numero possibile di persone.
                         </p>
-                        <div className="text-black w-full md:flex md:justify-end font-medium text-sm">
-                            <Link href="/" className="w-fit prime-bg rounded-full px-4 py-2">Scopri di più</Link>
+                        <div className="flex items-center h-[64px] text-black w-full md:flex md:justify-end font-medium text-sm">
+                            <a aria-label="Vai alla pagine delle proposte educative" target="_blank"
+                               rel="noopener noreferrer" href="https://musei.comune.cremona.it/it/servizi-educativi"
+                               className="h-fit w-auto block text-center prime-bg rounded-full px-4 py-2">Vai al
+                                sito</a>
                         </div>
                     </div>
                 </div>

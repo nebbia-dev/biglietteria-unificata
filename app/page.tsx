@@ -88,65 +88,73 @@ export default async function Home() {
                 </p>
             </div>
 
+            <h2 className="sr-only">Musei</h2>
             <div className="flex flex-col md:flex-row gap-4">
-            { filteredMuseums &&
-                filteredMuseums.map((el) => {
-                    if (!el.heroImage || !el.ticketImage) {
-                        return null;
-                    }
+                {filteredMuseums &&
+                    filteredMuseums.map((el) => {
+                        if (!el.heroImage || !el.ticketImage) {
+                            return null;
+                        }
 
-                    return(
-                        <div className="w-full md:w-1/4 text-white rounded-xl gradient"
-                            key={el.title}>
-                            <div className="w-full h-[200px] block md:hidden">
-                                <Image
-                                    className="w-full h-full object-cover rounded-t-xl"
-                                    src={process.env.NEXT_PUBLIC_BASE_URL + el.heroImage.url} alt={el.heroImage.alternativeText} width={300} height={200}/>
-                            </div>
-                            <div className="p-4 mt-2">
-                                <div className="h-[80px]">
-                                    <h3 className="text-2xl md:text-lg font-medium">{el.title}</h3>
-                                    <p className="text-sm">{getAddress(el.locations[0]?.label)}</p>
-                                </div>
-
-                                <div className="flex flex-col gap-4 bg-white rounded-xl text-black p-4 mt-8 mb-4">
+                        return (
+                            <div className="w-full md:w-1/4 text-white rounded-xl gradient"
+                                 key={el.title}>
+                                <div className="w-full h-[200px] block md:hidden">
                                     <Image
-                                        className="w-full h-[200px] object-cover rounded-xl"
-                                        src={process.env.NEXT_PUBLIC_BASE_URL + el.ticketImage.url} alt={`Interno del ${el.title}`} width={300} height={200}/>
-                                    <div className="flex flex-col gap-2">
-                                        <h4 className="text-xl md:text-base font-medium md:line-clamp-2">Ticket {el.title}</h4>
-                                        <p className="line-clamp-6 md:text-sm">
-                                            {el.description?.replace(/<\/?[^>]+(>|$)/g, "")}
-                                        </p>
-                                        <div className="flex items-center justify-between mt-4 h-[64px]">
-                                            {el.cheapest
-                                                ? <p className="text-sm">A partire da<br/><span
-                                                            className="text-xl font-medium">{new Intl.NumberFormat("de-DE", {
-                                                            style: "currency",
-                                                            currency: "EUR"
-                                                        }).format(el.cheapest)}</span></p>
+                                        className="w-full h-full object-cover rounded-t-xl"
+                                        src={process.env.NEXT_PUBLIC_BASE_URL + el.heroImage.url}
+                                        alt={el.heroImage.alternativeText} width={300} height={200}/>
+                                </div>
+                                <div className="p-4 mt-2">
+                                    <div className="h-[80px]">
+                                        <h3 className="text-2xl md:text-lg font-medium">{el.title}</h3>
+                                        <p className="text-sm">{getAddress(el.locations[0]?.label)}</p>
+                                    </div>
 
-                                                : <p className="text-base font-medium">Gratuito</p>
-                                            }
-                                            {/*<p className="text-sm">A partire da: <br/><span className="text-xl font-medium">{el.cheapest}</span></p>*/}
-                                            <a
-                                                aria-label="Vai alla pagina dedicata all'acquisto dei biglietti"
-                                                target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 text-lg md:text-sm font-medium prime-bg rounded-full md:px-3 px-4 py-2 md:py-1" href={`https://multishop-cremona.collaudo.domniapass.com/it/products/${el.slug}`}>
-                                                Prenota
-                                                <CircledArrow width={28} height={28}/>
-                                            </a>
+                                    <div className="flex flex-col gap-4 bg-white rounded-xl text-black p-4 mt-8 mb-4">
+                                        <Image
+                                            className="w-full h-[200px] object-cover rounded-xl"
+                                            src={process.env.NEXT_PUBLIC_BASE_URL + el.ticketImage.url}
+                                            alt={`Interno del ${el.title}`} width={300} height={200}/>
+                                        <div className="flex flex-col gap-2">
+                                            <h4 className="text-xl md:text-base font-medium md:line-clamp-2">Ticket {el.title}</h4>
+                                            <p className="line-clamp-6 md:text-sm">
+                                                {el.description?.replace(/<\/?[^>]+(>|$)/g, "")}
+                                            </p>
+                                            <div className="flex items-center justify-between mt-4 h-[64px]">
+                                                {el.cheapest
+                                                    ? <p className="text-sm">A partire da<br/><span
+                                                        className="text-xl font-medium">{new Intl.NumberFormat("de-DE", {
+                                                        style: "currency",
+                                                        currency: "EUR"
+                                                    }).format(el.cheapest)}</span></p>
+
+                                                    : <p className="text-base font-medium">Gratuito</p>
+                                                }
+                                                {/*<p className="text-sm">A partire da: <br/><span className="text-xl font-medium">{el.cheapest}</span></p>*/}
+                                                <a
+                                                    aria-label={`Vai alla pagina dedicata all'acquisto del biglietto standard del ${el.title}`}
+                                                    target="_blank" rel="noopener noreferrer"
+                                                    className="flex items-center gap-2 text-lg md:text-sm font-medium prime-bg rounded-full md:px-3 px-4 py-2 md:py-1"
+                                                    href={`https://multishop-cremona.collaudo.domniapass.com/it/products/${el.slug}`}>
+                                                    Prenota
+                                                    <CircledArrow width={28} height={28}/>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
 
-                            <div className="w-full text-end font-medium prime-text underline text-xl md:text-base px-4 pb-8">
-                                <Link href={`/${el.slug}`}>Scopri le altre esperienze</Link>
+                                <div
+                                    className="w-full text-end font-medium prime-text underline text-xl md:text-base px-4 pb-8">
+                                    <Link
+                                        aria-label={`Vai alla pagina dedicata all'acquisto dei biglietti del ${el.title}`}
+                                        href={`/${el.slug}`}>Scopri le altre esperienze</Link>
+                                </div>
                             </div>
-                        </div>
-                    )
-                })
-            }
+                        )
+                    })
+                }
             </div>
         </section>
 
@@ -164,10 +172,10 @@ export default async function Home() {
                             className="w-full h-[200px] object-cover rounded-xl"
                             src="/placeholders/cumulativo.jpg" alt="Interno di un museo" width={300} height={200}/>
                         <div className="flex flex-col gap-2">
-                            <h4 className="text-xl md:text-base font-medium">{bundle.title}</h4>
+                            <h3 className="text-xl md:text-base font-medium">{bundle.title}</h3>
                             <div className="w-full flex items-center justify-end mt-4">
                                 <a
-                                    aria-label="Vai alla pagina dedicata all'acquisto dei biglietti"
+                                    aria-label="Vai alla pagina dedicata all'acquisto del biglietto cumulativo"
                                     target="_blank" rel="noopener noreferrer"
                                     className="flex items-center gap-2 text-lg md:text-base font-medium prime-bg rounded-full px-4 py-2"
                                     href={`https://multishop-cremona.collaudo.domniapass.com/it/products/${bundle.slug}`}>
@@ -200,12 +208,12 @@ export default async function Home() {
                     <h2 className="text-2xl font-semibold mt-4 prime-text">Ticket per Gruppi</h2>
                     <Image
                         className="w-full h-[200px] object-cover rounded-xl"
-                        src={process.env.NEXT_PUBLIC_BASE_URL + homepage.immagine_gruppi.url} alt="Gruppi turistici" width={300} height={200}/>
+                        src={process.env.NEXT_PUBLIC_BASE_URL + homepage.immagine_gruppi.url} alt={homepage.immagine_gruppi.alternativeText} width={300} height={200}/>
 
                     <p className="text-xl md:text-base">Prenota l&apos;accesso per il tuo gruppo.
                         Scopri i ticket ridotti per i gruppi di più di 15 persone.</p>
                     <div className="mb-4 text-black w-full font-medium text-lg md:flex md:justify-end">
-                        <Link href="/info-gruppi" className="md:text-base w-auto block text-center prime-bg rounded-full px-4 py-2 md:w-fit">Scopri di più</Link>
+                        <Link aria-label="Vai alla pagine con le informazioni sulle visite dei gruppi" href="/info-gruppi" className="md:text-base w-auto block text-center prime-bg rounded-full px-4 py-2 md:w-fit">Scopri di più</Link>
                     </div>
                 </div>
             </div>
@@ -216,11 +224,11 @@ export default async function Home() {
                     <h2 className="text-2xl font-semibold mt-4 prime-text">Servizi educativi</h2>
                     <Image
                         className="w-full h-[200px] object-cover rounded-xl"
-                        src={process.env.NEXT_PUBLIC_BASE_URL + homepage.immagine_scuole.url} alt="Gruppi turistici" width={300} height={200}/>
+                        src={process.env.NEXT_PUBLIC_BASE_URL + homepage.immagine_scuole.url} alt={homepage.immagine_scuole.alternativeText} width={300} height={200}/>
 
                     <p className="text-xl md:text-base">Clicca qui se vuoi prenotare l&apos;accesso ai musei con il tuo gruppo scolastico.</p>
                     <div className="mb-4 text-black w-full font-medium text-lg md:flex md:justify-end">
-                        <Link href="/" className="md:text-base w-auto block text-center prime-bg rounded-full px-4 py-2 md:w-fit">Scopri di più</Link>
+                        <Link aria-label="Vai alla pagine con le informazioni sulle visite dei gruppi scolastici" href="/servizi-educativi" className="md:text-base w-auto block text-center prime-bg rounded-full px-4 py-2 md:w-fit">Scopri di più</Link>
                     </div>
                 </div>
             </div>

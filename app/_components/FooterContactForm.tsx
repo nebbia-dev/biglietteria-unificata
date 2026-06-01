@@ -8,7 +8,7 @@ export default function FooterContactForm() {
 
     function checkAndSend(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        const error = document.getElementById('errors')!;
+        const error = document.getElementById('errors-footer')!;
         const formData = new FormData(e.currentTarget);
         if(!formData.get('name')) {
             error.textContent = 'Inserisci il nome';
@@ -71,7 +71,7 @@ export default function FooterContactForm() {
                         </button>
                     </div>
                 </form>
-                <p id="errors" role="alert" aria-atomic="true"
+                <p id="errors-footer" role="alert" aria-atomic="true"
                    className={`${error ? 'block' : 'hidden'} p-4 border-red-500 bg-red-200 text-black rounded-xl`}
                 ></p>
             </div>

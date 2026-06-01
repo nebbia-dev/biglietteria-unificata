@@ -11,23 +11,23 @@ export default function Carousel({pics}:{pics: CarouselImage[]}) {
 
     const [slide, setSlide] = useState<number>(0);
     const [placeholder, setPlaceholder] = useState<number>(slide);
+    const [prefersReducedMotion, setPrefersReducedMotion] = useState<boolean>(false);
 
-    function setCurrentSlide(fn:string) {
+    function setCurrentSlide(fn:'add'|'sub') {
+        const nextSlide = fn === 'add'
+            ? slide === pics.length - 1 ? 0 : slide + 1
+            : slide === 0 ? pics.length - 1 : slide - 1;
+
+        if (prefersReducedMotion) {
+            document.getElementById('slider')?.classList.remove('fadein');
+            setPlaceholder(nextSlide);
+            setSlide(nextSlide);
+            return;
+        }
+
         document.getElementById('prevBtn')?.setAttribute('disabled', 'disabled');
         document.getElementById('nextBtn')?.setAttribute('disabled', 'disabled');
-        if(fn === 'add') {
-            if(slide === pics.length - 1) {
-                setSlide(0);
-            } else {
-                setSlide(prev => prev + 1);
-            }
-        } else {
-            if(slide === 0) {
-                setSlide(pics.length - 1);
-            } else {
-                setSlide(prev => prev - 1);
-            }
-        }
+        setSlide(nextSlide);
         document.getElementById('slider')?.classList.add('fadein');
     }
 
@@ -37,17 +37,44 @@ export default function Carousel({pics}:{pics: CarouselImage[]}) {
     }
 
     useEffect(() => {
-        setTimeout(() => {
+        const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+        const updateMotionPreference = () => {
+            setPrefersReducedMotion(mediaQuery.matches);
+        };
+
+        updateMotionPreference();
+        mediaQuery.addEventListener('change', updateMotionPreference);
+
+        return () => {
+            mediaQuery.removeEventListener('change', updateMotionPreference);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (prefersReducedMotion) {
+            document.getElementById('slider')?.classList.remove('fadein');
+            document.getElementById('prevBtn')?.removeAttribute('disabled');
+            document.getElementById('nextBtn')?.removeAttribute('disabled');
+            return;
+        }
+
+        const transitionTimeout = window.setTimeout(() => {
             document.getElementById('slider')?.classList.remove('fadein');
             document.getElementById('prevBtn')?.removeAttribute('disabled');
             document.getElementById('nextBtn')?.removeAttribute('disabled');
             setPlaceholder(slide);
         }, 1500)
-    }, [slide]);
+
+        return () => {
+            window.clearTimeout(transitionTimeout);
+        };
+    }, [prefersReducedMotion, slide]);
 
     if (pics.length === 0) {
         return null;
     }
+
+    const placeholderSlide = prefersReducedMotion ? slide : placeholder;
 
    return(
        <div className="flex flex-col items-center gap-4 w-full max-w-[100%] pt-[80px]">
@@ -58,8 +85,8 @@ export default function Carousel({pics}:{pics: CarouselImage[]}) {
                        <Image
                            aria-hidden={true}
                            className='object-cover absolute z-0'
-                           src={process.env.NEXT_PUBLIC_BASE_URL + pics[placeholder].url}
-                           alt={pics[placeholder].alternativeText}
+                           src={process.env.NEXT_PUBLIC_BASE_URL + pics[placeholderSlide].url}
+                           alt={pics[placeholderSlide].alternativeText}
                            fill={true}
                        />
 
@@ -75,6 +102,7 @@ export default function Carousel({pics}:{pics: CarouselImage[]}) {
                            <h2>{pics[slide].titolo}</h2>
                            <div className="w-full flex justify-end">
                                <Link
+                                   aria-label={`Vai alla pagine del ${pics[slide].titolo}`}
                                    className="w-fit text-black flex items-center gap-2 text-lg md:text-base font-medium prime-bg rounded-full px-3 py-1 mt-6"
                                    href={`/${pics[slide].slug}`}>
                                    Scopri di più

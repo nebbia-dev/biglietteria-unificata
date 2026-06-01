@@ -1,6 +1,5 @@
 import Image from "next/image";
 import TicketCard from "@/app/_components/TicketCard";
-import Link from "next/link";
 import {getExperiences} from "@/app/lib/domnia-experiences";
 import type { ExperienceCardData } from "@/app/lib/domnia-types";
 
@@ -105,8 +104,8 @@ export default async function ServiziEducativi() {
                             </p>
                         </div>
                         <div className="md:mt-8 text-black w-full md:flex md:justify-end font-medium text-sm">
-                            <Link href="/" className="w-auto block text-center prime-bg rounded-full px-4 py-2 md:text-base">Vai al
-                                sito</Link>
+                            <a aria-label="Vai alla pagine delle proposte educative" target="_blank" rel="noopener noreferrer" href="https://musei.comune.cremona.it/it/servizi-educativi" className="w-auto block text-center prime-bg rounded-full px-4 py-2">Vai al
+                                sito</a>
                         </div>
                     </div>
                 </div>

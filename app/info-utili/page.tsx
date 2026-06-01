@@ -41,7 +41,7 @@ export default async function InfoUtili() {
                         <section className="w-full md:w-[85%] md:mx-auto md:mt-8" key={el.documentId}>
                             <Image
                                 className="w-full h-[200px] object-cover md:rounded-t-xl"
-                                src={process.env.NEXT_PUBLIC_BASE_URL + el.immagine.url} alt="interno museo" width={300} height={200}/>
+                                src={process.env.NEXT_PUBLIC_BASE_URL + el.immagine.url} alt={el.immagine.alternativeText} width={300} height={200}/>
                             <div className="w-[90%] md:w-full mx-auto pt-8 md:px-12 md:pb-4 md:bg-white md:rounded-b-xl">
                                 <h2 className="text-2xl mb-4 font-semibold">{el.titolo}</h2>
 
@@ -92,7 +92,7 @@ export default async function InfoUtili() {
                                     >
                                         Orari
                                     </AccordionSummary>
-                                    <AccordionDetails id={`${el.documentId}-hours-content`}>
+                                    <AccordionDetails>
                                         <div className="markdown">
                                             <Markdown>
                                                 {el.orari}
@@ -123,7 +123,7 @@ export default async function InfoUtili() {
                                     >
                                         Accessibilità
                                     </AccordionSummary>
-                                    <AccordionDetails id={`${el.documentId}-accessibility-content`}>
+                                    <AccordionDetails>
                                         <div className="markdown">
                                             <Markdown>
                                                 {el.accessibilita}
@@ -159,7 +159,7 @@ export default async function InfoUtili() {
                                                     className="block text-sm font-regular">(con esibizione di documentazione idonea)</span>
                                             </p>
                                         </AccordionSummary>
-                                        <AccordionDetails id={`${el.documentId}-reductions-content`}>
+                                        <AccordionDetails>
                                             <div className="markdown">
                                                 <Markdown>
                                                     {el.riduzioni}
@@ -197,7 +197,7 @@ export default async function InfoUtili() {
                                                         className="block text-sm font-regular">(con esibizione di documentazione idonea)</span>
                                                 </p>
                                             </AccordionSummary>
-                                            <AccordionDetails id={`${el.documentId}-free-content`}>
+                                            <AccordionDetails>
                                                 <div className="markdown">
                                                     <Markdown>
                                                         {el.gratuita}

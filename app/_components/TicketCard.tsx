@@ -20,26 +20,26 @@ export default function TicketCard({el, layout}: {el: TicketCardData, layout: Ti
                             src={process.env.NEXT_PUBLIC_BASE_URL + el.immagine.url} alt={el.immagine.alternativeText} width={300} height={200}/>
                         <div className="flex flex-col gap-2">
                             <h4 className="text-xl font-medium md:line-clamp-1">{el.nome}</h4>
-                            <p className="line-clamp-4">{el.descrizione}</p>
+                            <p className={`${layout === 'fourth' ? 'text-sm' : ''} line-clamp-4`}>{el.descrizione}</p>
                             <div className="flex items-center justify-between mt-4">
                                 {el.prezzo
                                     ? <div>
                                         {el.infoPrezzo !== ""
                                             ? <p className="text-sm">{el.infoPrezzo}<br/><span
-                                                className="text-xl font-medium">{new Intl.NumberFormat("de-DE", {
+                                                className={`${layout === 'fourth' ? 'text-base' : 'text-xl'} font-medium`}>{new Intl.NumberFormat("de-DE", {
                                                 style: "currency",
                                                 currency: "EUR"
                                             }).format(el.prezzo)}</span></p>
-                                            : <p className="text-xl font-medium">{new Intl.NumberFormat("de-DE", {
+                                            : <p className={`${layout === 'fourth' ? 'text-base' : 'text-xl'} font-medium`}>{new Intl.NumberFormat("de-DE", {
                                                 style: "currency",
                                                 currency: "EUR"
                                             }).format(el.prezzo)}</p>
                                         }
                                     </div>
-                                    : <p className="text-xl font-medium">Gratuito</p>
+                                    : <p className={`${layout === 'fourth' ? 'text-base' : 'text-xl'} font-medium`}>Gratuito</p>
                                 }
-                                <a target="_blank" rel="noopener noreferrer"
-                                   className="flex items-center gap-2 text-lg font-medium prime-bg rounded-full px-4 py-2"
+                                <a aria-label={`Vai alla pagina di acquisto del ${el.titolo}`} target="_blank" rel="noopener noreferrer"
+                                   className={`${layout === 'fourth' ? 'text-sm px-3 py-1' : 'px-4 py-2'} flex items-center gap-2 text-lg font-medium prime-bg rounded-full`}
                                    href={`https://multishop-cremona.collaudo.domniapass.com/it/products/${el.slug ?? ''}`}>
                                     Prenota
                                     <CircledArrow width={28} height={28}/>

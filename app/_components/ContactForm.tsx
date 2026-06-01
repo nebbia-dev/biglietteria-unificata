@@ -8,7 +8,7 @@ export default function ContactForm({text}:{text:string}) {
 
     function checkAndSendCF(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
-        const error = document.getElementById('errors')!;
+        const error = document.getElementById('errors-contact-form')!;
         const formData = new FormData(e.currentTarget);
 
         if(!formData.get('info-name')) {
@@ -62,7 +62,7 @@ export default function ContactForm({text}:{text:string}) {
                     </button>
                 </div>
             </form>
-            <p id="errors" role="alert" aria-atomic="true"
+            <p id="errors-contact-form" role="alert" aria-atomic="true"
                className={`${error ? 'block' : 'hidden'} p-4 border-red-500 bg-red-200 text-black rounded-xl`}
             ></p>
         </section>

@@ -26,8 +26,9 @@ export default function RootLayout({
       <body
         className={`${poppins.className} antialiased`}
       >
+      {/*<a href="#main" className="skip-link">Salta al contenuto principale</a>*/}
       <Menu/>
-      <main id="main">
+      <main id="main" tabIndex={-1}>
           {children}
       </main>
       <Footer/>

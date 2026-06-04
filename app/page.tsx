@@ -12,7 +12,7 @@ export const dynamic = 'force-dynamic';
 
 export default async function Home() {
 
-    let museums, content, contentMuseums, filteredMuseums, bundle, contentEvents, events;
+    let museums, content, contentMuseums, filteredMuseums, bundle, contentEvents, events, contentNews;
     const pics = [];
 
     try {
@@ -26,6 +26,11 @@ export default async function Home() {
             {next: {revalidate: 1000}}
         );
         content = await data.json();
+
+        const dataNews = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/news?populate=*',
+            {next: {revalidate: 1000}}
+        );
+        contentNews = await dataNews.json();
 
         const dataMuseums = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/museums?populate=*',
             {next: {revalidate: 1000}})
@@ -253,7 +258,7 @@ export default async function Home() {
                     <h2 className="md:block hidden text-2xl font-semibold mt-2 prime-text">Leggi le ultime novità</h2>
                     <Image
                         className="w-full h-[300px] object-cover rounded-4xl p-4"
-                        src="/placeholders/news.jpg" alt="Interno" width={300} height={200}/>
+                        src={process.env.NEXT_PUBLIC_BASE_URL + contentNews.data.immagine.url} alt={contentNews.data.immagine.alternativeText} width={300} height={200}/>
 
                     <div className="text-black w-full md:flex md:justify-end font-medium text-sm">
                         <Link href="/news-eventi"

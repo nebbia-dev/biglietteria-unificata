@@ -59,7 +59,7 @@ export default async function NewsEventi() {
                             novità</h3>
                         <Image
                             className="w-full h-[300px] object-cover rounded-4xl p-4"
-                            src="/placeholders/news.jpg" alt="Interno" width={300} height={200}/>
+                            src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine.url} alt={content.data.immagine.alternativeText} width={1000} height={500}/>
 
                         <div className="text-black w-full md:flex md:justify-end font-medium text-sm p-4">
                             <a target="_blank"

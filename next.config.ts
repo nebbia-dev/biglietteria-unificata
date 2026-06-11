@@ -4,6 +4,15 @@ const backendURL = process.env.NEXT_PUBLIC_BASE_URL as string;
 const isDev = backendURL.startsWith("http://localhost");
 
 const nextConfig: NextConfig = {
+    async redirects() {
+        return [
+            {
+                source: "/",
+                destination: "/it",
+                permanent: false,
+            },
+        ];
+    },
     images: {
         dangerouslyAllowLocalIP: isDev,
         remotePatterns: [

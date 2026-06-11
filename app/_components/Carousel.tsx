@@ -7,7 +7,7 @@ import {CircledArrow} from "@/app/_components/_icons/CircledArrow";
 import Link from "next/link";
 import type { CarouselImage } from "@/app/lib/strapi-types";
 
-export default function Carousel({pics}:{pics: CarouselImage[]}) {
+export default function Carousel({pics, lang}:{pics: CarouselImage[], lang:string}) {
 
     const [slide, setSlide] = useState<number>(0);
     const [placeholder, setPlaceholder] = useState<number>(slide);
@@ -105,7 +105,7 @@ export default function Carousel({pics}:{pics: CarouselImage[]}) {
                                    aria-label={`Vai alla pagine del ${pics[slide].titolo}`}
                                    className="w-fit text-black flex items-center gap-2 text-lg md:text-base font-medium prime-bg rounded-full px-3 py-1 mt-6"
                                    href={`/${pics[slide].slug}`}>
-                                   Scopri di più
+                                   {lang === 'it' ? 'Scopri di più' : 'Find out more'}
                                    <CircledArrow width={28} height={28}/>
                                </Link>
                            </div>

@@ -227,7 +227,7 @@ export default async function InfoUtili() {
             }
 
             {/*Contact form*/}
-            <ContactForm text="Hai bisogno di info specifiche? Scrivici!"/>
+            <ContactForm lang="it" text="Hai bisogno di info specifiche? Scrivici!"/>
         </>
     )
 }

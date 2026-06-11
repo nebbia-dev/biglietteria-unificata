@@ -14,12 +14,12 @@ export default async function ServiziEducativi() {
         const museums = await getExperiences('/');
         filteredMuseums = museums.filter(el => el.tagIds.includes(9));
 
-        const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/servizi-educativi?populate=*',
+        const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/servizi-educativi?locale=en&populate=*',
             {next: {revalidate: 1000}}
         );
         content = await data.json();
 
-        const dataMuseums = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/museums?populate=*',
+        const dataMuseums = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/museums?locale=en&populate=*',
             {next: {revalidate: 1000}})
         contentMuseums = await dataMuseums.json();
 
@@ -65,7 +65,9 @@ export default async function ServiziEducativi() {
                         filteredMuseums &&
                         filteredMuseums.map(el => {
                             return (
-                                <TicketCard key={el.documentId} layout="fourth" el={{
+                                <TicketCard
+                                    lang="en"
+                                    key={el.documentId} layout="fourth" el={{
                                     titolo: "",
                                     nome: el.title,
                                     descrizione: el.description?.replace(/<\/?[^>]+(>|$)/g, ""),
@@ -85,7 +87,7 @@ export default async function ServiziEducativi() {
 
             {/*Gruppi scolastici*/}
             <section className="w-[90%] md:w-[85%] mx-auto pt-8">
-                <h2 className="text-2xl font-semibold mt-4 mb-8">Proposte educative</h2>
+                <h2 className="text-2xl font-semibold mt-4 mb-8">Educational programs</h2>
 
                 <div
                     className="flex flex-col md:flex-row md:items-center gap-8 p-4 md:p-8 mt-2 w-full text-white md:text-base rounded-xl gradient">
@@ -94,18 +96,17 @@ export default async function ServiziEducativi() {
                         src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine_proposte_educative.url} alt={content.data.immagine_proposte_educative.alternativeText} width={300} height={200}/>
                     <div>
                         <div>
-                            <p>Le nostre proposte educative permettono di arricchire la tua visita.
-                                Scopri i nostri percorsi laboratoristi rivolte a scuole, giovani e adulti.
+                            <p>Enhance your visit with our curated educational programs.
+                                Add an educational activity to make the most of your visit.
                             </p>
-                            <h3 className="text-xl font-semibold mt-4 mb-2">Diritto di prenotazione</h3>
-                            <p>
-                                L&apos;ingresso per gli studenti è gratuito, si applica la tariffa di 2€ a persona come diritto
-                                di prenotazione.
+                            <p className="mt-2">
+                                Admission for students is free of charge.  A mandatory 2€ reservation fee applies to each student.
                             </p>
                         </div>
                         <div className="md:mt-8 text-black w-full md:flex md:justify-end font-medium text-sm">
-                            <a aria-label="Vai alla pagine delle proposte educative" target="_blank" rel="noopener noreferrer" href="https://musei.comune.cremona.it/it/servizi-educativi/informazioni-didattica" className="w-auto block text-center prime-bg rounded-full px-4 py-2">Vai al
-                                sito</a>
+                            <a aria-label="Go to the educational programs page" target="_blank" rel="noopener noreferrer"
+                               href="https://musei.comune.cremona.it/it/servizi-educativi/informazioni-didattica"
+                               className="w-auto block text-center prime-bg rounded-full px-4 py-2">Go to the website</a>
                         </div>
                     </div>
                 </div>

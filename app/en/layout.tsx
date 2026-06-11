@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import {Lato, Poppins} from "next/font/google";
-import "./globals.css";
-import Menu from "@/app/_components/Menu";
-import Footer from "@/app/_components/Footer";
+import "../globals.css";
 import Script from "next/script";
+import FooterEn from "@/app/_components/FooterEn";
+import MenuEn from "@/app/_components/MenuEn";
 
 const poppins = Poppins({
   weight: [ "100", "200", "300", "400", "500", "600", "700", "800", "900" ],
@@ -18,8 +18,8 @@ const lato = Lato({
 
 
 export const metadata: Metadata = {
-  title: "Musei Civici di Cremona",
-  description: "Biglietteria unificata per i Musei Civici di Cremona",
+  title: "Cremona Civic Museums",
+  description: "Unified ticketing for the Cremona Civic Museums",
 };
 
 export default function RootLayout({
@@ -28,16 +28,16 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="it" className="bg-white text-black">
+    <html lang="en" className="bg-white text-black">
       <body
         className={`${poppins.className} ${lato.variable} antialiased`}
       >
-      {/*<a href="#main" className="skip-link">Salta al contenuto principale</a>*/}
-      <Menu/>
+      {/*<a href="#main" className="skip-link">Skip to main content</a>*/}
+      <MenuEn/>
       <main id="main" tabIndex={-1}>
           {children}
       </main>
-      <Footer/>
+      <FooterEn/>
       <Script src="https://cdn.jsdelivr.net/npm/sienna-accessibility@latest/dist/sienna-accessibility.umd.js" defer />
       </body>
     </html>

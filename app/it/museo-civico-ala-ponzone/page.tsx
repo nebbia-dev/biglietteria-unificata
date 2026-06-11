@@ -3,6 +3,7 @@ import TicketCard from "@/app/_components/TicketCard";
 import TwoPartsDescription from "@/app/_components/TwoPartsDescription";
 import EventCard from "@/app/_components/EventCard";
 import {getExperiences} from "@/app/lib/domnia-experiences";
+import PropEdu from "@/app/_components/PropEdu";
 
 export const dynamic = 'force-dynamic';
 
@@ -63,6 +64,7 @@ export default async function MuseoCivico() {
                     <h1 className="text-4xl mb-4 font-semibold">{content.data.titolo}</h1>
                     {content.data.sottotitolo && <h2 className="text-2xl font-medium mb-2">{content.data.sottotitolo}</h2>}
                     <TwoPartsDescription
+                        lang="it"
                         partOne={content.data.descrizione_1}
                         partTwo={content.data.descrizione_2}
                     />
@@ -70,6 +72,7 @@ export default async function MuseoCivico() {
 
                 <div className="flex flex-col md:flex-row w-full md:flex-wrap gap-4">
                     <TicketCard
+                        lang="it"
                         layout="half"
                         el={{
                         titolo: "Ticket",
@@ -83,6 +86,7 @@ export default async function MuseoCivico() {
                     }}/>
 
                     <TicketCard
+                        lang="it"
                         layout="half"
                         el={{
                         titolo: "Esperienze",
@@ -96,6 +100,7 @@ export default async function MuseoCivico() {
                     }}/>
 
                     <TicketCard
+                        lang="it"
                         layout="third"
                         el={{
                         titolo: "Ticket Cumulativo",
@@ -108,6 +113,7 @@ export default async function MuseoCivico() {
                     }}/>
 
                     <TicketCard
+                        lang="it"
                         layout="third"
                         el={{
                         titolo: "Gruppi",
@@ -121,6 +127,7 @@ export default async function MuseoCivico() {
                     }}/>
 
                     <TicketCard
+                        lang="it"
                         layout="third"
                         el={{
                         titolo: "Servizi educativi",
@@ -137,34 +144,12 @@ export default async function MuseoCivico() {
             </section>
 
             {/*Proposte educative*/}
-            <section className="w-[90%] md:w-[85%] mx-auto pt-8">
-                <div
-                    className="flex flex-col md:flex-row md:items-center md:h-[300px] gap-8 p-4 mt-2 w-full text-white rounded-xl gradient">
-                    <Image src={process.env.NEXT_PUBLIC_BASE_URL + contentEduImg.data.immagine_proposte_educative.url}
-                           alt={contentEduImg.data.immagine_proposte_educative.alternativeText}
-                           width={200} height={100}
-                           className="w-full object-cover md:w-2/4 md:h-full rounded-xl"
-                    />
-                    <div className="md:pr-8">
-                        <h3 className="text-2xl font-semibold mt-2 prime-text">Proposte educative</h3>
-                        <p>Dalle scuole dell&apos;infanzia, fino agli adulti lavoriamo per aprire le porte dei musei e
-                            renderli
-                            accessibili al più ampio numero possibile di persone.</p>
-                        <div className="mb-4 mt-8 text-black w-full text-end font-medium text-lg md:text-base">
-                            <a
-                                aria-label="Vai alla pagina dedicata alle nostre proposte educative"
-                                target="_blank" rel="noopener noreferrer"
-                                href="https://musei.comune.cremona.it/it/servizi-educativi/informazioni-didattica"
-                                className="w-fit prime-bg rounded-full px-4 py-2 md:text-sm">Scopri di più</a>
-                        </div>
-                    </div>
-                </div>
-            </section>
+            <PropEdu image={contentEduImg.data.immagine_proposte_educative.url} alt={contentEduImg.data.immagine_proposte_educative.alternativeText}/>
 
             {/*Eventi*/}
             <section className="w-[90%] md:w-[85%] mx-auto pt-8">
                 <h2 className="text-2xl font-semibold mt-4 mb-8">Eventi</h2>
-                <EventCard events={events} limit={3}/>
+                <EventCard lang="it" events={events} limit={3}/>
             </section>
         </>
     )

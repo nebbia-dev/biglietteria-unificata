@@ -2,7 +2,7 @@
 
 import {useState} from "react";
 
-export default function TwoPartsDescription({partOne, partTwo} : {partOne:string, partTwo:string}) {
+export default function TwoPartsDescription({partOne, partTwo, lang} : {partOne:string, partTwo:string, lang:string}) {
 
     const [showPartTwo, setShowPartTwo] = useState<boolean>(false)
 
@@ -23,7 +23,10 @@ export default function TwoPartsDescription({partOne, partTwo} : {partOne:string
                         // inert={!showPartTwo}
                         className="md:mt-4 cursor-pointer text-sm text-black text-center prime-bg rounded-full px-4 py-2"
                         onClick={() => setShowPartTwo(prev => !prev)}
-                >Leggi {showPartTwo ? 'meno' : 'tutto'}</button>
+                >{lang === 'it'
+                    ? `Leggi ${showPartTwo ? 'meno' : 'tutto'}`
+                    : `Read ${showPartTwo ? 'less' : 'more'}`}
+                </button>
             </div>
 
         </>

@@ -1,44 +1,44 @@
 import Image from "next/image";
 import FooterContactForm from "@/app/_components/FooterContactForm";
-export default function Footer() {
+export default function FooterEn() {
     return(
         <div id="footer" className="seco-bg">
             {/*Newsletter form*/}
-            <FooterContactForm lang="it"/>
+            <FooterContactForm lang="en"/>
             <footer
                 className="md:w-[85%] md:mx-auto md:min-h-[200px] md:text-sm text-white p-8 md:mt-6 flex flex-col md:flex-row gap-8 md:gap-12 md:justify-between">
                 <Image src='/icons/logo.png'
-                       alt="Logo dei Musei Civici di Cremona" width={48} height={48}
+                       alt="Cremona Civic Museums logo" width={48} height={48}
                        className="w-12 h-12 hidden md:block"
 
                 />
 
                 <div className="break-all">
-                    <h3 className="prime-text font-semibold mb-1">Contatti</h3>
+                    <h3 className="prime-text font-semibold mb-1">Contacts</h3>
                     <ul className="mb-2">
-                        <li>Uffici: 0372 407269</li>
+                        <li>Offices: 0372 407269</li>
                         <li><a className="underline" href="mailto:museo.alaponzone@cremona.comune.it">museo.alaponzone@cremona.comune.it</a></li>
                     </ul>
-                    <p>Per inviare segnalazioni riguardanti l&apos;accessibilità,<br/>scrivici a <a
-                        aria-label="Scrivi una mail per fare una segnalazione riguardante l'accessibilità del sito"
+                    <p>To send complaints concerning accessibility,<br/>write to <a
+                        aria-label="Send an email to report a website accessibility issue"
                         className="underline" href="mailto:museo.alaponzone@cremona.comune.it" target="_blank"
                         rel="noopener noreferrer">museo.alaponzone@cremona.comune.it</a>
                     </p>
                 </div>
 
                 <div>
-                    <h3 className="prime-text font-semibold mb-1">Link utili</h3>
+                    <h3 className="prime-text font-semibold mb-1">Useful links</h3>
                     <ul>
                         <li>
-                            <a aria-label="Vai alla pagina di Art Bonus"
+                            <a aria-label="Go to the Art Bonus page"
                                href="https://artbonus.gov.it" target="_blank" rel="noopener noreferrer">Art Bonus</a></li>
                         <li className="flex gap-2 mt-2">
-                            <a aria-label="Vai alla pagina Facebook dei Musei Civici" href="https://www.facebook.com/cremonamusei/" target="_blank"
+                            <a aria-label="Go to the Cremona Civic Museums Facebook page" href="https://www.facebook.com/cremonamusei/" target="_blank"
                                rel="noopener noreferrer" className="w-6">
                                 <Image src="/icons/hugeicons_facebook-02.webp" aria-hidden alt="facebook logo" width={48}
                                        height={48}/>
                             </a>
-                            <a aria-label="Vai alla pagina Instagram dei Musei Civici" href="https://www.instagram.com/cremonamusei/" target="_blank"
+                            <a aria-label="Go to the Cremona Civic Museums Instagram page" href="https://www.instagram.com/cremonamusei/" target="_blank"
                                rel="noopener noreferrer" className="w-6">
                                 <Image src="/icons/logo-instagram.webp" aria-hidden alt="instagram logo" width={48} height={48}/>
                             </a>
@@ -50,12 +50,12 @@ export default function Footer() {
                     <ul className="flex flex-col gap-1">
                         <li>Privacy Policy</li>
                         <li><a
-                            aria-label="Vai alla pagina dedicata all'elenco delle misure adottate per rendere i musei accessibili"
+                            aria-label="Go to the page listing the measures adopted to make the museums accessible"
                             href="https://musei.comune.cremona.it/it/accessibilita/percorsi-per-disabili-motori"
                             target="_blank" rel="noopener noreferrer">
-                            Accessibilità
+                            Accessibility
                         </a></li>
-                        <li>Condizioni di vendita</li>
+                        <li>Terms and conditions</li>
                     </ul>
                 </div>
             </footer>

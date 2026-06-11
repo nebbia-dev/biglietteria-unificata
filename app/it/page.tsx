@@ -84,7 +84,7 @@ export default async function Home() {
                 src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine.url}
                 alt={content.data.immagine.alternativeText} width={300} height={200}/>
         </div>
-        <Carousel pics={pics}/>
+        <Carousel pics={pics} lang="en"/>
         {/*Lista musei*/}
         <section className="w-[90%] md:w-[85%] mx-auto pt-8 md:pt-20">
             <div className="mb-8 md:mb-12">
@@ -247,7 +247,7 @@ export default async function Home() {
         {/*Eventi*/}
         <section className="w-[90%] md:w-[85%] mx-auto pt-8">
             <h2 className="text-3xl font-semibold my-8">Eventi</h2>
-            <EventCard events={events} limit={3}/>
+            <EventCard lang="it" events={events} limit={3}/>
         </section>
 
         {/*News*/}
@@ -286,7 +286,7 @@ export default async function Home() {
         </section>
 
         {/*Contact form*/}
-        <ContactForm text="Scrivici una mail"/>
+        <ContactForm lang="it" text="Scrivici una mail"/>
 
     </>
   );

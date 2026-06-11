@@ -46,7 +46,7 @@ export default async function NewsEventi() {
                 </div>
 
                 <div className="flex flex-col gap-4">
-                    <EventCard events={events} limit={1000}/>
+                    <EventCard lang="it" events={events} limit={1000}/>
                 </div>
             </section>
 

@@ -6,7 +6,7 @@ import {Close} from "@/app/_components/_icons/Close";
 import {useCallback, useEffect, useRef, useState} from "react";
 import {usePathname} from "next/navigation";
 
-export default function Menu() {
+export default function MenuEn() {
 
     const [showMenu, setShowMenu] = useState<string>('initial');
     const [showMuseumsMenu, setShowMuseumsMenu] = useState<string>('close');
@@ -123,7 +123,7 @@ export default function Menu() {
     return (
         <>
             <header id="header" className="fixed z-100 bg-black flex justify-between items-center w-full px-4 md:px-12 py-4">
-                <Link href="/it">
+                <Link href="/en">
                     <Image src='/icons/logo.png'
                            alt="museo civici cremona logo" width={48} height={48}
                            className="w-12"
@@ -133,7 +133,7 @@ export default function Menu() {
                 <div className="flex gap-4">
                     <button type="button"
                             aria-controls="mainMenu" aria-expanded={isMainMenuOpen}
-                            aria-label="Apri il menu"
+                            aria-label="Open menu"
                             id="hamburgerButton"
                             onClick={() => toggleMenu('open')}
                             className="md:hidden block rounded-full p-3 bg-white text-black w-fit cursor-pointer">
@@ -159,7 +159,7 @@ export default function Menu() {
                                     }}
                                     id={desktopMuseumsButtonId}
                                     className="min-w-[64px] border-b border-black/50 cursor-pointer flex justify-between items-center">
-                                <span className="font-semibold">Musei</span>
+                                <span className="font-semibold">Museums</span>
                                 <span
                                     className={`${isMuseumsMenuOpen ? 'rotate-90' : 'rotate-0'} transition-all duration-500 origin-center`}>&gt;</span>
                             </button>
@@ -167,34 +167,34 @@ export default function Menu() {
                                 className={`${isMuseumsMenuOpen ? openSubmenuClasses : closedSubmenuClasses} ${desktopSubmenuClasses} w-[250px] right-[15%]`}>
                                 <li className="py-3">
                                     <Link
-                                        href="/it/museo-civico-ala-ponzone"
+                                        href="/en/museo-civico-ala-ponzone"
                                         onNavigate={closeAllMenus}
                                     >
-                                        Museo Civico &quot;Ala Ponzone&quot;
+                                        &quot;Ala Ponzone&quot; City Art Gallery
                                     </Link>
                                 </li>
                                 <li className="py-3">
                                     <Link
-                                        href="/it/museo-archeologico-san-lorenzo"
+                                        href="/en/museo-archeologico-san-lorenzo"
                                         onNavigate={closeAllMenus}
                                     >
-                                        Museo Archeologico &quot;San Lorenzo&quot;
+                                        &quot;San Lorenzo&quot; Archaeological Museum
                                     </Link>
                                 </li>
                                 <li className="py-3">
                                     <Link
-                                        href="/it/museo-di-storia-naturale"
+                                        href="/en/museo-di-storia-naturale"
                                         onNavigate={closeAllMenus}
                                     >
-                                        Museo di Storia Naturale
+                                        Natural History Museum
                                     </Link>
                                 </li>
                                 <li className="py-3">
                                     <Link
-                                        href="/it/museo-della-civilta-contadina"
+                                        href="/en/museo-della-civilta-contadina"
                                         onNavigate={closeAllMenus}
                                     >
-                                        Museo della civiltà contadina &quot;Il Cambonino Vecchio&quot;
+                                        &quot;Il Cambonino Vecchio&quot; Museum of Rural Life
                                     </Link>
                                 </li>
                             </ul>
@@ -213,7 +213,7 @@ export default function Menu() {
                                         toggleVisitMenu();
                                     }}
                                     className="min-w-[64px] border-b border-black/50 cursor-pointer flex justify-between items-center">
-                                <span className="font-semibold">Visita</span>
+                                <span className="font-semibold">Visit</span>
                                 <span
                                     className={`${isVisitMenuOpen ? 'rotate-90' : 'rotate-0'} transition-all duration-500 origin-center`}>&gt;</span>
                             </button>
@@ -221,31 +221,31 @@ export default function Menu() {
                                 className={`${isVisitMenuOpen ? openSubmenuClasses : closedSubmenuClasses} ${desktopSubmenuClasses} w-[200px]`}>
                                 <li className="py-3">
                                     <Link
-                                        href="/it/info-gruppi"
+                                        href="/en/info-gruppi"
                                         onNavigate={closeAllMenus}
                                     >
-                                        Info gruppi
+                                        Group info
                                     </Link>
                                 </li>
                                 <li className="py-3">
                                     <Link
-                                        href="/it/servizi-educativi"
+                                        href="/en/servizi-educativi"
                                         onNavigate={closeAllMenus}
                                     >
-                                        Servizi educativi
+                                        Educational services
                                     </Link>
                                 </li>
                                 <li className="py-3">
                                     <Link
-                                        href="/it/info-utili"
+                                        href="/en/info-utili"
                                         onNavigate={closeAllMenus}
                                     >
-                                        Info utili
+                                        Useful info
                                     </Link>
                                 </li>
                                 <li className="py-3">
                                     <Link
-                                        href="/it/faq"
+                                        href="/en/faq"
                                         onNavigate={closeAllMenus}
                                     >
                                         FAQ
@@ -256,46 +256,46 @@ export default function Menu() {
 
                         <li className="font-semibold border-b border-black/50 cursor-pointer">
                             <Link
-                                href="/it/news-eventi"
+                                href="/en/news-eventi"
                                 onNavigate={closeAllMenus}
                             >
-                                News ed eventi
+                                News and events
                             </Link>
                         </li>
 
                         <li className="font-semibold border-b border-black/50 cursor-pointer">
                             <a
-                                aria-label="Vai alla pagina dedicata all'elenco delle misure adottate per rendere i musei accessibili"
+                                aria-label="Go to the page listing the measures adopted to make the museums accessible"
                                 href="https://musei.comune.cremona.it/it/accessibilita/percorsi-per-disabili-motori"
                                 target="_blank" rel="noopener noreferrer"
                             >
-                                Accessibilità
+                                Accessibility
                             </a>
                         </li>
 
                         <li className="font-semibold border-b border-black/50 cursor-pointer">
                             <Link
-                                href="/it/contatti"
+                                href="/en/contatti"
                                 onNavigate={closeAllMenus}
                             >
-                                Contatti
+                                Contacts
                             </Link>
                         </li>
 
                         <li className="flex gap-2">
-                            <a aria-label="Vai alla pagina Facebook dei Musei Civici" href="https://www.facebook.com/cremonamusei/" target="_blank"
+                            <a aria-label="Go to the Cremona Civic Museums Facebook page" href="https://www.facebook.com/cremonamusei/" target="_blank"
                                rel="noopener noreferrer" className="w-6">
                                 <Image src="/icons/hugeicons_facebook-02.webp" aria-hidden alt="facebook logo" width={48}
                                        height={48}/>
                             </a>
-                            <a aria-label="Vai alla pagina Instagram dei Musei Civici" href="https://www.instagram.com/cremonamusei/" target="_blank"
+                            <a aria-label="Go to the Cremona Civic Museums Instagram page" href="https://www.instagram.com/cremonamusei/" target="_blank"
                                rel="noopener noreferrer" className="w-6">
                                 <Image src="/icons/logo-instagram.webp" aria-hidden alt="instagram logo" width={48}
                                        height={48}/>
                             </a>
                         </li>
 
-                        <Link href="/en">EN</Link>
+                        <Link href="/it">IT</Link>
 
                     </ul>
                 </nav>
@@ -316,7 +316,7 @@ export default function Menu() {
                         height={500}
                         className="h-12 w-auto"
                     />
-                    <button aria-label="Chiudi il menu"
+                    <button aria-label="Close menu"
                             type="button"
                             onClick={() => toggleMenu('close')}
                             id="closeMenuButton"
@@ -353,34 +353,34 @@ export default function Menu() {
                                 className={`${isMuseumsMenuOpen ? 'max-h-[1000px]' : 'max-h-0'} pl-4 transition-all duration-500 overflow-hidden`}>
                                 <li className="py-3">
                                     <Link
-                                        href="/it/museo-civico-ala-ponzone"
+                                        href="/en/museo-civico-ala-ponzone"
                                         onNavigate={closeAllMenus}
                                     >
-                                        Museo Civico &quot;Ala Ponzone&quot;
+                                        &quot;Ala Ponzone&quot; City Art Gallery
                                     </Link>
                                 </li>
                                 <li className="py-3">
                                     <Link
-                                        href="/it/museo-archeologico-san-lorenzo"
+                                        href="/en/museo-archeologico-san-lorenzo"
                                         onNavigate={closeAllMenus}
                                     >
-                                        Museo Archeologico &quot;San Lorenzo&quot;
+                                        &quot;San Lorenzo&quot; Archaeological Museum
                                     </Link>
                                 </li>
                                 <li className="py-3">
                                     <Link
-                                        href="/it/museo-di-storia-naturale"
+                                        href="/en/museo-di-storia-naturale"
                                         onNavigate={closeAllMenus}
                                     >
-                                        Museo di Storia Naturale
+                                        Natural History Museum
                                     </Link>
                                 </li>
                                 <li className="py-3">
                                     <Link
-                                        href="/it/museo-della-civilta-contadina"
+                                        href="/en/museo-della-civilta-contadina"
                                         onNavigate={closeAllMenus}
                                     >
-                                        Museo della civiltà contadina &quot;Il Cambonino Vecchio&quot;
+                                        &quot;Il Cambonino Vecchio&quot; Museum of Rural Life
                                     </Link>
                                 </li>
                             </ul>
@@ -399,7 +399,7 @@ export default function Menu() {
                                         toggleVisitMenu();
                                     }}
                                     className="border-b border-black/50 cursor-pointer pr-4 py-3 flex justify-between items-center">
-                                <span className="text-2xl font-semibold">Visita</span>
+                                <span className="text-2xl font-semibold">Visit</span>
                                 <span
                                     className={`${isVisitMenuOpen ? 'rotate-90' : 'rotate-0'} transition-all duration-500 origin-center`}>&gt;</span>
                             </button>
@@ -407,31 +407,31 @@ export default function Menu() {
                                 className={`${isVisitMenuOpen ? 'max-h-[1000px]' : 'max-h-0'} pl-4 transition-all duration-500 overflow-hidden`}>
                                 <li className="py-3">
                                     <Link
-                                        href="/it/info-gruppi"
+                                        href="/en/info-gruppi"
                                         onNavigate={closeAllMenus}
                                     >
-                                        Info gruppi
+                                        Group info
                                     </Link>
                                 </li>
                                 <li className="py-3">
                                     <Link
-                                        href="/it/servizi-educativi"
+                                        href="/en/servizi-educativi"
                                         onNavigate={closeAllMenus}
                                     >
-                                        Servizi educativi
+                                        Educational services
                                     </Link>
                                 </li>
                                 <li className="py-3">
                                     <Link
-                                        href="/it/info-utili"
+                                        href="/en/info-utili"
                                         onNavigate={closeAllMenus}
                                     >
-                                        Info utili
+                                        Useful info
                                     </Link>
                                 </li>
                                 <li className="py-3">
                                     <Link
-                                        href="/it/faq"
+                                        href="/en/faq"
                                         onNavigate={closeAllMenus}
                                     >
                                         FAQ
@@ -442,34 +442,34 @@ export default function Menu() {
 
                         <li className="py-3 text-2xl font-semibold border-b border-black/50 cursor-pointer">
                             <Link
-                                href="/it/news-eventi"
+                                href="/en/news-eventi"
                                 onNavigate={closeAllMenus}
                             >
-                                News ed eventi
+                                News and events
                             </Link>
                         </li>
 
                         <li className="py-3 text-2xl font-semibold border-b border-black/50 cursor-pointer">
                             <a
-                                aria-label="Vai alla pagina dedicata all'elenco delle misure adottate per rendere i musei accessibili"
+                                aria-label="Go to the page listing the measures adopted to make the museums accessible"
                                 href="https://musei.comune.cremona.it/it/accessibilita/percorsi-per-disabili-motori"
                                 target="_blank" rel="noopener noreferrer"
                             >
-                                Accessibilità
+                                Accessibility
                             </a>
                         </li>
 
                         <li className="py-3 text-2xl font-semibold border-b border-black/50 cursor-pointer">
                             <Link
-                                href="/it/contatti"
+                                href="/en/contatti"
                                 onNavigate={closeAllMenus}
                             >
-                                Contatti
+                                Contacts
                             </Link>
                         </li>
 
                         <li className="font-bold absolute bottom-[-48px] right-5">
-                            <Link href="/en">Go to the English website</Link>
+                            <Link href="/it">Vai al sito in italiano</Link>
                         </li>
 
                     </ul>

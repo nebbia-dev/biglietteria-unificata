@@ -15,7 +15,7 @@ export default async function Faq(){
 
     try {
 
-        const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/faqs',
+        const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/faqs?locale=en',
             {next: {revalidate: 1000}}
         );
         content = await data.json() as StrapiCollectionResponse<StrapiFaq>;
@@ -67,7 +67,7 @@ export default async function Faq(){
                                         {el.link && <Link
                                             className="w-fit flex items-center gap-2 font-medium prime-bg rounded-full px-4 py-2"
                                             href={el.link}>
-                                            Vai alla sezione
+                                            Find out more
                                             <CircledArrow width={28} height={28}/>
                                         </Link>}
                                     </div>
@@ -78,7 +78,7 @@ export default async function Faq(){
                 }
             </section>
             {/*Contact form*/}
-            <ContactForm text="Hai bisogno di info specifiche? Scrivici!"/>
+            <ContactForm lang="en" text="Need specific information? Write to us!"/>
         </>
     )
 }

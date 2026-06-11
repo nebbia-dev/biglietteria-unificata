@@ -15,12 +15,12 @@ export default async function InfoGruppi() {
         const museums = await getExperiences('/');
         filteredMuseums = museums.filter(el => el.tagIds?.includes(8));
 
-        const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/info-gruppi?populate=*',
+        const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/info-gruppi?locale=en&populate=*',
             {next: {revalidate: 1000}}
         );
         content = await data.json();
 
-        const dataMuseums = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/museums?populate=*',
+        const dataMuseums = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/museums?locale=en&populate=*',
             {next: {revalidate: 1000}})
         contentMuseums = await dataMuseums.json();
 
@@ -70,7 +70,9 @@ export default async function InfoGruppi() {
                         filteredMuseums &&
                         filteredMuseums.map((el) => {
                             return(
-                                <TicketCard key={el.documentId} layout="fourth" el={{
+                                <TicketCard
+                                    lang="en"
+                                    key={el.documentId} layout="fourth" el={{
                                     titolo: "",
                                     nome: el.title,
                                     descrizione: el.description?.replace(/<\/?[^>]+(>|$)/g, ""),
@@ -91,33 +93,31 @@ export default async function InfoGruppi() {
 
             {/*Gruppi scolastici*/}
             <section className="w-[90%] md:w-[85%] mx-auto pt-8">
-                <h2 className="text-2xl font-semibold mt-4 mb-8">Gruppi scolastici</h2>
+                <h2 className="text-2xl font-semibold mt-4 mb-8">School groups</h2>
                 <div className="md:flex md:gap-4">
                     <div className="md:w-[calc(50%-0.5rem)] p-4 mt-4 md:mt-2 w-full text-white rounded-xl gradient">
-                        <h3 className="text-2xl font-semibold my-4 prime-text">Servizi educativi</h3>
+                        <h3 className="text-2xl font-semibold my-4 prime-text">Educational services</h3>
                         <Image
                             className="w-full h-[200px] object-cover rounded-xl"
                             src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine_servizi_educativi.url} alt={content.data.immagine_servizi_educativi.alternativeText} width={300} height={200}/>
 
-                        <p className="h-[100px] mt-8 text-xl md:text-base">Clicca qui se vuoi prenotare l&apos;accesso ai musei con il tuo gruppo scolastico.</p>
+                        <p className="h-[100px] mt-8 text-xl md:text-base">Click here if you want to book museum access for your school group.</p>
                         <div className="flex items-center h-[64px] text-black w-full md:flex md:justify-end font-medium text-sm">
-                            <Link aria-label="Vai alla pagina dei servizi educativi" href="/servizi-educativi" className="h-fit w-auto block text-center prime-bg rounded-full px-4 py-2">Scopri di più</Link>
+                            <Link aria-label="Go to the educational services page" href="/servizi-educativi" className="h-fit w-auto block text-center prime-bg rounded-full px-4 py-2">Find out more</Link>
                         </div>
                     </div>
 
                     <div className="md:w-[calc(50%-0.5rem)] p-4 mt-4 md:mt-2 w-full text-white rounded-xl gradient">
-                        <h3 className="text-2xl font-semibold my-4 prime-text">Proposte educative</h3>
+                        <h3 className="text-2xl font-semibold my-4 prime-text">Educational programs</h3>
                         <Image
                             className="w-full h-[200px] object-cover rounded-xl"
                             src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine_proposte_educative.url} alt={content.data.immagine_proposte_educative.alternativeText} width={300} height={200}/>
-                        <p className="h-[100px] mt-8 text-xl md:text-base">Dalle scuole dell&apos;infanzia, fino agli adulti lavoriamo per aprire le porte dei musei e
-                            renderli accessibili al più ampio numero possibile di persone.
+                        <p className="h-[100px] mt-8 text-xl md:text-base">Explore our educational programs designed for all ages. From preschoolers to adults, we are committed to making our museums open and accessible to everyone.
                         </p>
                         <div className="flex items-center h-[64px] text-black w-full md:flex md:justify-end font-medium text-sm">
-                            <a aria-label="Vai alla pagine delle proposte educative" target="_blank"
+                            <a aria-label="Go to the educational programs page" target="_blank"
                                rel="noopener noreferrer" href="https://musei.comune.cremona.it/it/servizi-educativi/informazioni-didattica"
-                               className="h-fit w-auto block text-center prime-bg rounded-full px-4 py-2">Vai al
-                                sito</a>
+                               className="h-fit w-auto block text-center prime-bg rounded-full px-4 py-2">Go to website</a>
                         </div>
                     </div>
                 </div>

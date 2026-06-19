@@ -17,12 +17,12 @@ export default function FooterEn() {
                     <h3 className="prime-text font-semibold mb-1">Contacts</h3>
                     <ul className="mb-2">
                         <li>Offices: 0372 407269</li>
-                        <li><a className="underline" href="mailto:museo.alaponzone@cremona.comune.it">museo.alaponzone@cremona.comune.it</a></li>
+                        <li><a className="underline" href="mailto:info.musei@comune.cremona.it">info.musei@comune.cremona.it</a></li>
                     </ul>
                     <p>To send complaints concerning accessibility,<br/>write to <a
                         aria-label="Send an email to report a website accessibility issue"
-                        className="underline" href="mailto:museo.alaponzone@cremona.comune.it" target="_blank"
-                        rel="noopener noreferrer">museo.alaponzone@cremona.comune.it</a>
+                        className="underline" href="mailto:info.musei@comune.cremona.it" target="_blank"
+                        rel="noopener noreferrer">info.musei@comune.cremona.it</a>
                     </p>
                 </div>
 

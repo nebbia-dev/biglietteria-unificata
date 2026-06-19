@@ -17,12 +17,12 @@ export default function Footer() {
                     <h3 className="prime-text font-semibold mb-1">Contatti</h3>
                     <ul className="mb-2">
                         <li>Uffici: 0372 407269</li>
-                        <li><a className="underline" href="mailto:museo.alaponzone@cremona.comune.it">museo.alaponzone@cremona.comune.it</a></li>
+                        <li><a className="underline" href="mailto:info.musei@comune.cremona.it">info.musei@comune.cremona.it</a></li>
                     </ul>
                     <p>Per inviare segnalazioni riguardanti l&apos;accessibilità,<br/>scrivici a <a
                         aria-label="Scrivi una mail per fare una segnalazione riguardante l'accessibilità del sito"
-                        className="underline" href="mailto:museo.alaponzone@cremona.comune.it" target="_blank"
-                        rel="noopener noreferrer">museo.alaponzone@cremona.comune.it</a>
+                        className="underline" href="mailto:info.musei@comune.cremona.it" target="_blank"
+                        rel="noopener noreferrer">info.musei@comune.cremona.it</a>
                     </p>
                 </div>
 

@@ -48,7 +48,7 @@ export default function TicketCard({el, layout, lang}: {el: TicketCardData, layo
                                 }
                                 <a aria-label={purchaseAriaLabel} target="_blank" rel="noopener noreferrer"
                                    className={`${layout === 'fourth' ? 'text-sm px-3 py-1' : 'px-4 py-2'} flex items-center gap-2 text-lg font-medium prime-bg rounded-full`}
-                                   href={`https://multishop-cremona.collaudo.domniapass.com/it/products/${el.slug ?? ''}`}>
+                                   href={`https://shopbiglietteriamusei.comune.cremona.it/${lang}/products/${el.slug ?? ''}`}>
                                     {lang === 'it'
                                         ? 'Prenota'
                                         : 'Book'

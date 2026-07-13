@@ -111,3 +111,28 @@ body {
         transition-duration: 0.01ms !important;
     }
 }
+
+@media (max-width: 767px) {
+    body {
+        padding-bottom: calc(5rem + env(safe-area-inset-bottom));
+    }
+
+    .asw-menu-btn,
+    button[aria-label="Open Accessibility Menu"],
+    button[aria-label="Apri il menu accessibilità"] {
+        right: 1rem !important;
+        bottom: calc(1rem + env(safe-area-inset-bottom)) !important;
+        left: auto !important;
+        width: 3rem !important;
+        height: 3rem !important;
+    }
+
+    .asw-menu {
+        right: 1rem !important;
+        bottom: calc(4.5rem + env(safe-area-inset-bottom)) !important;
+        left: auto !important;
+        max-width: calc(100vw - 2rem) !important;
+        max-height: calc(100dvh - 6rem) !important;
+        overflow-y: auto !important;
+    }
+}

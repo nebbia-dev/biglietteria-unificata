@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { Metadata } from "next";
 import {unstable_rethrow} from "next/navigation";
 import Link from "next/link";
 import {CircledArrow} from "@/app/_components/_icons/CircledArrow";
@@ -7,8 +8,25 @@ import {getExperiences} from "@/app/lib/domnia-experiences";
 import Carousel from "@/app/_components/Carousel";
 import getAddress from "@/helpers/address/getAddress";
 import ContactForm from "@/app/_components/ContactForm";
+import type { ExperienceCardData } from "@/app/lib/domnia-types";
+import type { StrapiMuseum } from "@/app/lib/strapi-types";
 
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
+    title: "Biglietteria unificata",
+    description: "Acquista biglietti e prenota visite per i Musei Civici di Cremona.",
+};
+
+function getMuseumOrder(museum: Pick<StrapiMuseum, 'ordine'>) {
+    const order = Number(museum.ordine ?? Number.MAX_SAFE_INTEGER);
+
+    return Number.isFinite(order) ? order : Number.MAX_SAFE_INTEGER;
+}
+
+function sortMuseumsByOrder(museums: StrapiMuseum[]) {
+    return [...museums].sort((a, b) => getMuseumOrder(a) - getMuseumOrder(b));
+}
 
 export default async function Home() {
 
@@ -18,8 +36,8 @@ export default async function Home() {
     try {
 
         museums = await getExperiences('/');
-        filteredMuseums = museums.filter(el => el.tagIds.includes(7));
-        bundle = museums.filter(el => el.tagIds.includes(10) && el.slug.includes('cumulativo'))[0];
+        filteredMuseums = museums.filter(el => el.tagIds.includes(Number(process.env.NEXT_TAG_MUSEI)));
+        bundle = museums.filter(el => el.tagIds.includes(Number(process.env.NEXT_TAG_EXTRA)) && el.slug.includes('cumulativo'))[0];
         events = museums.filter(el => el.tagIds.includes(11));
 
         const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/homepage?populate=*',
@@ -36,18 +54,35 @@ export default async function Home() {
             {next: {revalidate: 1000}})
         contentMuseums = await dataMuseums.json();
 
-        for(const museum of filteredMuseums) {
-            for(const contentMuseum of contentMuseums.data) {
-                if(museum.slug === contentMuseum.slug) {
-                    contentMuseum.immagine.titolo = contentMuseum.titolo;
-                    contentMuseum.immagine.slug = contentMuseum.slug;
-                    pics.push(contentMuseum.immagine);
-                    museum.heroImage = contentMuseum.immagine;
-                    museum.ticketImage = contentMuseum.immagine_biglietti_standard;
-                    break;
-                }
+        const filteredMuseumsBySlug = new Map(
+            filteredMuseums.map((museum: ExperienceCardData) => [museum.slug, museum]),
+        );
+        const orderedFilteredMuseums: ExperienceCardData[] = [];
+
+        for(const contentMuseum of sortMuseumsByOrder(contentMuseums.data ?? [])) {
+            const museum = filteredMuseumsBySlug.get(contentMuseum.slug);
+
+            if(!museum) {
+                continue;
             }
+
+            const heroImage = {
+                ...contentMuseum.immagine,
+                ordine: contentMuseum.ordine,
+                slug: contentMuseum.slug,
+                titolo: contentMuseum.titolo,
+            };
+
+            pics.push(heroImage);
+            orderedFilteredMuseums.push({
+                ...museum,
+                heroImage,
+                ordine: contentMuseum.ordine ?? undefined,
+                ticketImage: contentMuseum.immagine_biglietti_standard,
+            });
         }
+
+        filteredMuseums = orderedFilteredMuseums;
 
         const dataEvents = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/events?populate=*',
             {next: {revalidate: 1000}}
@@ -84,7 +119,7 @@ export default async function Home() {
                 src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine.url}
                 alt={content.data.immagine.alternativeText} width={300} height={200}/>
         </div>
-        <Carousel pics={pics} lang="en"/>
+        <Carousel pics={pics} lang="it"/>
         {/*Lista musei*/}
         <section className="w-[90%] md:w-[85%] mx-auto pt-8 md:pt-20">
             <div className="mb-8 md:mb-12">
@@ -127,7 +162,7 @@ export default async function Home() {
                                             src={process.env.NEXT_PUBLIC_BASE_URL + el.ticketImage.url}
                                             alt={`Interno del ${el.title}`} width={300} height={200}/>
                                         <div className="flex flex-col gap-2">
-                                            <h4 className="text-xl md:text-base font-medium md:line-clamp-2">Ticket {el.title}</h4>
+                                            <h4 className="text-xl md:text-base font-medium md:line-clamp-2">{el.title}</h4>
                                             <p className="line-clamp-6 md:text-sm lato">
                                                 {el.description?.replace(/<\/?[^>]+(>|$)/g, "")}
                                             </p>
@@ -146,7 +181,7 @@ export default async function Home() {
                                                     aria-label={`Vai alla pagina dedicata all'acquisto del biglietto standard del ${el.title}`}
                                                     target="_blank" rel="noopener noreferrer"
                                                     className="flex items-center gap-2 text-lg md:text-sm font-medium prime-bg rounded-full md:px-3 px-4 py-2 md:py-1"
-                                                    href={`https://multishop-cremona.collaudo.domniapass.com/it/products/${el.slug}`}>
+                                                    href={`https://shopbiglietteriamusei.comune.cremona.it/it/products/${el.slug}`}>
                                                     Prenota
                                                     <CircledArrow width={28} height={28}/>
                                                 </a>
@@ -188,7 +223,7 @@ export default async function Home() {
                                     aria-label="Vai alla pagina dedicata all'acquisto del biglietto cumulativo"
                                     target="_blank" rel="noopener noreferrer"
                                     className="flex items-center gap-2 text-lg md:text-base font-medium prime-bg rounded-full px-4 py-2"
-                                    href={`https://multishop-cremona.collaudo.domniapass.com/it/products/${bundle.slug}`}>
+                                    href={`https://shopbiglietteriamusei.comune.cremona.it/it/products/${bundle.slug}`}>
                                     Prenota
                                     <CircledArrow width={28} height={28}/>
                                 </a>
@@ -199,17 +234,6 @@ export default async function Home() {
             </div>
         </section>
         )}
-
-        {/*Search bar*/}
-        {/*<section className="w-[90%] mx-auto pt-8">*/}
-        {/*        <div className="flex flex-col gap-8 p-4 mt-2 w-full text-white rounded-xl gradient">*/}
-        {/*            <h3 className="text-2xl font-semibold mt-2">Cerchi qualcosa di specifico?</h3>*/}
-        {/*            <input type="text" className="text-black rounded-full bg-white h-[48px] p-2"/>*/}
-        {/*            <div className="mb-4 text-black w-full text-end font-medium text-lg">*/}
-        {/*                <Link href="/" className="w-fit prime-bg rounded-full px-4 py-2">Cerca</Link>*/}
-        {/*            </div>*/}
-        {/*        </div>*/}
-        {/*</section>*/}
 
         {/*Biglietto gruppi*/}
         <section className="w-[90%] md:w-[85%] mx-auto flex flex-col md:flex-row md:gap-8">
@@ -223,7 +247,7 @@ export default async function Home() {
                     <p className="text-xl md:text-base md:h-[64px]">Prenota l&apos;accesso per il tuo gruppo.
                         Scopri i ticket ridotti per i gruppi di più di 15 persone.</p>
                     <div className="mb-4 text-black w-full font-medium text-lg md:flex md:justify-end">
-                        <Link aria-label="Vai alla pagine con le informazioni sulle visite dei gruppi" href="/info-gruppi" className="md:text-base w-auto block text-center prime-bg rounded-full px-4 py-2 md:w-fit">Scopri di più</Link>
+                        <Link aria-label="Vai alla pagina con le informazioni sulle visite dei gruppi" href="/info-gruppi" className="md:text-base w-auto block text-center prime-bg rounded-full px-4 py-2 md:w-fit">Scopri di più</Link>
                     </div>
                 </div>
             </div>
@@ -238,17 +262,19 @@ export default async function Home() {
 
                     <p className="text-xl md:text-base md:h-[64px]">Clicca qui se vuoi prenotare l&apos;accesso ai musei con il tuo gruppo scolastico.</p>
                     <div className="mb-4 text-black w-full font-medium text-lg md:flex md:justify-end">
-                        <Link aria-label="Vai alla pagine con le informazioni sulle visite dei gruppi scolastici" href="/servizi-educativi" className="md:text-base w-auto block text-center prime-bg rounded-full px-4 py-2 md:w-fit">Scopri di più</Link>
+                        <Link aria-label="Vai alla pagina con le informazioni sulle visite dei gruppi scolastici" href="/servizi-educativi" className="md:text-base w-auto block text-center prime-bg rounded-full px-4 py-2 md:w-fit">Scopri di più</Link>
                     </div>
                 </div>
             </div>
         </section>
 
         {/*Eventi*/}
-        <section className="w-[90%] md:w-[85%] mx-auto pt-8">
-            <h2 className="text-3xl font-semibold my-8">Eventi</h2>
-            <EventCard lang="it" events={events} limit={3}/>
-        </section>
+        {events && events.length > 0 &&
+            <section className="w-[90%] md:w-[85%] mx-auto pt-8">
+                <h2 className="text-3xl font-semibold my-8">Eventi</h2>
+                <EventCard lang="it" events={events} limit={3}/>
+            </section>
+        }
 
         {/*News*/}
         <section className="w-[90%] md:w-[85%] mx-auto flex md:flex-row flex-col md:gap-8">
@@ -279,7 +305,7 @@ export default async function Home() {
 
                     />
                     <div className="text-black w-full md:flex md:justify-end font-medium text-sm">
-                        <a aria-label="Vai alla sito di Musei Italiani" href="https://www.museiitaliani.it/" target="_blank" rel="noopener noreferrer" className="md:w-fit w-auto block text-center prime-bg rounded-full px-4 py-2">Vai al sito</a>
+                        <a aria-label="Vai al sito di Musei Italiani" href="https://www.museiitaliani.it/" target="_blank" rel="noopener noreferrer" className="md:w-fit w-auto block text-center prime-bg rounded-full px-4 py-2">Vai al sito</a>
                     </div>
                 </div>
             </div>

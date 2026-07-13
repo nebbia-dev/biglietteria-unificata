@@ -11,13 +11,13 @@ export default async function MuseoCivico() {
     let content, museums, filteredMuseums, bundle, standard, groups, schools, extra, contentEvents, events, contentEduImg;
 
     try {
-        museums = await getExperiences('/');
-        filteredMuseums = museums.filter(el => el.tagIds.includes(12));
-        bundle = museums.filter(el => el.tagIds.includes(10) && el.slug.includes('cumulativo'))[0];
-        standard = filteredMuseums.filter(el => el.tagIds.includes(7))[0];
-        groups = filteredMuseums.filter(el => el.tagIds.includes(8))[0];
-        schools = filteredMuseums.filter(el => el.tagIds.includes(9))[0];
-        extra = filteredMuseums.filter(el => el.tagIds.includes(10))[0];
+        museums = await getExperiences('/', { locale: 'en' });
+        filteredMuseums = museums.filter(el => el.tagIds.includes(Number(process.env.NEXT_TAG_CIVICO)));
+        bundle = museums.filter(el => el.tagIds.includes(Number(process.env.NEXT_TAG_EXTRA)) && el.slug.includes('pass'))[0];
+        standard = filteredMuseums.filter(el => el.tagIds.includes(Number(process.env.NEXT_TAG_STANDARD)))[0];
+        groups = filteredMuseums.filter(el => el.tagIds.includes(Number(process.env.NEXT_TAG_GRUPPI)))[0];
+        schools = filteredMuseums.filter(el => el.tagIds.includes(Number(process.env.NEXT_TAG_SCUOLE)))[0];
+        extra = filteredMuseums.filter(el => el.tagIds.includes(Number(process.env.NEXT_TAG_EXTRA)))[0];
         events = museums.filter(el => el.tagIds.includes(11));
 
         const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/museums/' + process.env.NEXT_ALA_PONZONE +'?locale=en&populate=*',
@@ -76,7 +76,7 @@ export default async function MuseoCivico() {
                         layout="half"
                         el={{
                         titolo: "Ticket",
-                        nome: "Ticket " + standard?.title,
+                        nome: standard?.title,
                         descrizione: standard?.description?.replace(/<\/?[^>]+(>|$)/g, ""),
                         infoPrezzo: "Starting from:",
                         prezzo: standard?.cheapest,
@@ -147,10 +147,12 @@ export default async function MuseoCivico() {
             <EduPrograms image={contentEduImg.data.immagine_proposte_educative.url} alt={contentEduImg.data.immagine_proposte_educative.alternativeText}/>
 
             {/*Eventi*/}
-            <section className="w-[90%] md:w-[85%] mx-auto pt-8">
-                <h2 className="text-2xl font-semibold mt-4 mb-8">Events</h2>
-                <EventCard lang="en" events={events} limit={3}/>
-            </section>
+            {events && events.length > 0 &&
+                <section className="w-[90%] md:w-[85%] mx-auto pt-8">
+                    <h2 className="text-3xl font-semibold my-8">Events</h2>
+                    <EventCard lang="en" events={events} limit={3}/>
+                </section>
+            }
         </>
     )
 }

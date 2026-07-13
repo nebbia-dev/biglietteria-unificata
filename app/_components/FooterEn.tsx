@@ -35,12 +35,12 @@ export default function FooterEn() {
                         <li className="flex gap-2 mt-2">
                             <a aria-label="Go to the Cremona Civic Museums Facebook page" href="https://www.facebook.com/cremonamusei/" target="_blank"
                                rel="noopener noreferrer" className="w-6">
-                                <Image src="/icons/hugeicons_facebook-02.webp" aria-hidden alt="facebook logo" width={48}
+                                <Image src="/icons/hugeicons_facebook-02.webp" aria-hidden alt="" width={48}
                                        height={48}/>
                             </a>
                             <a aria-label="Go to the Cremona Civic Museums Instagram page" href="https://www.instagram.com/cremonamusei/" target="_blank"
                                rel="noopener noreferrer" className="w-6">
-                                <Image src="/icons/logo-instagram.webp" aria-hidden alt="instagram logo" width={48} height={48}/>
+                                <Image src="/icons/logo-instagram.webp" aria-hidden alt="" width={48} height={48}/>
                             </a>
                         </li>
                     </ul>

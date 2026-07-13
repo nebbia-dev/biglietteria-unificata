@@ -18,7 +18,10 @@ const lato = Lato({
 
 
 export const metadata: Metadata = {
-  title: "Musei Civici di Cremona",
+  title: {
+    default: "Musei Civici di Cremona",
+    template: "%s | Musei Civici di Cremona",
+  },
   description: "Biglietteria unificata per i Musei Civici di Cremona",
 };
 
@@ -39,6 +42,37 @@ export default function RootLayout({
       </main>
       <Footer/>
       <Script src="https://cdn.jsdelivr.net/npm/sienna-accessibility@latest/dist/sienna-accessibility.umd.js" defer />
+      <Script id="sienna-accessibility-it-label" strategy="afterInteractive">
+        {`
+          (() => {
+            const label = 'Apri il menu accessibilità';
+
+            const updateAccessibilityWidgetLabel = () => {
+              document
+                .querySelectorAll('button[aria-label="Open Accessibility Menu"], .asw-menu-btn')
+                .forEach((button) => {
+                  if (button.getAttribute('aria-label') !== label) {
+                    button.setAttribute('aria-label', label);
+                  }
+
+                  if (button.getAttribute('title') !== label) {
+                    button.setAttribute('title', label);
+                  }
+                });
+            };
+
+            updateAccessibilityWidgetLabel();
+
+            const observer = new MutationObserver(updateAccessibilityWidgetLabel);
+            observer.observe(document.body, {
+              attributes: true,
+              attributeFilter: ['aria-label', 'title'],
+              childList: true,
+              subtree: true,
+            });
+          })();
+        `}
+      </Script>
       </body>
     </html>
   );

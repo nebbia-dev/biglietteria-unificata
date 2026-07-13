@@ -11,8 +11,8 @@ export default async function ServiziEducativi() {
     let filteredMuseums: ExperienceCardData[] = [];
 
     try {
-        const museums = await getExperiences('/');
-        filteredMuseums = museums.filter(el => el.tagIds.includes(9));
+        const museums = await getExperiences('/', { locale: 'en' });
+        filteredMuseums = museums.filter(el => el.tagIds.includes(Number(process.env.NEXT_TAG_SCUOLE)));
 
         const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/servizi-educativi?locale=en&populate=*',
             {next: {revalidate: 1000}}

@@ -10,7 +10,7 @@ export default async function NewsEventi() {
 
     try {
 
-        museums = await getExperiences('/');
+        museums = await getExperiences('/', { locale: 'en' });
         events = museums.filter(el => el.tagIds.includes(11));
 
         const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/news?locale=en&populate=*',
@@ -45,9 +45,11 @@ export default async function NewsEventi() {
                     <p className="text-xl">{content.data.descrizione}</p>
                 </div>
 
-                <div className="flex flex-col gap-4">
-                    <EventCard lang="en" events={events} limit={1000}/>
-                </div>
+                {events && events.length > 0 &&
+                    <div className="flex flex-col gap-4">
+                        <EventCard lang="en" events={events} limit={1000}/>
+                    </div>
+                }
             </section>
 
             {/*News*/}

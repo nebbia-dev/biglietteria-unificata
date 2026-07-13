@@ -16,6 +16,10 @@ import type {
     ProductGroupResponse,
 } from '@/app/lib/domnia-types';
 
+type GetExperiencesOptions = {
+    locale?: string;
+};
+
 const mockProductGroupLocations = [
     'Via Ugolani Dati, 4, Cremona',
     'Via San Lorenzo, 4, Cremona',
@@ -96,6 +100,18 @@ async function fetchDomniaJson<T>(path: string, accessToken: string): Promise<T>
     }
 
     return response.json() as Promise<T>;
+}
+
+function getProductGroupsPath(options: GetExperiencesOptions = {}) {
+    const params = new URLSearchParams({
+        tagIds: '1',
+    });
+
+    if (options.locale) {
+        params.set('locale', options.locale);
+    }
+
+    return `/api/shop/product-groups?${params.toString()}`;
 }
 
 function getMockProductGroups() {
@@ -180,10 +196,13 @@ function attachFallbackConnectedProducts(
     });
 }
 
-async function fetchProductGroupsWithFallback(accessToken: string) {
+async function fetchProductGroupsWithFallback(
+    accessToken: string,
+    options: GetExperiencesOptions = {},
+) {
     try {
         const response = await fetchDomniaJson<ProductGroupResponse>(
-            '/api/shop/product-groups?tagIds=1',
+            getProductGroupsPath(options),
             accessToken,
         );
 
@@ -261,9 +280,12 @@ function enrichExperiences(
     });
 }
 
-export async function fetchExperiencesWithAccessToken(accessToken: string) {
+export async function fetchExperiencesWithAccessToken(
+    accessToken: string,
+    options: GetExperiencesOptions = {},
+) {
     const [productGroupsResult, products] = await Promise.all([
-        fetchProductGroupsWithFallback(accessToken),
+        fetchProductGroupsWithFallback(accessToken, options),
         fetchProductsWithFallback(accessToken),
     ]);
     const productGroups = productGroupsResult.isFallback
@@ -276,11 +298,14 @@ export async function fetchExperiencesWithAccessToken(accessToken: string) {
     );
 }
 
-export async function getExperiences(returnTo: string) {
+export async function getExperiences(
+    returnTo: string,
+    options: GetExperiencesOptions = {},
+) {
     try {
         const { session } = await ensureDomniaSession();
 
-        return fetchExperiencesWithAccessToken(session.accessToken);
+        return fetchExperiencesWithAccessToken(session.accessToken, options);
     } catch (error) {
         console.warn(
             `Domnia session unavailable for ${returnTo}, using local mock response`,

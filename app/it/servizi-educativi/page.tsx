@@ -1,9 +1,15 @@
 import Image from "next/image";
+import type { Metadata } from "next";
 import TicketCard from "@/app/_components/TicketCard";
 import {getExperiences} from "@/app/lib/domnia-experiences";
 import type { ExperienceCardData } from "@/app/lib/domnia-types";
 
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
+    title: "Servizi educativi",
+    description: "Biglietti e informazioni per scuole e servizi educativi dei Musei Civici di Cremona.",
+};
 
 export default async function ServiziEducativi() {
 
@@ -12,7 +18,7 @@ export default async function ServiziEducativi() {
 
     try {
         const museums = await getExperiences('/');
-        filteredMuseums = museums.filter(el => el.tagIds.includes(9));
+        filteredMuseums = museums.filter(el => el.tagIds.includes(Number(process.env.NEXT_TAG_SCUOLE)));
 
         const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/servizi-educativi?populate=*',
             {next: {revalidate: 1000}}
@@ -106,7 +112,7 @@ export default async function ServiziEducativi() {
                             </p>
                         </div>
                         <div className="md:mt-8 text-black w-full md:flex md:justify-end font-medium text-sm">
-                            <a aria-label="Vai alla pagine delle proposte educative" target="_blank" rel="noopener noreferrer" href="https://musei.comune.cremona.it/it/servizi-educativi/informazioni-didattica" className="w-auto block text-center prime-bg rounded-full px-4 py-2">Vai al
+                            <a aria-label="Vai alla pagina delle proposte educative" target="_blank" rel="noopener noreferrer" href="https://musei.comune.cremona.it/it/servizi-educativi/informazioni-didattica" className="w-auto block text-center prime-bg rounded-full px-4 py-2">Vai al
                                 sito</a>
                         </div>
                     </div>

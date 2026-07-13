@@ -7,8 +7,20 @@ import {getExperiences} from "@/app/lib/domnia-experiences";
 import Carousel from "@/app/_components/Carousel";
 import getAddress from "@/helpers/address/getAddress";
 import ContactForm from "@/app/_components/ContactForm";
+import type { ExperienceCardData } from "@/app/lib/domnia-types";
+import type { StrapiMuseum } from "@/app/lib/strapi-types";
 
 export const dynamic = 'force-dynamic';
+
+function getMuseumOrder(museum: Pick<StrapiMuseum, 'ordine'>) {
+    const order = Number(museum.ordine ?? Number.MAX_SAFE_INTEGER);
+
+    return Number.isFinite(order) ? order : Number.MAX_SAFE_INTEGER;
+}
+
+function sortMuseumsByOrder(museums: StrapiMuseum[]) {
+    return [...museums].sort((a, b) => getMuseumOrder(a) - getMuseumOrder(b));
+}
 
 export default async function Home() {
 
@@ -17,9 +29,9 @@ export default async function Home() {
 
     try {
 
-        museums = await getExperiences('/');
-        filteredMuseums = museums.filter(el => el.tagIds.includes(7));
-        bundle = museums.filter(el => el.tagIds.includes(10) && el.slug.includes('cumulativo'))[0];
+        museums = await getExperiences('/', { locale: 'en' });
+        filteredMuseums = museums.filter(el => el.tagIds.includes(Number(process.env.NEXT_TAG_MUSEI)));
+        bundle = museums.filter(el => el.tagIds.includes(Number(process.env.NEXT_TAG_EXTRA)) && el.slug.includes('pass'))[0];
         events = museums.filter(el => el.tagIds.includes(11));
 
         const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/homepage?locale=en&populate=*',
@@ -36,18 +48,35 @@ export default async function Home() {
             {next: {revalidate: 1000}})
         contentMuseums = await dataMuseums.json();
 
-        for(const museum of filteredMuseums) {
-            for(const contentMuseum of contentMuseums.data) {
-                if(museum.slug === contentMuseum.slug) {
-                    contentMuseum.immagine.titolo = contentMuseum.titolo;
-                    contentMuseum.immagine.slug = contentMuseum.slug;
-                    pics.push(contentMuseum.immagine);
-                    museum.heroImage = contentMuseum.immagine;
-                    museum.ticketImage = contentMuseum.immagine_biglietti_standard;
-                    break;
-                }
+        const filteredMuseumsBySlug = new Map(
+            filteredMuseums.map((museum: ExperienceCardData) => [museum.slug, museum]),
+        );
+        const orderedFilteredMuseums: ExperienceCardData[] = [];
+
+        for(const contentMuseum of sortMuseumsByOrder(contentMuseums.data ?? [])) {
+            const museum = filteredMuseumsBySlug.get(contentMuseum.slug);
+
+            if(!museum) {
+                continue;
             }
+
+            const heroImage = {
+                ...contentMuseum.immagine,
+                ordine: contentMuseum.ordine,
+                slug: contentMuseum.slug,
+                titolo: contentMuseum.titolo,
+            };
+
+            pics.push(heroImage);
+            orderedFilteredMuseums.push({
+                ...museum,
+                heroImage,
+                ordine: contentMuseum.ordine ?? undefined,
+                ticketImage: contentMuseum.immagine_biglietti_standard,
+            });
         }
+
+        filteredMuseums = orderedFilteredMuseums;
 
         const dataEvents = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/events?populate=*',
             {next: {revalidate: 1000}}
@@ -127,7 +156,7 @@ export default async function Home() {
                                             src={process.env.NEXT_PUBLIC_BASE_URL + el.ticketImage.url}
                                             alt={`Interno del ${el.title}`} width={300} height={200}/>
                                         <div className="flex flex-col gap-2">
-                                            <h4 className="text-xl md:text-base font-medium md:line-clamp-2">Ticket {el.title}</h4>
+                                            <h4 className="text-xl md:text-base font-medium md:line-clamp-2">{el.title}</h4>
                                             <p className="line-clamp-6 md:text-sm lato">
                                                 {el.description?.replace(/<\/?[^>]+(>|$)/g, "")}
                                             </p>
@@ -146,7 +175,7 @@ export default async function Home() {
                                                     aria-label={`Go to the page to purchase the standard ticket for ${el.title}`}
                                                     target="_blank" rel="noopener noreferrer"
                                                     className="flex items-center gap-2 text-lg md:text-sm font-medium prime-bg rounded-full md:px-3 px-4 py-2 md:py-1"
-                                                    href={`https://multishop-cremona.collaudo.domniapass.com/it/products/${el.slug}`}>
+                                                    href={`https://shopbiglietteriamusei.comune.cremona.it/en/products/${el.slug}`}>
                                                     Book
                                                     <CircledArrow width={28} height={28}/>
                                                 </a>
@@ -190,7 +219,7 @@ export default async function Home() {
                                     aria-label="Go to the page to purchase the all-museums ticket"
                                     target="_blank" rel="noopener noreferrer"
                                     className="flex items-center gap-2 text-lg md:text-base font-medium prime-bg rounded-full px-4 py-2"
-                                    href={`https://multishop-cremona.collaudo.domniapass.com/it/products/${bundle.slug}`}>
+                                    href={`https://shopbiglietteriamusei.comune.cremona.it/en/products/${bundle.slug}`}>
                                     Book
                                     <CircledArrow width={28} height={28}/>
                                 </a>
@@ -254,10 +283,12 @@ export default async function Home() {
         </section>
 
         {/*Eventi*/}
-        <section className="w-[90%] md:w-[85%] mx-auto pt-8">
-            <h2 className="text-3xl font-semibold my-8">Events</h2>
-            <EventCard lang="en" events={events} limit={3}/>
-        </section>
+        {events && events.length > 0 &&
+            <section className="w-[90%] md:w-[85%] mx-auto pt-8">
+                <h2 className="text-3xl font-semibold my-8">Events</h2>
+                <EventCard lang="en" events={events} limit={3}/>
+            </section>
+        }
 
         {/*News*/}
         <section className="w-[90%] md:w-[85%] mx-auto flex md:flex-row flex-col md:gap-8">

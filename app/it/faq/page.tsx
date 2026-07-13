@@ -1,4 +1,5 @@
 import {Accordion, AccordionDetails, AccordionSummary} from "@mui/material";
+import type { Metadata } from "next";
 import {CircledArrow} from "@/app/_components/_icons/CircledArrow";
 import Link from "next/link";
 import {unstable_rethrow} from "next/navigation";
@@ -8,6 +9,11 @@ import ContactForm from "@/app/_components/ContactForm";
 import type { StrapiCollectionResponse, StrapiFaq } from "@/app/lib/strapi-types";
 
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
+    title: "FAQ",
+    description: "Domande frequenti sui Musei Civici di Cremona.",
+};
 
 export default async function Faq(){
 

@@ -1,8 +1,14 @@
 import EventCard from "@/app/_components/EventCard";
+import type { Metadata } from "next";
 import {getExperiences} from "@/app/lib/domnia-experiences";
 import Image from "next/image";
 
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
+    title: "News ed eventi",
+    description: "News ed eventi dei Musei Civici di Cremona.",
+};
 
 export default async function NewsEventi() {
 
@@ -45,9 +51,11 @@ export default async function NewsEventi() {
                     <p className="text-xl">{content.data.descrizione}</p>
                 </div>
 
-                <div className="flex flex-col gap-4">
-                    <EventCard lang="it" events={events} limit={1000}/>
-                </div>
+                {events && events.length > 0 &&
+                    <div className="flex flex-col gap-4">
+                        <EventCard lang="it" events={events} limit={1000}/>
+                    </div>
+                }
             </section>
 
             {/*News*/}

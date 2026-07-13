@@ -9,18 +9,18 @@ const ACCESS_TOKEN_COOKIE = 'access_token';
 const REFRESH_TOKEN_COOKIE = 'refresh_token';
 
 export const DOMNIA_API_BASE_URL =
-    process.env.DOMNIA_API_BASE_URL ?? 'https://api-cremona.collaudo.domniapass.com';
+    process.env.DOMNIA_API_BASE_URL ?? 'https://api-cremona.domniapass.com';
 const DOMNIA_API_USERNAME =
-    process.env.DOMNIA_API_USERNAME ?? 'nebbialab.test@mydomnia.it';
+    process.env.DOMNIA_API_USERNAME ?? 'info@nebbialab.it';
 const DOMNIA_API_PASSWORD =
-    process.env.DOMNIA_API_PASSWORD ?? 'n0U9L9yBuXxXBt';
-const DOMNIA_API_REALM = process.env.DOMNIA_API_REALM ?? 'staging';
+    process.env.DOMNIA_API_PASSWORD ?? 'lbr2i8U4W4Gxfv';
+const DOMNIA_API_REALM = process.env.DOMNIA_API_REALM ?? 'production';
 const DOMNIA_API_RESOURCE = process.env.DOMNIA_API_RESOURCE ?? 'desk';
 const DOMNIA_API_SECRET =
-    process.env.DOMNIA_API_SECRET ?? 'UZluSGa8o86Fq2WdbA9nKqOObRdqZPz0';
+    process.env.DOMNIA_API_SECRET ?? 'kpiKdvEM6oRc2DHWDUDB6zRMShOiopSm';
 
 const DOMNIA_ORGANIZATION_CODE = process.env.DOMNIA_ORGANIZATION_CODE ?? 'CR';
-const DOMNIA_PARTNER_CODE = process.env.DOMNIA_PARTNER_CODE ?? 'CR';
+const DOMNIA_PARTNER_CODE = process.env.DOMNIA_PARTNER_CODE ?? 'MCC';
 const DOMNIA_ROLE_CODE = process.env.DOMNIA_ROLE_CODE ?? 'SELL_WEB_API';
 
 type TokenCookiePayload = {

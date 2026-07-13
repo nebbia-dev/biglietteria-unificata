@@ -2,13 +2,16 @@
 
 import Image from "next/image";
 
-export default function NextSlide({setSlide} : {setSlide:() => void}) {
+type NextSlideLang = 'it' | 'en';
+
+export default function NextSlide({setSlide, lang} : {setSlide:() => void, lang: NextSlideLang}) {
+    const ariaLabel = lang === 'it' ? 'Slide successiva' : 'Next slide';
 
     return(
-        <button aria-label="Slide successiva" className="z-10 pb-0.5 cursor-pointer absolute w-8 h-8 right-5"
+        <button aria-label={ariaLabel} className="z-10 pb-0.5 cursor-pointer absolute w-8 h-8 right-5"
                 onClick={setSlide}
                 id="nextBtn">
-            <Image src="/icons/carousel-next.svg" alt="Freccia a destra" width={48} height={48}/>
+            <Image src="/icons/carousel-next.svg" alt="" aria-hidden={true} width={48} height={48}/>
         </button>
     )
 }

@@ -16,9 +16,9 @@ export default function EduPrograms({image, alt} : {image:string, alt:string}) {
                         committed to making our museums open and accessible to everyone.</p>
                     <div className="mb-4 mt-8 text-black w-full text-end font-medium text-lg md:text-base">
                         <a
-                            aria-label="Vai alla pagina dedicata alle nostre proposte educative"
+                            aria-label="Go to the page about our educational programs"
                             target="_blank" rel="noopener noreferrer"
-                            href="https://musei.comune.cremona.it/it/servizi-educativi/informazioni-didattica"
+                            href="https://musei.comune.cremona.it/en/educational-services/educational-programmes"
                             className="w-fit prime-bg rounded-full px-4 py-2 md:text-sm">Find out more</a>
                     </div>
                 </div>

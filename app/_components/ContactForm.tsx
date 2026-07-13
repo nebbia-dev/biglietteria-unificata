@@ -87,22 +87,26 @@ export default function ContactForm({text, lang}:{text:string, lang: ContactForm
         <section className="w-[90%] md:w-[85%] mx-auto pt-8 mt-12">
             <h2 className="text-3xl font-semibold mb-8">{text}</h2>
 
-            <form method="post" onSubmit={checkAndSendCF} className="bg-white rounded-xl flex flex-col gap-4 p-4">
+            <form method="post" onSubmit={checkAndSendCF} className="bg-white rounded-xl flex flex-col gap-4 p-4" noValidate>
                 <input name="info-newsletter" type="hidden" value='false'/>
                 <label htmlFor="info-name" className="text-sm">{copy.labels.name}
                     <input id="info-name" name="info-name" placeholder={copy.placeholders.name} type="text"
+                           required aria-required="true"
                            className="w-full rounded-xl bg-[#ecf0f2] h-[48px] p-2"/>
                 </label>
                 <label htmlFor="info-lastname" className="text-sm">{copy.labels.lastname}
                     <input id="info-lastname" name="info-lastname" placeholder={copy.placeholders.lastname} type="text"
+                           required aria-required="true"
                            className="w-full rounded-xl bg-[#ecf0f2] h-[48px] p-2"/>
                 </label>
                 <label htmlFor="info-email" className="text-sm">{copy.labels.email}
                     <input id="info-email" name="info-email" placeholder={copy.placeholders.email} type="email"
+                           required aria-required="true"
                            className="w-full rounded-xl bg-[#ecf0f2] h-[48px] p-2"/>
                 </label>
                 <label htmlFor="info-message" className="text-sm">{copy.labels.message}
                     <textarea id="info-message" name="info-message" placeholder={copy.placeholders.message}
+                              required aria-required="true"
                               className="w-full rounded-xl bg-[#ecf0f2] h-[148px] p-2"/>
                 </label>
                 <div className="text-black w-full md:flex md:justify-end font-medium text-sm">

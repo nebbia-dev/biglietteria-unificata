@@ -12,8 +12,8 @@ export default async function InfoGruppi() {
     let filteredMuseums: ExperienceCardData[] = [];
 
     try {
-        const museums = await getExperiences('/');
-        filteredMuseums = museums.filter(el => el.tagIds?.includes(8));
+        const museums = await getExperiences('/', { locale: 'en' });
+        filteredMuseums = museums.filter(el => el.tagIds?.includes(Number(process.env.NEXT_TAG_GRUPPI)));
 
         const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/info-gruppi?locale=en&populate=*',
             {next: {revalidate: 1000}}

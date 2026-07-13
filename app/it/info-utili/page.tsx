@@ -1,4 +1,5 @@
 import Image from "next/image";
+import type { Metadata } from "next";
 import {Accordion, AccordionDetails, AccordionSummary} from "@mui/material";
 import Link from "next/link";
 import {unstable_rethrow} from "next/navigation";
@@ -8,6 +9,11 @@ import type { StrapiCollectionResponse, StrapiMuseum } from "@/app/lib/strapi-ty
 import {AccordionArrow} from "@/app/_components/_icons/AccordionArrow";
 
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
+    title: "Info utili",
+    description: "Orari, accessibilità, riduzioni e ingressi gratuiti dei Musei Civici di Cremona.",
+};
 
 function getMuseumOrder(museum: StrapiMuseum) {
     const order = Number(museum.ordine ?? Number.MAX_SAFE_INTEGER);

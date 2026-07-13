@@ -1,10 +1,16 @@
 import Image from "next/image";
+import type { Metadata } from "next";
 import TicketCard from "@/app/_components/TicketCard";
 import Link from "next/link";
 import {getExperiences} from "@/app/lib/domnia-experiences";
 import type { ExperienceCardData } from "@/app/lib/domnia-types";
 
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
+    title: "Info gruppi",
+    description: "Informazioni e biglietti per visite di gruppo ai Musei Civici di Cremona.",
+};
 
 export default async function InfoGruppi() {
 
@@ -13,7 +19,7 @@ export default async function InfoGruppi() {
 
     try {
         const museums = await getExperiences('/');
-        filteredMuseums = museums.filter(el => el.tagIds?.includes(8));
+        filteredMuseums = museums.filter(el => el.tagIds?.includes(Number(process.env.NEXT_TAG_GRUPPI)));
 
         const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/info-gruppi?populate=*',
             {next: {revalidate: 1000}}
@@ -116,7 +122,7 @@ export default async function InfoGruppi() {
                             renderli accessibili al più ampio numero possibile di persone.
                         </p>
                         <div className="flex items-center h-[64px] text-black w-full md:flex md:justify-end font-medium text-sm">
-                            <a aria-label="Vai alla pagine delle proposte educative" target="_blank"
+                            <a aria-label="Vai alla pagina delle proposte educative" target="_blank"
                                rel="noopener noreferrer" href="https://musei.comune.cremona.it/it/servizi-educativi/informazioni-didattica"
                                className="h-fit w-auto block text-center prime-bg rounded-full px-4 py-2">Vai al
                                 sito</a>

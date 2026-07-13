@@ -1,3 +1,4 @@
+import type { Metadata } from "next";
 import {unstable_rethrow} from "next/navigation";
 import type {
     StrapiCollectionResponse,
@@ -7,6 +8,11 @@ import type {
 } from "@/app/lib/strapi-types";
 
 export const dynamic = 'force-dynamic';
+
+export const metadata: Metadata = {
+    title: "Contatti",
+    description: "Contatti e informazioni utili per i Musei Civici di Cremona.",
+};
 
 const emptyContacts: StrapiContacts = {
     documentId: 'empty-contacts',

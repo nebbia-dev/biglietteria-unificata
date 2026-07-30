@@ -25,6 +25,7 @@ export type DomniaProductGroupResponse = {
     description?: ExperienceDescription;
     documentId?: string;
     heroImage?: StrapiImage;
+    id?: number;
     immagine?: StrapiImage;
     locations?: Array<Partial<ExperienceLocation>>;
     ordine?: number | string;
@@ -44,7 +45,7 @@ export type ExperienceCardData = {
     heroImage?: StrapiImage;
     immagine?: StrapiImage;
     locations: ExperienceLocation[];
-    id: number,
+    id: number;
     ordine?: number | string;
     slug: string;
     tagIds: number[];

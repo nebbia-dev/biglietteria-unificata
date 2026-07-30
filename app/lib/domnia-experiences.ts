@@ -71,6 +71,7 @@ function normalizeProductGroup(
             ? productGroup.connectedProducts
             : [],
         description: normalizeExperienceDescription(productGroup.description),
+        id: typeof productGroup.id === 'number' ? productGroup.id : -1,
         documentId:
             typeof productGroup.documentId === 'string'
                 ? productGroup.documentId

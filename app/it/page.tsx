@@ -265,7 +265,7 @@ export default async function Home() {
                     <p className="text-xl md:text-base md:h-[64px]">Prenota l&apos;accesso per il tuo gruppo.
                         Scopri i ticket ridotti per i gruppi di più di 15 persone.</p>
                     <div className="mb-4 text-black w-full font-medium text-lg md:flex md:justify-end">
-                        <Link aria-label="Vai alla pagina con le informazioni sulle visite dei gruppi" href="/info-gruppi" className="md:text-base w-auto block text-center prime-bg rounded-full px-4 py-2 md:w-fit">Scopri di più</Link>
+                        <Link aria-label="Vai alla pagina con le informazioni sulle visite dei gruppi" href="/it/info-gruppi" className="md:text-base w-auto block text-center prime-bg rounded-full px-4 py-2 md:w-fit">Scopri di più</Link>
                     </div>
                 </div>
             </div>
@@ -280,7 +280,7 @@ export default async function Home() {
 
                     <p className="text-xl md:text-base md:h-[64px]">Clicca qui se vuoi prenotare l&apos;accesso ai musei con il tuo gruppo scolastico.</p>
                     <div className="mb-4 text-black w-full font-medium text-lg md:flex md:justify-end">
-                        <Link aria-label="Vai alla pagina con le informazioni sulle visite dei gruppi scolastici" href="/servizi-educativi" className="md:text-base w-auto block text-center prime-bg rounded-full px-4 py-2 md:w-fit">Scopri di più</Link>
+                        <Link aria-label="Vai alla pagina con le informazioni sulle visite dei gruppi scolastici" href="/it/servizi-educativi" className="md:text-base w-auto block text-center prime-bg rounded-full px-4 py-2 md:w-fit">Scopri di più</Link>
                     </div>
                 </div>
             </div>
@@ -305,7 +305,7 @@ export default async function Home() {
                         src={process.env.NEXT_PUBLIC_BASE_URL + contentNews.data.immagine.url} alt={contentNews.data.immagine.alternativeText} width={300} height={200}/>
 
                     <div className="text-black w-full md:flex md:justify-end font-medium text-sm">
-                        <Link href="/news-eventi"
+                        <Link href="/it/news-eventi"
                               className="md:w-fit w-auto block text-center prime-bg rounded-full px-4 py-2">
                             Vedi tutte le news
                         </Link>

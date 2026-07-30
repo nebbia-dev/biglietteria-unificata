@@ -109,7 +109,7 @@ export default async function InfoGruppi() {
 
                         <p className="h-[100px] mt-8 text-xl md:text-base">Clicca qui se vuoi prenotare l&apos;accesso ai musei con il tuo gruppo scolastico.</p>
                         <div className="flex items-center h-[64px] text-black w-full md:flex md:justify-end font-medium text-sm">
-                            <Link aria-label="Vai alla pagina dei servizi educativi" href="/servizi-educativi" className="h-fit w-auto block text-center prime-bg rounded-full px-4 py-2">Scopri di più</Link>
+                            <Link aria-label="Vai alla pagina dei servizi educativi" href="/it/servizi-educativi" className="h-fit w-auto block text-center prime-bg rounded-full px-4 py-2">Scopri di più</Link>
                         </div>
                     </div>
 

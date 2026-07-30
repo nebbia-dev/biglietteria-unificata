@@ -53,11 +53,26 @@ export default async function InfoUtili() {
             ...content,
             data: sortMuseumsByOrder(content.data),
         };
-        console.log(content)
+        console.log(content);
 
     } catch(e) {
         unstable_rethrow(e);
         console.log(e)
+    }
+
+    function setLink(n:number) {
+        switch(n) {
+            case 1:
+                return 'museo-civico-ala-ponzone';
+            case 2:
+                return 'museo-archeologico-san-lorenzo';
+            case 3:
+                return 'museo-di-storia-naturale';
+            case 4:
+                return 'museo-della-civilta-contadina';
+            default:
+                return 'museo-civico-ala-ponzone';
+        }
     }
 
     return(
@@ -224,7 +239,7 @@ export default async function InfoUtili() {
                                 }
 
                                 <div className="my-8 text-black w-full md:flex md:justify-end font-medium md:text-base text-lg">
-                                    <Link href="/" className="w-auto md:w-fit block text-center prime-bg rounded-full px-4 py-2">Acquista il biglietto</Link>
+                                    <Link href={`/it/${setLink(el.ordine as number)}`} className="w-auto md:w-fit block text-center prime-bg rounded-full px-4 py-2">Acquista il biglietto</Link>
                                 </div>
                             </div>
                         </section>

@@ -103,7 +103,7 @@ export default async function InfoGruppi() {
 
                         <p className="h-[100px] mt-8 text-xl md:text-base">Click here if you want to book museum access for your school group.</p>
                         <div className="flex items-center h-[64px] text-black w-full md:flex md:justify-end font-medium text-sm">
-                            <Link aria-label="Go to the educational services page" href="/servizi-educativi" className="h-fit w-auto block text-center prime-bg rounded-full px-4 py-2">Find out more</Link>
+                            <Link aria-label="Go to the educational services page" href="/en/servizi-educativi" className="h-fit w-auto block text-center prime-bg rounded-full px-4 py-2">Find out more</Link>
                         </div>
                     </div>
 

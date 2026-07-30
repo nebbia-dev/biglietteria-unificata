@@ -31,6 +31,21 @@ const accordionSx = {
     },
 };
 
+function setLink(n:number) {
+    switch(n) {
+        case 1:
+            return 'museo-civico-ala-ponzone';
+        case 2:
+            return 'museo-archeologico-san-lorenzo';
+        case 3:
+            return 'museo-di-storia-naturale';
+        case 4:
+            return 'museo-della-civilta-contadina';
+        default:
+            return 'museo-civico-ala-ponzone';
+    }
+}
+
 export default async function InfoUtili() {
 
     let content: StrapiCollectionResponse<StrapiMuseum> = { data: [] };
@@ -216,7 +231,7 @@ export default async function InfoUtili() {
                                 }
 
                                 <div className="my-8 text-black w-full md:flex md:justify-end font-medium md:text-base text-lg">
-                                    <Link href="/public" className="w-auto md:w-fit block text-center prime-bg rounded-full px-4 py-2">Buy your ticket</Link>
+                                    <Link href={`/en/${setLink(el.ordine as number)}`} className="w-auto md:w-fit block text-center prime-bg rounded-full px-4 py-2">Buy your ticket</Link>
                                 </div>
                             </div>
                         </section>

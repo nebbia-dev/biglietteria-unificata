@@ -5,7 +5,6 @@ import {CircledArrow} from "@/app/_components/_icons/CircledArrow";
 import EventCard from "@/app/_components/EventCard";
 import {getExperiences} from "@/app/lib/domnia-experiences";
 import Carousel from "@/app/_components/Carousel";
-import getAddress from "@/helpers/address/getAddress";
 import ContactForm from "@/app/_components/ContactForm";
 import type { ExperienceCardData } from "@/app/lib/domnia-types";
 import type { StrapiMuseum } from "@/app/lib/strapi-types";
@@ -20,6 +19,25 @@ function getMuseumOrder(museum: Pick<StrapiMuseum, 'ordine'>) {
 
 function sortMuseumsByOrder(museums: StrapiMuseum[]) {
     return [...museums].sort((a, b) => getMuseumOrder(a) - getMuseumOrder(b));
+}
+
+function setLink(n:number) {
+    switch(n) {
+        case 36:
+            return 'museo-civico-ala-ponzone';
+        case 33:
+            return 'museo-archeologico-san-lorenzo';
+        case 30:
+            return 'museo-di-storia-naturale';
+        case 15:
+            return 'museo-della-civilta-contadina';
+        default:
+            return 'museo-civico-ala-ponzone';
+    }
+}
+
+function deleteTicket(s:string) {
+    return s.replace('Ticket', '');
 }
 
 export default async function Home() {
@@ -145,9 +163,9 @@ export default async function Home() {
                                         alt={el.heroImage.alternativeText} width={300} height={200}/>
                                 </div>
                                 <div className="p-4 mt-2">
-                                    <div className="h-[80px]">
-                                        <h3 className="text-2xl md:text-lg font-medium">{el.title}</h3>
-                                        <p className="text-sm">{getAddress(el.locations[0]?.label)}</p>
+                                    <div className="h-[56px]">
+                                        <h3 className="text-2xl md:text-lg font-medium md:line-clamp-2">{deleteTicket(el.title)}</h3>
+                                        {/*<p className="text-sm">{getAddress(el.locations[0]?.label)}</p>*/}
                                     </div>
 
                                     <div className="flex flex-col gap-4 bg-white rounded-xl text-black p-4 mt-8 mb-4">
@@ -156,7 +174,7 @@ export default async function Home() {
                                             src={process.env.NEXT_PUBLIC_BASE_URL + el.ticketImage.url}
                                             alt={`Interno del ${el.title}`} width={300} height={200}/>
                                         <div className="flex flex-col gap-2">
-                                            <h4 className="text-xl md:text-base font-medium md:line-clamp-2">{el.title}</h4>
+                                            <h4 className="text-xl md:text-base font-medium md:line-clamp-2 h-[48px]">{el.title}</h4>
                                             <p className="line-clamp-6 md:text-sm lato">
                                                 {el.description?.replace(/<\/?[^>]+(>|$)/g, "")}
                                             </p>
@@ -188,7 +206,7 @@ export default async function Home() {
                                     className="w-full text-end font-medium prime-text underline text-xl md:text-base px-4 pb-8">
                                     <Link
                                         aria-label={`Go to the page with ticket options for ${el.title}`}
-                                        href={`/en/${el.slug}`}>Discover other experiences</Link>
+                                        href={`/en/${setLink(el.id)}`}>Discover other experiences</Link>
                                 </div>
                             </div>
                         )
@@ -205,7 +223,7 @@ export default async function Home() {
                     <div>
                         <h2 className="text-2xl font-semibold prime-text mt-4">All-Museums Ticket</h2>
                         <p className="text-xl md:text-base font-medium mt-2">
-                            Why settle for just one museum? Explore the best of the city and save with our Combined Ticket. This pass grants you access to all museums within the Cremona City Museum Network at a special discounted rate.
+                            This pass grants you access to all museums within the Cremona City Museum Network at a special discounted rate.
                         </p>
                     </div>
                     <div className="flex flex-col gap-4 bg-white rounded-xl text-black p-4 mt-8 mb-4">
@@ -313,7 +331,7 @@ export default async function Home() {
             <div className="w-full md:1/2 pt-8 md:h-full">
                 <div className="flex flex-col gap-8 p-4 mt-2 w-full rounded-xl gradient md:h-full">
                     <h3 className="text-2xl font-semibold mt-2 prime-text">Musei Italiani</h3>
-                    <Image src='/placeholders/card_musei italiani.webp'
+                    <Image src='/placeholders/card_musei_italiani.png'
                            alt="Logo di Musei Italiani" width={200} height={300}
                            className="w-full h-[300px] object-cover rounded-4xl p-4 hidden md:block rounded"
 

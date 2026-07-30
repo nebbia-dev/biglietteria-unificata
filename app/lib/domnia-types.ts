@@ -44,6 +44,7 @@ export type ExperienceCardData = {
     heroImage?: StrapiImage;
     immagine?: StrapiImage;
     locations: ExperienceLocation[];
+    id: number,
     ordine?: number | string;
     slug: string;
     tagIds: number[];

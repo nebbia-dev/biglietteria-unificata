@@ -75,6 +75,8 @@ export default async function Contatti() {
         console.log(e)
     }
 
+    console.log(contentContacts)
+
     return(
         <section className="w-[90%] md:w-[85%] mx-auto pt-[128px] md:pt-[148px]">
             <div className="mb-8">
@@ -86,7 +88,7 @@ export default async function Contatti() {
                 {content.data &&
                     content.data.map((el) => {
                         return (
-                            <div key={el.documentId}>
+                            <div key={el.documentId} className="mb-8">
                                 <h2 className="text-2xl font-semibold">{el.titolo}</h2>
                                 <p className="mb-4 lato">{el.indirizzo}</p>
 
@@ -96,18 +98,18 @@ export default async function Contatti() {
                                     <li className="break-all underline"><a href={`mailto:${el.biglietteria_email}`}>{el.biglietteria_email}</a></li>
                                 </ul>
 
-                                <h3 className="font-medium mt-2 mb-1">Prenotazione gruppi:</h3>
-                                <p className="break-all underline lato"><a href={`mailto:${el.gruppi_email}`}>{el.gruppi_email}</a>
-                                </p>
+                                {/*<h3 className="font-medium mt-2 mb-1">Prenotazione gruppi:</h3>*/}
+                                {/*<p className="break-all underline lato"><a href={`mailto:${el.gruppi_email}`}>{el.gruppi_email}</a>*/}
+                                {/*</p>*/}
 
-                                <h3 className="font-medium mt-2 mb-1">Conservatore:</h3>
-                                <p className="pb-8 lato">{el.conservatore_nome} {el.conservatore_telefono} – <a className="break-all underline" href={`mailto:${el.conservatore_email}`}>{el.conservatore_email}</a></p>
+                                {/*<h3 className="font-medium mt-2 mb-1">Conservatore:</h3>*/}
+                                {/*<p className="pb-8 lato">{el.conservatore_nome} {el.conservatore_telefono} – <a className="break-all underline" href={`mailto:${el.conservatore_email}`}>{el.conservatore_email}</a></p>*/}
                             </div>
                         )
                     })}
 
 
-                {contentContacts.data.indirizzo && <div>
+                {contentContacts.data && <div>
                     <h2 className="text-2xl font-semibold">Uffici del Sistema Museale</h2>
                     <p className="mb-4">{contentContacts.data.indirizzo}</p>
 

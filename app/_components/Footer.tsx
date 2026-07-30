@@ -16,7 +16,6 @@ export default function Footer() {
                 <div className="break-all">
                     <h3 className="prime-text font-semibold mb-1">Contatti</h3>
                     <ul className="mb-2">
-                        <li>Uffici: 0372 407269</li>
                         <li><a className="underline" href="mailto:info.musei@comune.cremona.it">info.musei@comune.cremona.it</a></li>
                     </ul>
                     <p>Per inviare segnalazioni riguardanti l&apos;accessibilità,<br/>scrivici a <a

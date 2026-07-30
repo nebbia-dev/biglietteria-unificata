@@ -20,6 +20,9 @@ const lato = Lato({
 export const metadata: Metadata = {
   title: "Cremona Civic Museums",
   description: "Unified ticketing for the Cremona Civic Museums",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({

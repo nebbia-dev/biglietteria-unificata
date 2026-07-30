@@ -23,6 +23,9 @@ export const metadata: Metadata = {
     template: "%s | Musei Civici di Cremona",
   },
   description: "Biglietteria unificata per i Musei Civici di Cremona",
+  icons: {
+    icon: "/favicon.svg",
+  },
 };
 
 export default function RootLayout({

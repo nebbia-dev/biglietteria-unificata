@@ -78,7 +78,7 @@ export default async function Contatti() {
     console.log(contentContacts)
 
     return(
-        <section className="w-[90%] md:w-[85%] mx-auto pt-[128px] md:pt-[148px]">
+        <section className="w-[90%] md:w-[85%] mx-auto pt-[128px] md:pt-[148px] pb-8">
             <div className="mb-8">
                 <p className="text-sm mb-8 font-light">Home / Contatti</p>
                 <h1 className="text-4xl mb-4 font-semibold">Contatti</h1>
@@ -94,8 +94,9 @@ export default async function Contatti() {
 
                                 <h3 className="font-medium mt-2 mb-1">Biglietteria:</h3>
                                 <ul className="lato">
-                                    <li>{el.biglietteria_telefono}</li>
-                                    <li className="break-all underline"><a href={`mailto:${el.biglietteria_email}`}>{el.biglietteria_email}</a></li>
+                                    <li>Tel: {el.biglietteria_telefono}</li>
+                                    <li className="break-all">Email: <a className="underline"
+                                        href={`mailto:${el.biglietteria_email}`}>{el.biglietteria_email}</a></li>
                                 </ul>
 
                                 {/*<h3 className="font-medium mt-2 mb-1">Prenotazione gruppi:</h3>*/}
@@ -113,35 +114,49 @@ export default async function Contatti() {
                     <h2 className="text-2xl font-semibold">Uffici del Sistema Museale</h2>
                     <p className="mb-4">{contentContacts.data.indirizzo}</p>
 
-                    <h3 className="font-medium mt-2 mb-1">Uffici:</h3>
+                    <h3 className="font-medium mt-4 mb-1">Uffici:</h3>
                     <ul>
-                        <li>{contentContacts.data.uffici_telefono}</li>
-                        <li className="break-all underline"><a href={`mailto:${contentContacts.data.uffici_email}`}>{contentContacts.data.uffici_email}</a></li>
+                        <li>Tel: {contentContacts.data.uffici_telefono}</li>
+                        <li className="break-all">Email: <a className="underline"
+                            href={`mailto:${contentContacts.data.uffici_email}`}>{contentContacts.data.uffici_email}</a>
+                        </li>
                     </ul>
-                    <h3 className="font-medium mt-2 mb-1">Uffici sezione didattica:</h3>
+                    <h3 className="font-medium mt-4 mb-1">Uffici sezione didattica:</h3>
+                    <p className="pb-1">Responsabile Servizi Educativi: Laura Maiavacca</p>
                     <ul>
-                        <li>{contentContacts.data.didattica_telefono}</li>
-                        <li className="break-all underline"><a href={`mailto:${contentContacts.data.didattica_email}`}>{contentContacts.data.didattica_email}</a></li>
+                        <li>Tel: {contentContacts.data.didattica_telefono}</li>
+                        <li className="break-all">Email: <a className="underline"
+                            href={`mailto:${contentContacts.data.didattica_email}`}>{contentContacts.data.didattica_email}</a>
+                        </li>
                     </ul>
-                    <h3 className="font-medium mt-2 mb-1">Registrar:</h3>
+
+                    <h3 className="font-medium mt-4 mb-1">Registrar:</h3>
                     <ul>
-                        <li>{contentContacts.data.registrar_telefono}</li>
-                        <li className="break-all underline"><a href={`mailto:${contentContacts.data.registrar_email}`}>{contentContacts.data.registrar_email}</a></li>
+                        <li>Tel: {contentContacts.data.registrar_telefono}</li>
+                        <li className="break-all">Email: <a className="underline"
+                            href={`mailto:${contentContacts.data.registrar_email}`}>{contentContacts.data.registrar_email}</a>
+                        </li>
                     </ul>
-                    <h3 className="font-medium mt-2 mb-1">Richiesta immagini e consultazione archivi:</h3>
+                    <h3 className="font-medium mt-4 mb-1">Richiesta immagini e consultazione archivi:</h3>
                     <ul>
-                        <li>{contentContacts.data.archivi_telefono}</li>
-                        <li className="break-all underline"><a href={`mailto:${contentContacts.data.archivi_email}`}>{contentContacts.data.archivi_email}</a></li>
+                        <li>Tel: {contentContacts.data.archivi_telefono}</li>
+                        <li className="break-all">Email: <a className="underline"
+                            href={`mailto:${contentContacts.data.archivi_email}`}>{contentContacts.data.archivi_email}</a>
+                        </li>
                     </ul>
-                    <h3 className="font-medium mt-2 mb-1">Segreteria del Sistema Museale:</h3>
+                    <h3 className="font-medium mt-4 mb-1">Segreteria del Sistema Museale:</h3>
                     <ul>
-                        <li>{contentContacts.data.segreteria_telefono}</li>
-                        <li className="break-all underline"><a href={`mailto:${contentContacts.data.segreteria_email}`}>{contentContacts.data.segreteria_email}</a></li>
+                        <li>Tel: {contentContacts.data.segreteria_telefono}</li>
+                        <li className="break-all">Email: <a className="underline"
+                            href={`mailto:${contentContacts.data.segreteria_email}`}>{contentContacts.data.segreteria_email}</a>
+                        </li>
                     </ul>
-                    <h3 className="font-medium mt-2 mb-1">Comunicazione:</h3>
+                    <h3 className="font-medium mt-4 mb-1">Comunicazione:</h3>
                     <ul>
-                        <li>{contentContacts.data.comunicazione_telefono}</li>
-                        <li className="break-all underline"><a href={`mailto:${contentContacts.data.comunicazione_email}`}>{contentContacts.data.comunicazione_email}</a></li>
+                        <li>Tel: {contentContacts.data.comunicazione_telefono}</li>
+                        <li className="break-all">Email: <a className="underline"
+                            href={`mailto:${contentContacts.data.comunicazione_email}`}>{contentContacts.data.comunicazione_email}</a>
+                        </li>
                     </ul>
                 </div>}
             </div>

@@ -75,8 +75,6 @@ export default async function Contatti() {
         console.log(e)
     }
 
-    console.log(contentContacts)
-
     return(
         <section className="w-[90%] md:w-[85%] mx-auto pt-[128px] md:pt-[148px] pb-8">
             <div className="mb-8">
@@ -98,6 +96,19 @@ export default async function Contatti() {
                                     <li className="break-all">Email: <a className="underline"
                                         href={`mailto:${el.biglietteria_email}`}>{el.biglietteria_email}</a></li>
                                 </ul>
+
+                                {
+                                    el.ordine === 3 &&
+                                    <>
+                                        <h3 className="font-medium mt-2 mb-1">Piccola Biblioteca:</h3>
+                                        <ul className="lato">
+                                            <li>Tel: 334 3510540</li>
+                                            <li className="break-all">Email: <a className="underline"
+                                                                                href="mailto:piccolabiblioteca@comune.cremona.it">piccolabiblioteca@comune.cremona.it</a>
+                                            </li>
+                                        </ul>
+                                    </>
+                                }
 
                                 {/*<h3 className="font-medium mt-2 mb-1">Prenotazione gruppi:</h3>*/}
                                 {/*<p className="break-all underline lato"><a href={`mailto:${el.gruppi_email}`}>{el.gruppi_email}</a>*/}

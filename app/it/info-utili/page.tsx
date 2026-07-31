@@ -118,6 +118,19 @@ export default async function InfoUtili() {
                                     <li className="break-all underline"><a href={`mailto:${el.biglietteria_email}`}>{el.biglietteria_email}</a></li>
                                 </ul>
 
+                                {
+                                    el.ordine === 3 &&
+                                    <>
+                                        <h4 className="font-medium mt-2 mb-1">Piccola Biblioteca:</h4>
+                                        <ul className="mb-4 lato">
+                                            <li>334 3510540</li>
+                                            <li className="break-all"><a className="underline"
+                                                                         href="mailto:piccolabiblioteca@comune.cremona.it">piccolabiblioteca@comune.cremona.it</a>
+                                            </li>
+                                        </ul>
+                                    </>
+                                }
+
                                 <Accordion sx={accordionSx}>
                                     <AccordionSummary expandIcon={<AccordionArrow />}
                                                       aria-controls={`${el.documentId}-hours-content`}

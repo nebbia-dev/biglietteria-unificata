@@ -91,6 +91,19 @@ export default async function Contatti() {
                                         href={`mailto:${el.biglietteria_email}`}>{el.biglietteria_email}</a></li>
                                 </ul>
 
+                                {
+                                    el.ordine === 3 &&
+                                    <>
+                                        <h3 className="font-medium mt-2 mb-1">Piccola Biblioteca:</h3>
+                                        <ul className="lato">
+                                            <li>Phone: 334 3510540</li>
+                                            <li className="break-all">Email: <a className="underline"
+                                                                                href="mailto:piccolabiblioteca@comune.cremona.it">piccolabiblioteca@comune.cremona.it</a>
+                                            </li>
+                                        </ul>
+                                    </>
+                                }
+
                                 {/*<h3 className="font-medium mt-2 mb-1">Group reservation:</h3>*/}
                                 {/*<p className="break-all underline lato"><a href={`mailto:${el.gruppi_email}`}>{el.gruppi_email}</a>*/}
                                 {/*</p>*/}

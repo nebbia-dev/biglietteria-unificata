@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {CircledArrow} from "@/app/_components/_icons/CircledArrow";
 import type { TicketCardData } from "@/app/lib/strapi-types";
 
@@ -20,7 +19,7 @@ export default function TicketCard({el, layout, lang}: {el: TicketCardData, layo
                     {el.titolo && <h2 className="text-2xl font-semibold prime-text">{el.titolo}</h2>}
 
                     <div className="flex flex-col gap-4 bg-white rounded-xl text-black p-4 my-4">
-                        <Image
+                        <img
                             className="w-full h-[200px] object-cover rounded-xl"
                             src={process.env.NEXT_PUBLIC_BASE_URL + el.immagine.url} alt={el.immagine.alternativeText} width={300} height={200}/>
                         <div className="flex flex-col gap-2">

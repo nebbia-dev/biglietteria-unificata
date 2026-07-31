@@ -1,6 +1,5 @@
 import EventCard from "@/app/_components/EventCard";
 import {getExperiences} from "@/app/lib/domnia-experiences";
-import Image from "next/image";
 
 export const dynamic = 'force-dynamic';
 
@@ -58,7 +57,7 @@ export default async function NewsEventi() {
                 <div className="w-full md:1/2">
                     <div className="flex flex-col gap-4 p-4 w-full rounded-xl gradient">
                         <h3 className="px-4 text-2xl font-semibold mt-2 prime-text">Read the last news</h3>
-                        <Image
+                        <img
                             className="w-full h-[300px] object-cover rounded-4xl p-4"
                             src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine.url} alt={content.data.immagine.alternativeText} width={1000} height={500}/>
 

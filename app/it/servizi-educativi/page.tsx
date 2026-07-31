@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { Metadata } from "next";
 import TicketCard from "@/app/_components/TicketCard";
 import {getExperiences} from "@/app/lib/domnia-experiences";
@@ -97,7 +96,7 @@ export default async function ServiziEducativi() {
 
                 <div
                     className="flex flex-col md:flex-row md:items-center gap-8 p-4 md:p-8 mt-2 w-full text-white md:text-base rounded-xl gradient">
-                    <Image
+                    <img
                         className="w-full md:w-2/4 h-[200px] md:h-[300px] object-cover rounded-xl"
                         src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine_proposte_educative.url} alt={content.data.immagine_proposte_educative.alternativeText} width={300} height={200}/>
                     <div>

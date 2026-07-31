@@ -1,4 +1,3 @@
-import Image from "next/image";
 import {Museum} from "@/app/_components/_icons/Museum";
 import Link from "next/link";
 import {CircledArrow} from "@/app/_components/_icons/CircledArrow";
@@ -29,7 +28,7 @@ export default function EventCard({card, limit, events = [], lang} : EventCardPr
 
                         return (
                             <div key={el.documentId} className="w-full md:w-1/3 flex flex-col gap-4 bg-white rounded-xl text-black p-4">
-                                <Image
+                                <img
                                     className="w-full h-[200px] object-cover rounded-xl"
                                     src={process.env.NEXT_PUBLIC_BASE_URL + el.immagine.url} alt={el.immagine.alternativeText} width={300} height={200}/>
                                 <div className="flex flex-col gap-2 pl-1">

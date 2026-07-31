@@ -2,7 +2,6 @@
 import {useEffect, useMemo, useState} from "react";
 import NextSlide from "@/app/_components/NextSlide";
 import PrevSlide from "@/app/_components/PrevSlide";
-import Image from "next/image";
 import {CircledArrow} from "@/app/_components/_icons/CircledArrow";
 import Link from "next/link";
 import type { CarouselImage } from "@/app/lib/strapi-types";
@@ -126,20 +125,18 @@ export default function Carousel({pics, lang}:{pics: OrderedCarouselImage[], lan
                <PrevSlide lang={lang} setSlide={() => setCurrentSlide('sub')}/>
                {orderedPics &&
                    <>
-                       <Image
+                       <img
                            aria-hidden={true}
-                           className='object-cover absolute z-0'
+                           className='absolute inset-0 z-0 h-full w-full object-cover'
                            src={process.env.NEXT_PUBLIC_BASE_URL + orderedPics[placeholderSlide].url}
                            alt={orderedPics[placeholderSlide].alternativeText}
-                           fill={true}
                        />
 
-                       <Image
+                       <img
                            id="slider"
-                           className='object-cover relative z-5'
+                           className='absolute inset-0 z-5 h-full w-full object-cover'
                            src={process.env.NEXT_PUBLIC_BASE_URL + orderedPics[slide].url}
                            alt={orderedPics[slide].alternativeText}
-                           fill={true}
                        />
 
                        <div className="hidden md:block rounded-xl gradient absolute bottom-5 left-[7.5%] z-10 text-white font-bold text-xl p-8">

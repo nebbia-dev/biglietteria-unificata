@@ -1,4 +1,3 @@
-import Image from "next/image";
 import FooterContactForm from "@/app/_components/FooterContactForm";
 export default function FooterEn() {
     return(
@@ -7,7 +6,7 @@ export default function FooterEn() {
             <FooterContactForm lang="en"/>
             <footer
                 className="md:w-[85%] md:mx-auto md:min-h-[200px] md:text-sm text-white p-8 md:mt-6 flex flex-col md:flex-row gap-8 md:gap-12 md:justify-between">
-                <Image src='/icons/logo.png'
+                <img src='/icons/logo.png'
                        alt="Cremona Civic Museums logo" width={48} height={48}
                        className="w-12 h-12 hidden md:block"
 
@@ -34,12 +33,12 @@ export default function FooterEn() {
                         <li className="flex gap-2 mt-2">
                             <a aria-label="Go to the Cremona Civic Museums Facebook page" href="https://www.facebook.com/cremonamusei/" target="_blank"
                                rel="noopener noreferrer" className="w-6">
-                                <Image src="/icons/hugeicons_facebook-02.webp" aria-hidden alt="" width={48}
+                                <img src="/icons/hugeicons_facebook-02.webp" aria-hidden alt="" width={48}
                                        height={48}/>
                             </a>
                             <a aria-label="Go to the Cremona Civic Museums Instagram page" href="https://www.instagram.com/cremonamusei/" target="_blank"
                                rel="noopener noreferrer" className="w-6">
-                                <Image src="/icons/logo-instagram.webp" aria-hidden alt="" width={48} height={48}/>
+                                <img src="/icons/logo-instagram.webp" aria-hidden alt="" width={48} height={48}/>
                             </a>
                         </li>
                     </ul>

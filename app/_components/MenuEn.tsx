@@ -1,5 +1,4 @@
 'use client'
-import Image from "next/image";
 import {Hamburger} from "@/app/_components/_icons/Hamburger";
 import Link from "next/link";
 import {Close} from "@/app/_components/_icons/Close";
@@ -195,7 +194,7 @@ export default function MenuEn() {
         <>
             <header id="header" className="fixed z-100 bg-black flex justify-between items-center w-full px-4 md:px-12 py-4">
                 <Link href="/en">
-                    <Image src='/icons/logo.png'
+                    <img src='/icons/logo.png'
                            alt="Cremona Civic Museums logo" width={48} height={48}
                            className="w-12"
 
@@ -362,12 +361,12 @@ export default function MenuEn() {
                         <li className="flex gap-2">
                             <a aria-label="Go to the Cremona Civic Museums Facebook page" href="https://www.facebook.com/cremonamusei/" target="_blank"
                                rel="noopener noreferrer" className="w-6">
-                                <Image src="/icons/hugeicons_facebook-02.webp" aria-hidden alt="" width={48}
+                                <img src="/icons/hugeicons_facebook-02.webp" aria-hidden alt="" width={48}
                                        height={48}/>
                             </a>
                             <a aria-label="Go to the Cremona Civic Museums Instagram page" href="https://www.instagram.com/cremonamusei/" target="_blank"
                                rel="noopener noreferrer" className="w-6">
-                                <Image src="/icons/logo-instagram.webp" aria-hidden alt="" width={48}
+                                <img src="/icons/logo-instagram.webp" aria-hidden alt="" width={48}
                                        height={48}/>
                             </a>
                         </li>
@@ -392,7 +391,7 @@ export default function MenuEn() {
                 role="dialog"
                 className={`${isMainMenuOpen ? 'appear' : showMenu !== 'initial' ? 'disappear' : 'w-0'} md:hidden block max-w-full h-screen fixed bg-white z-200 right-0 top-0`}>
                 <div className="w-full px-8 pb-2 md:pb-8 pt-4 flex items-center justify-between">
-                    <Image
+                    <img
                         src='/icons/logo_black.png'
                         alt="Cremona Civic Museums logo"
                         width={500}

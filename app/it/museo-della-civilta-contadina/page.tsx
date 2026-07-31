@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { Metadata } from "next";
 import TicketCard from "@/app/_components/TicketCard";
 import TwoPartsDescription from "@/app/_components/TwoPartsDescription";
@@ -58,7 +57,7 @@ export default async function MuseoCambonino() {
 
     return(
         <>
-            <Image
+            <img
                 // src='/placeholders/0-hero.jpg'
                 src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine.url}
                 alt={content.data.immagine.alternativeText} width={2000} height={1000}

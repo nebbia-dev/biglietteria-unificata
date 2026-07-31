@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { Metadata } from "next";
 import {Accordion, AccordionDetails, AccordionSummary} from "@mui/material";
 import Link from "next/link";
@@ -86,7 +85,7 @@ export default async function InfoUtili() {
                 content.data.map((el) => {
                     return (
                         <section className="w-full md:w-[85%] md:mx-auto md:mt-8" key={el.documentId}>
-                            <Image
+                            <img
                                 className="w-full h-[200px] object-cover md:rounded-t-xl"
                                 src={process.env.NEXT_PUBLIC_BASE_URL + el.immagine.url} alt={el.immagine.alternativeText} width={300} height={200}/>
                             <div className="w-[90%] md:w-full mx-auto pt-8 md:px-12 md:pb-4 md:bg-white md:rounded-b-xl">

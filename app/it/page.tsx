@@ -1,4 +1,3 @@
-import Image from "next/image";
 import type { Metadata } from "next";
 import {unstable_rethrow} from "next/navigation";
 import Link from "next/link";
@@ -126,13 +125,13 @@ export default async function Home() {
 
   return (
     <>
-      {/*<Image*/}
+      {/*<img*/}
       {/*    src={process.env.NEXT_PUBLIC_BASE_URL + homepage.immagine.url}*/}
       {/*    alt="Cremona vista dall'alto" width={500} height={500}*/}
       {/*    className="w-full h-[70dvh] object-cover object-top block md:hidden"*/}
       {/*/>*/}
         <div className="md:hidden block w-full pt-[80px]">
-            <Image
+            <img
                 className="w-full h-full object-cover rounded-t-xl"
                 src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine.url}
                 alt={content.data.immagine.alternativeText} width={300} height={200}/>
@@ -163,7 +162,7 @@ export default async function Home() {
                             <div className="w-full md:w-1/4 text-white rounded-xl gradient"
                                  key={el.title}>
                                 <div className="w-full h-[200px] block md:hidden">
-                                    <Image
+                                    <img
                                         className="w-full h-full object-cover rounded-t-xl"
                                         src={process.env.NEXT_PUBLIC_BASE_URL + el.heroImage.url}
                                         alt={el.heroImage.alternativeText} width={300} height={200}/>
@@ -175,7 +174,7 @@ export default async function Home() {
                                     </div>
 
                                     <div className="flex flex-col gap-4 bg-white rounded-xl text-black p-4 mt-8 mb-4">
-                                        <Image
+                                        <img
                                             className="w-full h-[200px] object-cover rounded-xl"
                                             src={process.env.NEXT_PUBLIC_BASE_URL + el.ticketImage.url}
                                             alt={`Interno del ${el.title}`} width={300} height={200}/>
@@ -231,7 +230,7 @@ export default async function Home() {
                         <p className="text-xl md:text-base font-medium mt-2">Il ticket cumulativo ti consente l&apos;accesso a tutti i Musei del Polo Civico con tariffa agevolata.</p>
                     </div>
                     <div className="flex flex-col gap-4 bg-white rounded-xl text-black p-4 mt-8 mb-4">
-                        <Image src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine_biglietto_cumulativo.url}
+                        <img src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine_biglietto_cumulativo.url}
                             className="w-full h-[200px] object-cover rounded-xl"
                              alt={content.data.immagine_biglietto_cumulativo.alternativeText} width={300} height={200}/>
                         <div className="flex flex-col gap-2">
@@ -258,7 +257,7 @@ export default async function Home() {
             <div className="w-full md:w-1/2 pt-8">
                 <div className="flex flex-col gap-8 p-4 mt-2 w-full text-white rounded-xl gradient">
                     <h2 className="text-2xl font-semibold mt-4 prime-text">Ticket per Gruppi</h2>
-                    <Image
+                    <img
                         className="w-full h-[200px] object-cover rounded-xl"
                         src={process.env.NEXT_PUBLIC_BASE_URL + homepage.immagine_gruppi.url} alt={homepage.immagine_gruppi.alternativeText} width={300} height={200}/>
 
@@ -274,7 +273,7 @@ export default async function Home() {
             <div className="w-full md:w-1/2 pt-8">
                 <div className="flex flex-col gap-8 p-4 mt-2 w-full text-white rounded-xl gradient">
                     <h2 className="text-2xl font-semibold mt-4 prime-text">Servizi educativi</h2>
-                    <Image
+                    <img
                         className="w-full h-[200px] object-cover rounded-xl"
                         src={process.env.NEXT_PUBLIC_BASE_URL + homepage.immagine_scuole.url} alt={homepage.immagine_scuole.alternativeText} width={300} height={200}/>
 
@@ -300,7 +299,7 @@ export default async function Home() {
                 <div className="flex flex-col gap-8 p-4 mt-2 w-full rounded-xl gradient">
                     <h2 className="md:hidden text-3xl text-white font-semibold mt-2">News</h2>
                     <h2 className="md:block hidden text-2xl font-semibold mt-2 prime-text">Leggi le ultime novità</h2>
-                    <Image
+                    <img
                         className="w-full h-[300px] object-cover rounded-4xl p-4"
                         src={process.env.NEXT_PUBLIC_BASE_URL + contentNews.data.immagine.url} alt={contentNews.data.immagine.alternativeText} width={300} height={200}/>
 
@@ -317,7 +316,7 @@ export default async function Home() {
             <div className="w-full md:1/2 pt-8 md:h-full">
                 <div className="flex flex-col gap-8 p-4 mt-2 w-full rounded-xl gradient md:h-full">
                     <h3 className="text-2xl font-semibold mt-2 prime-text">Musei Italiani</h3>
-                    <Image src='/placeholders/card_musei_italiani.png'
+                    <img src='/placeholders/card_musei_italiani.png'
                            alt="Logo di Musei Italiani" width={200} height={300}
                            className="w-full h-[300px] object-cover rounded-4xl p-4 hidden md:block rounded"
 

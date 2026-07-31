@@ -1,4 +1,3 @@
-import Image from "next/image";
 import TicketCard from "@/app/_components/TicketCard";
 import Link from "next/link";
 import {getExperiences} from "@/app/lib/domnia-experiences";
@@ -52,7 +51,7 @@ export default async function InfoGruppi() {
 
     return(
         <>
-            <Image
+            <img
                 src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine.url}
                 alt="Cremona vista dall'alto" width={2000} height={1000}
                 className="w-full h-[70dvh] object-cover pt-[80px]"
@@ -97,7 +96,7 @@ export default async function InfoGruppi() {
                 <div className="md:flex md:gap-4">
                     <div className="md:w-[calc(50%-0.5rem)] p-4 mt-4 md:mt-2 w-full text-white rounded-xl gradient">
                         <h3 className="text-2xl font-semibold my-4 prime-text">Educational services</h3>
-                        <Image
+                        <img
                             className="w-full h-[200px] object-cover rounded-xl"
                             src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine_servizi_educativi.url} alt={content.data.immagine_servizi_educativi.alternativeText} width={300} height={200}/>
 
@@ -109,7 +108,7 @@ export default async function InfoGruppi() {
 
                     <div className="md:w-[calc(50%-0.5rem)] p-4 mt-4 md:mt-2 w-full text-white rounded-xl gradient">
                         <h3 className="text-2xl font-semibold my-4 prime-text">Educational programs</h3>
-                        <Image
+                        <img
                             className="w-full h-[200px] object-cover rounded-xl"
                             src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine_proposte_educative.url} alt={content.data.immagine_proposte_educative.alternativeText} width={300} height={200}/>
                         <p className="h-[100px] mt-8 text-xl md:text-base">Explore our educational programs designed for all ages. From preschoolers to adults, we are committed to making our museums open and accessible to everyone.

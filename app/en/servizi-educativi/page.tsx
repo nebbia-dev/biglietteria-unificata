@@ -92,18 +92,18 @@ export default async function ServiziEducativi() {
                 <h2 className="text-2xl font-semibold mt-4 mb-8">Educational programs</h2>
 
                 <div
-                    className="flex flex-col md:flex-row md:items-center gap-8 p-4 md:p-8 mt-2 w-full text-white md:text-base rounded-xl gradient">
+                    className="flex flex-col md:flex-row md:items-end gap-8 p-4 md:p-8 mt-2 w-full text-white md:text-base rounded-xl gradient">
                     <img
                         className="w-full md:w-2/4 h-[200px] md:h-[300px] object-cover rounded-xl"
                         src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine_proposte_educative.url} alt={content.data.immagine_proposte_educative.alternativeText} width={300} height={200}/>
                     <div>
-                        <div>
+                        <div className="mb-8 md:mb-20">
                             <p>Enhance your visit with our curated educational programs.
                                 Add an educational activity to make the most of your visit.
                             </p>
-                            <p className="mt-2">
-                                Admission for students is free of charge.  A mandatory 2€ reservation fee applies to each student.
-                            </p>
+                            {/*<p className="mt-2">*/}
+                            {/*    Admission for students is free of charge.  A mandatory 2€ reservation fee applies to each student.*/}
+                            {/*</p>*/}
                         </div>
                         <div className="md:mt-8 text-black w-full md:flex md:justify-end font-medium text-sm">
                             <a aria-label="Go to the educational programs page" target="_blank" rel="noopener noreferrer"

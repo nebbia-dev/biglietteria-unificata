@@ -84,7 +84,7 @@ export default async function InfoUtili() {
                                 <h2 className="text-2xl mb-4 font-semibold">{el.titolo}</h2>
 
                                     {el.intero === 0 && el.ridotto === 0
-                                        ? <p className="lato">Free</p>
+                                        ? <p className="lato">Free entry</p>
                                         : <ul className="lato">
                                             <li>Full price {
                                                 new Intl.NumberFormat("de-DE", {
@@ -194,7 +194,7 @@ export default async function InfoUtili() {
                                             <p className="flex flex-col gap-1">
                                                 Reductions<br/>
                                                 <span
-                                                    className="block text-sm font-regular">(con esibizione di documentazione idonea)</span>
+                                                    className="block text-sm font-regular">(upon presentation of valid documentation)</span>
                                             </p>
                                         </AccordionSummary>
                                         <AccordionDetails>
@@ -226,9 +226,9 @@ export default async function InfoUtili() {
                                                               }}
                                             >
                                                 <p className="flex flex-col gap-1">
-                                                    Free Entry / Complimentary<br/>
+                                                    Free Entry<br/>
                                                     <span
-                                                        className="block text-sm font-regular">(con esibizione di documentazione idonea)</span>
+                                                        className="block text-sm font-regular">(upon presentation of valid documentation)</span>
                                                 </p>
                                             </AccordionSummary>
                                             <AccordionDetails>

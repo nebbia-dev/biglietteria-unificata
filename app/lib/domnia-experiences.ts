@@ -71,13 +71,22 @@ function normalizeProductGroup(
             ? productGroup.connectedProducts
             : [],
         description: normalizeExperienceDescription(productGroup.description),
+        disabled: productGroup.disabled === true,
         id: typeof productGroup.id === 'number' ? productGroup.id : -1,
         documentId:
             typeof productGroup.documentId === 'string'
                 ? productGroup.documentId
                 : `domnia-product-group-${index}`,
         locations,
+        shortDescription:
+            typeof productGroup.shortDescription === 'string'
+                ? productGroup.shortDescription
+                : undefined,
         slug: typeof productGroup.slug === 'string' ? productGroup.slug : '',
+        subtitle:
+            typeof productGroup.subtitle === 'string'
+                ? productGroup.subtitle
+                : undefined,
         tagIds: Array.isArray(productGroup.tagIds) ? productGroup.tagIds : [],
         title: typeof productGroup.title === 'string' ? productGroup.title : '',
     };

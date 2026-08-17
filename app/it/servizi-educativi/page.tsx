@@ -72,10 +72,13 @@ export default async function ServiziEducativi() {
                             return (
                                 <TicketCard
                                     lang="it"
-                                    key={el.documentId} layout="fourth" el={{
+                                    key={el.documentId}
+                                    layout="fourth"
+                                    disabled={el.disabled}
+                                    el={{
                                     titolo: "",
                                     nome: el.title,
-                                    descrizione: el.description?.replace(/<\/?[^>]+(>|$)/g, ""),
+                                    descrizione: el.shortDescription?.replace(/<\/?[^>]+(>|$)/g, ""),
                                     infoPrezzo: "",
                                     prezzo: el.cheapest,
                                     pic: "0-groups",

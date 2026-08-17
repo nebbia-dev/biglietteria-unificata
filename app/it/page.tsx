@@ -180,8 +180,8 @@ export default async function Home() {
                                             alt={`Interno del ${el.title}`} width={300} height={200}/>
                                         <div className="flex flex-col gap-2">
                                             <h4 className="text-xl md:text-base font-medium md:line-clamp-2 h-[48px]">{el.title}</h4>
-                                            <p className="line-clamp-6 md:text-sm lato">
-                                                {el.description?.replace(/<\/?[^>]+(>|$)/g, "")}
+                                            <p className="line-clamp-4 md:text-sm lato">
+                                                {el.shortDescription?.replace(/<\/?[^>]+(>|$)/g, "")}
                                             </p>
                                             <div className="flex items-center justify-between mt-4 h-[64px]">
                                                 {el.cheapest
@@ -234,7 +234,9 @@ export default async function Home() {
                             className="w-full h-[200px] object-cover rounded-xl"
                              alt={content.data.immagine_biglietto_cumulativo.alternativeText} width={300} height={200}/>
                         <div className="flex flex-col gap-2">
-                            <h3 className="text-xl md:text-base font-medium">{bundle.title}</h3>
+                            <h3 className="text-xl md:text-base font-medium">{bundle.title}: <br/>
+                                <span className="font-normal">{bundle.subtitle}</span>
+                            </h3>
                             <div className="w-full flex items-center justify-end mt-4">
                                 <a
                                     aria-label="Vai alla pagina dedicata all'acquisto del biglietto cumulativo"
@@ -314,13 +316,12 @@ export default async function Home() {
 
             {/*Musei Italiani*/}
             <div className="w-full md:1/2 pt-8 md:h-full">
-                <div className="flex flex-col gap-8 p-4 mt-2 w-full rounded-xl gradient md:h-full">
+                <div className="flex flex-col gap-12 p-4 mt-2 w-full rounded-xl gradient md:h-full">
                     <h3 className="text-2xl font-semibold mt-2 prime-text">Musei Italiani</h3>
-                    <img src='/placeholders/card_musei_italiani.png'
-                           alt="Logo di Musei Italiani" width={200} height={300}
-                           className="w-full h-[300px] object-cover rounded-4xl p-4 hidden md:block rounded"
-
-                    />
+                        <img src='/placeholders/card_musei_italiani.png'
+                               alt="Logo di Musei Italiani" width={200} height={300}
+                               className="w-full h-[268px] object-contain p-4 rounded-xl hidden md:block rounded bg-[#2b479f]"
+                        />
                     <div className="text-black w-full md:flex md:justify-end font-medium text-sm">
                         <a aria-label="Vai al sito di Musei Italiani" href="https://www.museiitaliani.it/" target="_blank" rel="noopener noreferrer" className="md:w-fit w-auto block text-center prime-bg rounded-full px-4 py-2">Vai al sito</a>
                     </div>

@@ -27,6 +27,9 @@ export default async function MuseoCivico() {
         const data = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/museums/' + process.env.NEXT_ALA_PONZONE +'?populate=*',
             {next: {revalidate: 1000}}
         );
+
+        console.log(extra)
+
         content = await data.json();
 
         const dataEvents = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/events?populate=*',
@@ -78,10 +81,11 @@ export default async function MuseoCivico() {
                     <TicketCard
                         lang="it"
                         layout="half"
+                        disabled={standard?.disabled ?? false}
                         el={{
                         titolo: "Ticket",
                         nome: standard?.title,
-                        descrizione: standard?.description?.replace(/<\/?[^>]+(>|$)/g, ""),
+                        descrizione: standard?.shortDescription?.replace(/<\/?[^>]+(>|$)/g, ""),
                         infoPrezzo: "A partire da:",
                         prezzo: standard?.cheapest,
                         pic: "0-ticket",
@@ -92,10 +96,11 @@ export default async function MuseoCivico() {
                     <TicketCard
                         lang="it"
                         layout="half"
+                        disabled={extra?.disabled ?? false}
                         el={{
                         titolo: "Esperienze",
                         nome: extra?.title,
-                        descrizione: extra?.description?.replace(/<\/?[^>]+(>|$)/g, ""),
+                        descrizione: extra?.shortDescription?.replace(/<\/?[^>]+(>|$)/g, ""),
                         infoPrezzo: "",
                         prezzo: extra?.cheapest,
                         pic: "evento",
@@ -106,10 +111,11 @@ export default async function MuseoCivico() {
                     <TicketCard
                         lang="it"
                         layout="third"
+                        disabled={bundle?.disabled ?? false}
                         el={{
                         titolo: "Ticket Cumulativo",
                         nome: bundle?.title,
-                        descrizione: bundle?.description?.replace(/<\/?[^>]+(>|$)/g, ""),
+                        descrizione: bundle?.subtitle,
                         infoPrezzo: "",
                         prezzo: bundle?.cheapest,
                         slug: bundle?.slug,
@@ -119,10 +125,11 @@ export default async function MuseoCivico() {
                     <TicketCard
                         lang="it"
                         layout="third"
+                        disabled={groups?.disabled ?? false}
                         el={{
                         titolo: "Gruppi",
                         nome: groups?.title,
-                        descrizione: groups?.description?.replace(/<\/?[^>]+(>|$)/g, ""),
+                        descrizione: groups?.shortDescription?.replace(/<\/?[^>]+(>|$)/g, ""),
                         infoPrezzo: "A partire da:",
                         prezzo: groups?.cheapest,
                         pic: "cumulativo",
@@ -133,10 +140,11 @@ export default async function MuseoCivico() {
                     <TicketCard
                         lang="it"
                         layout="third"
+                        disabled={schools?.disabled ?? false}
                         el={{
                         titolo: "Servizi educativi",
                         nome: schools?.title,
-                        descrizione: schools?.description?.replace(/<\/?[^>]+(>|$)/g, ""),
+                        descrizione: schools?.shortDescription?.replace(/<\/?[^>]+(>|$)/g, ""),
                         infoPrezzo: "A partire da:",
                         prezzo: schools?.cheapest,
                         pic: "cumulativo",

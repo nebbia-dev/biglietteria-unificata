@@ -73,10 +73,11 @@ export default async function MuseoCivico() {
                     <TicketCard
                         lang="en"
                         layout="half"
+                        disabled={standard?.disabled ?? false}
                         el={{
                         titolo: "Ticket",
                         nome: standard?.title,
-                        descrizione: standard?.description?.replace(/<\/?[^>]+(>|$)/g, ""),
+                        descrizione: standard?.shortDescription?.replace(/<\/?[^>]+(>|$)/g, ""),
                         infoPrezzo: "Starting from:",
                         prezzo: standard?.cheapest,
                         pic: "0-ticket",
@@ -87,10 +88,11 @@ export default async function MuseoCivico() {
                     <TicketCard
                         lang="en"
                         layout="half"
+                        disabled={extra?.disabled ?? false}
                         el={{
                         titolo: "Experiences",
                         nome: extra?.title,
-                        descrizione: extra?.description?.replace(/<\/?[^>]+(>|$)/g, ""),
+                        descrizione: extra?.shortDescription?.replace(/<\/?[^>]+(>|$)/g, ""),
                         infoPrezzo: "",
                         prezzo: extra?.cheapest,
                         pic: "evento",
@@ -101,10 +103,11 @@ export default async function MuseoCivico() {
                     <TicketCard
                         lang="en"
                         layout="third"
+                        disabled={bundle?.disabled ?? false}
                         el={{
                         titolo: "All-Museum Pass",
                         nome: bundle?.title,
-                        descrizione: bundle?.description?.replace(/<\/?[^>]+(>|$)/g, ""),
+                        descrizione: bundle?.subtitle,
                         infoPrezzo: "",
                         prezzo: bundle?.cheapest,
                         slug: bundle?.slug,
@@ -114,10 +117,11 @@ export default async function MuseoCivico() {
                     <TicketCard
                         lang="en"
                         layout="third"
+                        disabled={groups?.disabled ?? false}
                         el={{
                         titolo: "Groups",
                         nome: groups?.title,
-                        descrizione: groups?.description?.replace(/<\/?[^>]+(>|$)/g, ""),
+                        descrizione: groups?.shortDescription?.replace(/<\/?[^>]+(>|$)/g, ""),
                         infoPrezzo: "Starting from:",
                         prezzo: groups?.cheapest,
                         pic: "cumulativo",
@@ -128,10 +132,11 @@ export default async function MuseoCivico() {
                     <TicketCard
                         lang="en"
                         layout="third"
+                        disabled={schools?.disabled ?? false}
                         el={{
                         titolo: "Educational services",
                         nome: schools?.title,
-                        descrizione: schools?.description?.replace(/<\/?[^>]+(>|$)/g, ""),
+                        descrizione: schools?.shortDescription?.replace(/<\/?[^>]+(>|$)/g, ""),
                         infoPrezzo: "Starting from:",
                         prezzo: schools?.cheapest,
                         pic: "cumulativo",

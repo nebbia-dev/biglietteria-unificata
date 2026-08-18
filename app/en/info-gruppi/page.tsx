@@ -103,7 +103,7 @@ export default async function InfoGruppi() {
                             className="w-full h-[200px] object-cover rounded-xl"
                             src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine_servizi_educativi.url} alt={content.data.immagine_servizi_educativi.alternativeText} width={300} height={200}/>
 
-                        <p className="h-[100px] mt-8 text-xl md:text-base">Click here if you want to book museum access for your school group.</p>
+                        <p className="h-[100px] mt-8 text-xl md:text-base">{content.data.servizi_educativi_testo}</p>
                         <div className="flex items-center h-[64px] text-black w-full md:flex md:justify-end font-medium text-sm">
                             <Link aria-label="Go to the educational services page" href="/en/servizi-educativi" className="h-fit w-auto block text-center prime-bg rounded-full px-4 py-2">Find out more</Link>
                         </div>
@@ -114,11 +114,11 @@ export default async function InfoGruppi() {
                         <img
                             className="w-full h-[200px] object-cover rounded-xl"
                             src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine_proposte_educative.url} alt={content.data.immagine_proposte_educative.alternativeText} width={300} height={200}/>
-                        <p className="h-[100px] mt-8 text-xl md:text-base">Explore our educational programs designed for all ages. From preschoolers to adults, we are committed to making our museums open and accessible to everyone.
+                        <p className="h-[100px] mt-8 text-xl md:text-base">{content.data.proposte_educative_testo}
                         </p>
                         <div className="flex items-center h-[64px] text-black w-full md:flex md:justify-end font-medium text-sm">
                             <a aria-label="Go to the educational programs page" target="_blank"
-                               rel="noopener noreferrer" href="https://musei.comune.cremona.it/it/servizi-educativi/informazioni-didattica"
+                               rel="noopener noreferrer" href={content.data.proposte_educative_link}
                                className="h-fit w-auto block text-center prime-bg rounded-full px-4 py-2">Go to website</a>
                         </div>
                     </div>

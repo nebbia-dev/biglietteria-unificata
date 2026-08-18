@@ -98,8 +98,7 @@ export default async function ServiziEducativi() {
                         src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine_proposte_educative.url} alt={content.data.immagine_proposte_educative.alternativeText} width={300} height={200}/>
                     <div>
                         <div className="mb-8 md:mb-20">
-                            <p>Enhance your visit with our curated educational programs.
-                                Add an educational activity to make the most of your visit.
+                            <p>{content.data.proposte_educative_testo}
                             </p>
                             {/*<p className="mt-2">*/}
                             {/*    Admission for students is free of charge.  A mandatory 2€ reservation fee applies to each student.*/}
@@ -107,7 +106,7 @@ export default async function ServiziEducativi() {
                         </div>
                         <div className="md:mt-8 text-black w-full md:flex md:justify-end font-medium text-sm">
                             <a aria-label="Go to the educational programs page" target="_blank" rel="noopener noreferrer"
-                               href="https://musei.comune.cremona.it/it/servizi-educativi/informazioni-didattica"
+                               href={content.data.proposte_educative_link}
                                className="w-auto block text-center prime-bg rounded-full px-4 py-2">Go to the website</a>
                         </div>
                     </div>

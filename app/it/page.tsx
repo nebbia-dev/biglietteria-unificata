@@ -120,6 +120,7 @@ export default async function Home() {
     }
 
     const homepage = content.data;
+    console.log(homepage)
     const mobileTitle = homepage.titolo_mobile || homepage.titolo;
     const mobileDescription = homepage.descrizione_mobile || homepage.descrizione;
 
@@ -227,7 +228,7 @@ export default async function Home() {
                 <div className="p-4 md:p-8 mt-2 flex flex-col md:flex-row md:items-center md:gap-8">
                     <div>
                         <h2 className="text-2xl font-semibold prime-text mt-4">Ticket Cumulativo</h2>
-                        <p className="text-xl md:text-base font-medium mt-2">Il ticket cumulativo consente l&apos;accesso a tutti i Musei del Polo Civico con tariffa agevolata.</p>
+                        <p className="text-xl md:text-base font-medium mt-2">{homepage.biglietto_cumulativo_testo}</p>
                     </div>
                     <div className="flex flex-col gap-4 bg-white rounded-xl text-black p-4 mt-8 mb-4">
                         <img src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine_biglietto_cumulativo.url}
@@ -263,8 +264,7 @@ export default async function Home() {
                         className="w-full h-[200px] object-cover rounded-xl"
                         src={process.env.NEXT_PUBLIC_BASE_URL + homepage.immagine_gruppi.url} alt={homepage.immagine_gruppi.alternativeText} width={300} height={200}/>
 
-                    <p className="text-xl md:text-base md:h-[64px]">Prenota l&apos;accesso per il tuo gruppo.
-                        Scopri i ticket ridotti per i gruppi di più di 15 persone.</p>
+                    <p className="text-xl md:text-base md:h-[64px]">{homepage.ticket_gruppi_testo}</p>
                     <div className="mb-4 text-black w-full font-medium text-lg md:flex md:justify-end">
                         <Link aria-label="Vai alla pagina con le informazioni sulle visite dei gruppi" href="/it/info-gruppi" className="md:text-base w-auto block text-center prime-bg rounded-full px-4 py-2 md:w-fit">Scopri di più</Link>
                     </div>
@@ -279,7 +279,7 @@ export default async function Home() {
                         className="w-full h-[200px] object-cover rounded-xl"
                         src={process.env.NEXT_PUBLIC_BASE_URL + homepage.immagine_scuole.url} alt={homepage.immagine_scuole.alternativeText} width={300} height={200}/>
 
-                    <p className="text-xl md:text-base md:h-[64px]">Scopri le nostre Proposte Educative e prenota l’accesso per il tuo gruppo scolastico.</p>
+                    <p className="text-xl md:text-base md:h-[64px]">{homepage.servizi_educativi_testo}</p>
                     <div className="mb-4 text-black w-full font-medium text-lg md:flex md:justify-end">
                         <Link aria-label="Vai alla pagina con le informazioni sulle visite dei gruppi scolastici" href="/it/servizi-educativi" className="md:text-base w-auto block text-center prime-bg rounded-full px-4 py-2 md:w-fit">Scopri di più</Link>
                     </div>

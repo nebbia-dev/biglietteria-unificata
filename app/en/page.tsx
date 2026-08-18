@@ -222,7 +222,7 @@ export default async function Home() {
                     <div>
                         <h2 className="text-2xl font-semibold prime-text mt-4">All-Museums Ticket</h2>
                         <p className="text-xl md:text-base font-medium mt-2">
-                            This pass grants you access to all museums within the Cremona City Museum Network at a special discounted rate.
+                            {homepage.biglietto_cumulativo_testo}
                         </p>
                     </div>
                     <div className="flex flex-col gap-4 bg-white rounded-xl text-black p-4 mt-8 mb-4">
@@ -270,8 +270,7 @@ export default async function Home() {
                         className="w-full h-[200px] object-cover rounded-xl"
                         src={process.env.NEXT_PUBLIC_BASE_URL + homepage.immagine_gruppi.url} alt={homepage.immagine_gruppi.alternativeText} width={300} height={200}/>
 
-                    <p className="text-xl md:text-base md:h-[64px]">Book access for your group.
-                        Discover discounted tickets for groups of more than 15 people.
+                    <p className="text-xl md:text-base md:h-[64px]">{homepage.ticket_gruppi_testo}
                     </p>
                     <div className="mb-4 text-black w-full font-medium text-lg md:flex md:justify-end">
                         <Link
@@ -290,7 +289,7 @@ export default async function Home() {
                         src={process.env.NEXT_PUBLIC_BASE_URL + homepage.immagine_scuole.url} alt={homepage.immagine_scuole.alternativeText} width={300} height={200}/>
 
                     <p className="text-xl md:text-base md:h-[64px]">
-                        Explore our educational programs. Click here if you want to book museum access for your school group.
+                        {homepage.servizi_educativi_testo}
                     </p>
                     <div className="mb-4 text-black w-full font-medium text-lg md:flex md:justify-end">
                         <Link

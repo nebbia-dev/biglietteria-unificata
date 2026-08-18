@@ -109,7 +109,7 @@ export default async function InfoGruppi() {
                             className="w-full h-[200px] object-cover rounded-xl"
                             src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine_servizi_educativi.url} alt={content.data.immagine_servizi_educativi.alternativeText} width={300} height={200}/>
 
-                        <p className="h-[100px] mt-8 text-xl md:text-base">Clicca qui se vuoi prenotare l&apos;accesso ai musei con il tuo gruppo scolastico.</p>
+                        <p className="h-[100px] mt-8 text-xl md:text-base">{content.data.servizi_educativi_testo}</p>
                         <div className="flex items-center h-[64px] text-black w-full md:flex md:justify-end font-medium text-sm">
                             <Link aria-label="Vai alla pagina dei servizi educativi" href="/it/servizi-educativi" className="h-fit w-auto block text-center prime-bg rounded-full px-4 py-2">Scopri di più</Link>
                         </div>
@@ -120,12 +120,11 @@ export default async function InfoGruppi() {
                         <img
                             className="w-full h-[200px] object-cover rounded-xl"
                             src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine_proposte_educative.url} alt={content.data.immagine_proposte_educative.alternativeText} width={300} height={200}/>
-                        <p className="h-[100px] mt-8 text-xl md:text-base">Dalle scuole dell&apos;infanzia, fino agli adulti lavoriamo per aprire le porte dei musei e
-                            renderli accessibili al più ampio numero possibile di persone.
+                        <p className="h-[100px] mt-8 text-xl md:text-base">{content.data.proposte_educative_testo}
                         </p>
                         <div className="flex items-center h-[64px] text-black w-full md:flex md:justify-end font-medium text-sm">
                             <a aria-label="Vai alla pagina delle proposte educative" target="_blank"
-                               rel="noopener noreferrer" href="https://musei.comune.cremona.it/it/servizi-educativi/informazioni-didattica"
+                               rel="noopener noreferrer" href={content.data.proposte_educative_link}
                                className="h-fit w-auto block text-center prime-bg rounded-full px-4 py-2">Vai al
                                 sito</a>
                         </div>

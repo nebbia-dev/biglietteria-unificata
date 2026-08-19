@@ -6,8 +6,6 @@ import Markdown from "react-markdown";
 import ContactForm from "@/app/_components/ContactForm";
 import type { StrapiCollectionResponse, StrapiMuseum } from "@/app/lib/strapi-types";
 import {AccordionArrow} from "@/app/_components/_icons/AccordionArrow";
-import rehypeRaw from "rehype-raw";
-import DOMpurify from 'dompurify';
 
 export const dynamic = 'force-dynamic';
 
@@ -178,8 +176,8 @@ export default async function InfoUtili() {
                                     </AccordionSummary>
                                     <AccordionDetails>
                                         <div className="markdown lato">
-                                            <Markdown rehypePlugins={[rehypeRaw]}>
-                                                {DOMpurify.sanitize(el.accessibilita!)}
+                                            <Markdown>
+                                                {el.accessibilita}
                                             </Markdown>
                                         </div>
                                     </AccordionDetails>

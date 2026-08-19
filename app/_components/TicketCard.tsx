@@ -18,10 +18,10 @@ export default function TicketCard({el, layout, lang, disabled}: {el: TicketCard
         <>
             {disabled
                 ? <div aria-hidden
-                       className={`w-full ${layout === 'half' ? 'md:w-[calc(50%-0.5rem)]' : layout === 'third' ? 'md:w-[calc(33%-0.5rem)]' : 'md:w-[calc(25%-0.75rem)]'}`}>
+                       className={`w-full ${layout === 'half' ? 'lg:w-[calc(50%-0.5rem)]' : layout === 'third' ? 'lg:w-[calc(33%-0.5rem)]' : 'lg:w-[calc(50%-0.5rem)] xl:w-[calc(25%-0.75rem)]'}`}>
                 </div>
                 : <div
-                    className={`w-full ${layout === 'half' ? 'md:w-[calc(50%-0.5rem)]' : layout === 'third' ? 'md:w-[calc(33%-0.5rem)]' : 'md:w-[calc(25%-0.75rem)]'} text-white rounded-xl gradient`}>
+                    className={`w-full ${layout === 'half' ? 'lg:w-[calc(50%-0.5rem)]' : layout === 'third' ? 'lg:w-[calc(33%-0.5rem)]' : 'lg:w-[calc(50%-0.5rem)] xl:w-[calc(25%-0.75rem)]'} text-white rounded-xl gradient`}>
                     <div className="p-4 mt-2">
                         {el.titolo && <h2 className="text-2xl font-semibold prime-text">{el.titolo}</h2>}
 
@@ -32,8 +32,8 @@ export default function TicketCard({el, layout, lang, disabled}: {el: TicketCard
                                 alt={el.immagine.alternativeText} width={300} height={200}/>
                             <div className="flex flex-col gap-2">
                                 {el.titolo
-                                    ? <h3 className={`${layout === 'fourth' ? 'text-base' : layout === 'half' ? 'text-2xl py-1' : 'text-xl h-[56px]'} font-medium md:line-clamp-2`}>{el.nome}</h3>
-                                    : <h2 className={`${layout === 'fourth' ? 'text-base' : layout === 'half' ? 'text-2xl py-1' : 'text-xl h-[56px]'} font-medium md:line-clamp-2`}>{el.nome}</h2>
+                                    ? <h3 className={`${layout === 'fourth' ? 'text-base' : layout === 'half' ? 'text-2xl py-1' : 'text-xl h-[56px]'} font-medium lg:line-clamp-2`}>{el.nome}</h3>
+                                    : <h2 className={`${layout === 'fourth' ? 'text-base' : layout === 'half' ? 'text-2xl py-1' : 'text-xl h-[56px]'} font-medium lg:line-clamp-2`}>{el.nome}</h2>
                                 }
                                 <p className={`${layout === 'fourth' ? 'text-sm' : ''} line-clamp-4 lato h-[96px]`}>{el.descrizione}</p>
                                 <div className="flex items-center justify-between mt-4">

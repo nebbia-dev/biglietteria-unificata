@@ -145,7 +145,7 @@ export default async function Home() {
             </div>
 
             <h2 className="sr-only">Museums</h2>
-            <div className="flex flex-col md:flex-row gap-4">
+            <div className="flex flex-col lg:flex-row gap-4">
                 {filteredMuseums &&
                     filteredMuseums.map((el) => {
                         if (!el.heroImage || !el.ticketImage) {
@@ -153,9 +153,9 @@ export default async function Home() {
                         }
 
                         return (
-                            <div className="w-full md:w-1/4 text-white rounded-xl gradient"
+                            <div className="w-full lg:w-1/2 xl:w-1/4 text-white rounded-xl gradient"
                                  key={el.title}>
-                                <div className="w-full h-[200px] block md:hidden">
+                                <div className="w-full h-[200px] block lg:hidden">
                                     <img
                                         className="w-full h-full object-cover rounded-t-xl"
                                         src={process.env.NEXT_PUBLIC_BASE_URL + el.heroImage.url}
@@ -174,7 +174,7 @@ export default async function Home() {
                                             alt={`Interno del ${el.title}`} width={300} height={200}/>
                                         <div className="flex flex-col gap-2">
                                             <h4 className="text-xl md:text-base font-medium md:line-clamp-2 h-[48px]">{el.title}</h4>
-                                            <p className="line-clamp-4 md:text-sm lato">
+                                            <p className="line-clamp-6 md:text-sm lato h-[120px]">
                                                 {el.shortDescription?.replace(/<\/?[^>]+(>|$)/g, "")}
                                             </p>
                                             <div className="flex items-center justify-between mt-4 h-[64px]">
@@ -249,17 +249,6 @@ export default async function Home() {
             </div>
         </section>
         )}
-
-        {/*Search bar*/}
-        {/*<section className="w-[90%] mx-auto pt-8">*/}
-        {/*        <div className="flex flex-col gap-8 p-4 mt-2 w-full text-white rounded-xl gradient">*/}
-        {/*            <h3 className="text-2xl font-semibold mt-2">Cerchi qualcosa di specifico?</h3>*/}
-        {/*            <input type="text" className="text-black rounded-full bg-white h-[48px] p-2"/>*/}
-        {/*            <div className="mb-4 text-black w-full text-end font-medium text-lg">*/}
-        {/*                <Link href="/" className="w-fit prime-bg rounded-full px-4 py-2">Cerca</Link>*/}
-        {/*            </div>*/}
-        {/*        </div>*/}
-        {/*</section>*/}
 
         {/*Biglietto gruppi*/}
         <section className="w-[90%] md:w-[85%] mx-auto flex flex-col md:flex-row md:gap-8">

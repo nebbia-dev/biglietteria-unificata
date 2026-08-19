@@ -152,7 +152,7 @@ export default async function Home() {
             </div>
 
             <h2 className="sr-only">Musei</h2>
-            <div className="flex flex-col md:flex-row gap-4">
+            <div className="flex flex-col lg:flex-row lg:flex-wrap xl:flex-nowrap gap-4">
                 {filteredMuseums &&
                     filteredMuseums.map((el) => {
                         if (!el.heroImage || !el.ticketImage) {
@@ -160,9 +160,9 @@ export default async function Home() {
                         }
 
                         return (
-                            <div className="w-full md:w-1/4 text-white rounded-xl gradient"
+                            <div className="w-full lg:w-[calc(50%-8px)] xl:w-1/4 text-white rounded-xl gradient"
                                  key={el.title}>
-                                <div className="w-full h-[200px] block md:hidden">
+                                <div className="w-full h-[200px] block lg:hidden">
                                     <img
                                         className="w-full h-full object-cover rounded-t-xl"
                                         src={process.env.NEXT_PUBLIC_BASE_URL + el.heroImage.url}
@@ -181,7 +181,7 @@ export default async function Home() {
                                             alt={`Interno del ${el.title}`} width={300} height={200}/>
                                         <div className="flex flex-col gap-2">
                                             <h4 className="text-xl md:text-base font-medium md:line-clamp-2 h-[48px]">{el.title}</h4>
-                                            <p className="line-clamp-4 md:text-sm lato">
+                                            <p className="line-clamp-6 md:text-sm lato md:h-[120px]">
                                                 {el.shortDescription?.replace(/<\/?[^>]+(>|$)/g, "")}
                                             </p>
                                             <div className="flex items-center justify-between mt-4 h-[64px]">

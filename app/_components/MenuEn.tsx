@@ -239,7 +239,7 @@ export default function MenuEn() {
                                     className={`${isMuseumsMenuOpen ? 'rotate-90' : 'rotate-0'} transition-all duration-500 origin-center`}>&gt;</span>
                             </button>
                             <ul id={desktopMuseumsSubmenuId} inert={!isMuseumsMenuOpen} aria-hidden={!isMuseumsMenuOpen}
-                                className={`${isMuseumsMenuOpen ? openSubmenuClasses : closedSubmenuClasses} ${desktopSubmenuClasses} w-[250px] right-[15%]`}>
+                                className={`${isMuseumsMenuOpen ? openSubmenuClasses : closedSubmenuClasses} ${desktopSubmenuClasses} w-[250px] md:left-0 lg:right-[15%]`}>
                                 <li className="py-3">
                                     <Link
                                         href="/en/museo-civico-ala-ponzone"

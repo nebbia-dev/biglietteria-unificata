@@ -3,8 +3,8 @@ import type { Metadata } from "next";
 import NewsletterRegistrationForm from "@/app/_components/NewsletterRegistrationForm";
 
 export const metadata: Metadata = {
-    title: "Newsletter",
-    description: "Iscrizione alla newsletter US Cremonese con sconto del 10%.",
+    title: "Newsletter dei Musei Civici di Cremona",
+    description: "Iscrizione alla newsletter dei Musei Civici di Cremona.",
 };
 
 export default function NewsletterPage() {

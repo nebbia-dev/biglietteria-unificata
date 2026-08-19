@@ -10,7 +10,7 @@ export default function PropEdu({image, alt} : {image:string, alt:string}) {
                        className="w-full object-cover md:w-2/4 md:h-full rounded-xl"
                 />
                 <div className="md:pr-8">
-                    <h3 className="text-2xl font-semibold mt-2 prime-text">Proposte educative</h3>
+                    <h3 className="text-2xl font-semibold my-2 prime-text">Proposte educative</h3>
                     <p>Dalle scuole dell&apos;infanzia, fino agli adulti lavoriamo per aprire le porte dei musei e
                         renderli
                         accessibili al più ampio numero possibile di persone.</p>

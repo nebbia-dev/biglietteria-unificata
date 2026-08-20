@@ -302,7 +302,7 @@ export default async function Home() {
             <div className="w-full md:1/2 pt-8">
                 <div className="flex flex-col gap-8 p-4 mt-2 w-full rounded-xl gradient">
                     <h2 className="md:hidden text-3xl text-white font-semibold mt-2">News</h2>
-                    <h2 className="md:block hidden text-2xl font-semibold mt-2 prime-text">Read the last news</h2>
+                    <h2 className="md:block hidden text-2xl font-semibold mt-2 prime-text">News and events</h2>
                     <img
                         className="w-full h-[300px] object-cover rounded-4xl p-4"
                         src={process.env.NEXT_PUBLIC_BASE_URL + contentNews.data.immagine.url} alt={contentNews.data.immagine.alternativeText} width={300} height={200}/>
@@ -310,7 +310,7 @@ export default async function Home() {
                     <div className="text-black w-full md:flex md:justify-end font-medium text-sm">
                         <Link href="/en/news-eventi"
                               className="md:w-fit w-auto block text-center prime-bg rounded-full px-4 py-2">
-                            Go to all news
+                            Find out more
                         </Link>
                     </div>
                 </div>

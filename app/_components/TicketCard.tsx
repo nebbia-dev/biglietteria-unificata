@@ -32,8 +32,8 @@ export default function TicketCard({el, layout, lang, disabled}: {el: TicketCard
                                 alt={el.immagine.alternativeText} width={300} height={200}/>
                             <div className="flex flex-col gap-2">
                                 {el.titolo
-                                    ? <h3 className={`${layout === 'fourth' ? 'text-base' : layout === 'half' ? 'text-2xl py-1' : 'text-xl h-[56px]'} font-medium lg:line-clamp-2`}>{el.nome}</h3>
-                                    : <h2 className={`${layout === 'fourth' ? 'text-base' : layout === 'half' ? 'text-2xl py-1' : 'text-xl h-[56px]'} font-medium lg:line-clamp-2`}>{el.nome}</h2>
+                                    ? <h3 className={`${layout === 'fourth' ? 'text-base lg:line-clamp-3' : layout === 'half' ? 'text-2xl py-1 lg:line-clamp-2' : 'text-xl h-[56px] lg:line-clamp-2'} font-medium`}>{el.nome}</h3>
+                                    : <h2 className={`${layout === 'fourth' ? 'text-base lg:line-clamp-3' : layout === 'half' ? 'text-2xl py-1 lg:line-clamp-2' : 'text-xl h-[56px] lg:line-clamp-2'} font-medium`}>{el.nome}</h2>
                                 }
                                 <p className={`${layout === 'fourth' ? 'text-sm' : ''} line-clamp-4 lato h-[96px]`}>{el.descrizione}</p>
                                 <div className="flex items-center justify-between mt-4">

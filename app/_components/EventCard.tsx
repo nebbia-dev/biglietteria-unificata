@@ -37,13 +37,12 @@ export default function EventCard({card, limit, events = [], lang} : EventCardPr
                                         <Museum width={24} height={24}/> <p className="line-clamp-1">{getAddress(el.locations[0]?.label)}</p>
                                     </div>
                                     <div className="flex items-center justify-between mt-4">
-                                        <p className="md:text-base text-xl font-medium">{lang === 'it'
-                                            ? 'Gratuito'
-                                            : 'Free'
-                                        }</p>
+                                        <p className="md:text-base text-xl font-medium">
+                                            {/*{lang === 'it' ? 'Gratuito' : 'Free'}*/}
+                                        </p>
                                         <a aria-label={purchaseAriaLabel(el.title)} target="_blank" rel="noopener noreferrer"
                                            className="flex items-center gap-2 text-lg md:text-base font-medium prime-bg rounded-full px-4 py-2 md:px-3 md:py-1"
-                                           href={`https://multishop-cremona.collaudo.domniapass.com/it/products/${el.slug}`}>
+                                           href={`https://shopbiglietteriamusei.comune.cremona.it/${lang}/products/${el.slug ?? ''}`}>
                                             {lang === 'it'
                                                 ? 'Prenota'
                                                 : 'Book'
@@ -57,9 +56,9 @@ export default function EventCard({card, limit, events = [], lang} : EventCardPr
                     })}
 
             </div>
-            {!card &&
+            {!card && limit !== 1000 &&
                 <div className="text-black w-full md:flex md:justify-end font-medium text-sm pt-4">
-                    <Link href={lang === 'it' ? "/news-eventi" : "/en/news-eventi"}
+                    <Link href={lang === 'it' ? "/it/news-eventi" : "/en/news-eventi"}
                           className="md:w-fit w-auto block text-center prime-bg rounded-full px-4 py-2">
                         {lang === 'it'
                             ? 'Vedi tutti gli eventi'

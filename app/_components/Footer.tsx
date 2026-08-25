@@ -49,7 +49,7 @@ export default function Footer() {
                         <li>Privacy Policy</li>
                         <li><a
                             aria-label="Vai alla pagina dedicata all'elenco delle misure adottate per rendere i musei accessibili"
-                            href="https://musei.comune.cremona.it/it/accessibilita/percorsi-per-disabili-motori"
+                            href="https://form.agid.gov.it/c_d150/biglietteriamusei.comune.cremona.it/dichiarazione"
                             target="_blank" rel="noopener noreferrer">
                             Accessibilità
                         </a></li>

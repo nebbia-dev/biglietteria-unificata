@@ -38,7 +38,7 @@ const copy = {
             birthDate: "Data di nascita",
             city: "Città",
             phone: "Telefono",
-            privacy: "Presa visione dell'informativa privacy, autorizzo l'invio del materiale marketing promozionale e offerte speciali tramite newsletter e/o a ricevere la newsletter periodica dei Musei Civici di Cremona",
+            privacy: "Presa visione dell'informativa privacy, autorizzo l'invio del materiale marketing promozionale e offerte speciali tramite newsletter e/o a ricevere la newsletter periodica dei Musei Civici di Cremona.",
         },
         placeholders: {
             firstName: "Nome / Name",
@@ -356,7 +356,7 @@ export default function NewsletterRegistrationForm({ lang }: { lang: NewsletterR
                         onChange={handleChange}
                         type="checkbox"
                     />
-                    <span>{localizedCopy.labels.privacy}</span>
+                    <span>{localizedCopy.labels.privacy} <a target="_blank" rel="noopener noreferrer" className="underline" href="https://www.comune.cremona.it/informative-privacy">{lang === 'it' ? "Clicca qui per leggere l'informativa sulla privacy" : "Click here to read the privacy policy"}</a></span>
                 </label>
                 {errors.privacy && <span className="mt-2 block text-sm text-[#D80900]">{errors.privacy}</span>}
             </div>

@@ -1,4 +1,5 @@
 import FooterContactForm from "@/app/_components/FooterContactForm";
+import Link from "next/link";
 export default function Footer() {
     return(
         <div id="footer" className="seco-bg">
@@ -46,7 +47,7 @@ export default function Footer() {
 
                 <div>
                     <ul className="flex flex-col gap-1">
-                        <li>Privacy Policy</li>
+                        <li><Link href="/it/privacy-policy">Privacy Policy</Link></li>
                         <li><a
                             aria-label="Vai alla pagina dedicata all'elenco delle misure adottate per rendere i musei accessibili"
                             href="https://form.agid.gov.it/c_d150/biglietteriamusei.comune.cremona.it/dichiarazione"

@@ -9,9 +9,9 @@ export default async function Home() {
 
   return (
     <div className="bg-black h-screen w-screen">
-        <div className="w-[60%] mx-auto h-full flex items-center gap-12">
+        <div className="w-[90%] md:w-[60%] mx-auto h-full flex flex-col md:flex-row justify-center items-center gap-12">
             <img className="w-[180px] h-[180px]" alt="Lodo Cremona musei" src="/icons/logo.png"/>
-            <div className="text-white">
+            <div className="text-white text-center md:text-left">
                 <h2 className="text-xl font-bold mb-4">Sito in manutenzione</h2>
                 <p>Ci scusiamo per il disagio. Nel frattempo, puoi visitare il <a className="underline"
                                                                                   href="https://musei.comune.cremona.it/it"

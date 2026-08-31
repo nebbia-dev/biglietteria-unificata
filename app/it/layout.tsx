@@ -35,17 +35,18 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="it" className="bg-white text-black">
-      <body
+    <body
         className={`${poppins.className} ${lato.variable} antialiased`}
-      >
-      {/*<a href="#main" className="skip-link">Salta al contenuto principale</a>*/}
-      <Menu/>
-      <main id="main" tabIndex={-1}>
-          {children}
-      </main>
-      <Footer/>
-      <Script src="https://cdn.jsdelivr.net/npm/sienna-accessibility@latest/dist/sienna-accessibility.umd.js" defer />
-      <Script id="sienna-accessibility-it-label" strategy="afterInteractive">
+    >
+    {/*<a href="#main" className="skip-link">Salta al contenuto principale</a>*/}
+    <Menu/>
+    <main id="main" tabIndex={-1}>
+        {children}
+    </main>
+    <Footer/>
+    <Script src="https://embeds.iubenda.com/widgets/2a2c9c05-4bfb-48fe-a72e-efd7bde2d82c.js"/>
+    <Script src="https://cdn.jsdelivr.net/npm/sienna-accessibility@latest/dist/sienna-accessibility.umd.js" defer/>
+    <Script id="sienna-accessibility-it-label" strategy="afterInteractive">
         {`
           (() => {
             const label = 'Apri il menu accessibilità';
@@ -75,8 +76,8 @@ export default function RootLayout({
             });
           })();
         `}
-      </Script>
-      </body>
+    </Script>
+    </body>
     </html>
   );
 }

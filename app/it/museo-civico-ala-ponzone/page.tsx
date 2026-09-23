@@ -28,9 +28,9 @@ export default async function MuseoCivico() {
             {next: {revalidate: 1000}}
         );
 
-        console.log(extra)
-
         content = await data.json();
+
+        console.log(content.data)
 
         const dataEvents = await fetch(process.env.NEXT_PUBLIC_BASE_URL + '/api/events?populate=*',
             {next: {revalidate: 1000}}

@@ -24,7 +24,6 @@ export default async function send(formData: FormData) {
     if(newsletter === 'false') {
         const message = getFormValue(formData, 'info-message');
         await sendMail({
-            // sendTo: 'comunicazione.cremonamusei@comune.cremona.it',
             sendTo: 'info.musei@comune.cremona.it',
             subject:'Nuova richiesta di informazioni',
             text: fullName + ' ha mandato il seguente messaggio: ' + message,

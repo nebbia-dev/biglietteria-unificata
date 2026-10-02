@@ -7,14 +7,14 @@ const SMTP_SERVER_PASSWORD = process.env.NEXT_SMTP_SERVER_PASSWORD;
 const SITE_MAIL_SENDER = process.env.NEXT_SITE_MAIL_SENDER;
 const transporter = nodemailer.createTransport({
     host: SMTP_SERVER_HOST,
-    port: 587,
-    secure: false,
+    port: 465,
+    secure: true,
     auth: {
         user: SMTP_SERVER_USERNAME,
         pass: SMTP_SERVER_PASSWORD,
     },
     tls: {
-        rejectUnauthorized: false,
+        rejectUnauthorized: true,
     }
 });
 
@@ -22,7 +22,7 @@ export async function sendMail({sendTo, subject, text, html, replyTo}: {sendTo: 
     try {
         await transporter.verify();
         await transporter.sendMail({
-            from: `"Visit Cremona" ${SITE_MAIL_SENDER}`,
+            from: `"Biglietteria Unificata" ${SITE_MAIL_SENDER}`,
             to: sendTo,
             subject: subject,
             text: text,

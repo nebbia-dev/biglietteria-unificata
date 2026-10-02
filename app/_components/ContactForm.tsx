@@ -110,7 +110,7 @@ export default function ContactForm({text, lang}:{text:string, lang: ContactForm
                               className="w-full rounded-xl bg-[#ecf0f2] h-[148px] p-2"/>
                 </label>
                 <div className="text-black w-full md:flex md:justify-end font-medium text-sm">
-                    <button type="submit" className="w-full md:w-fit text-center prime-bg rounded-full px-4 py-2">{copy.submit}
+                    <button type="submit" className="cursor-pointer w-full md:w-fit text-center prime-bg rounded-full px-4 py-2">{copy.submit}
                     </button>
                 </div>
             </form>

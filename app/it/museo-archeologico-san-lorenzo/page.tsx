@@ -97,13 +97,14 @@ export default async function MuseoArcheologico() {
                     <TicketCard
                         lang="it"
                         layout="third"
-                        hidePurchaseActions
                         disabled={bundle?.disabled ?? false}
                         el={{
                         titolo: "Ticket Cumulativo",
                         nome: bundle?.title,
                         descrizione: bundle?.subtitle,
                         infoPrezzo: "",
+                        prezzo: bundle?.cheapest,
+                        slug: bundle?.slug,
                         immagine: content.data.immagine_biglietto_cumulativo
                     }}/>
 

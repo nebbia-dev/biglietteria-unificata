@@ -4,19 +4,7 @@ import type { TicketCardData } from "@/app/lib/strapi-types";
 type TicketCardLayout = 'fourth' | 'half' | 'third';
 type TicketCardLang = 'it' | 'en';
 
-export default function TicketCard({
-    el,
-    layout,
-    lang,
-    disabled,
-    hidePurchaseActions = false,
-}: {
-    el: TicketCardData;
-    layout: TicketCardLayout;
-    lang: TicketCardLang;
-    disabled: boolean;
-    hidePurchaseActions?: boolean;
-}) {
+export default function TicketCard({el, layout, lang, disabled}: {el: TicketCardData, layout: TicketCardLayout, lang: TicketCardLang, disabled: boolean}) {
     if (!el.immagine) {
         return null;
     }
@@ -37,7 +25,7 @@ export default function TicketCard({
                     <div className="p-4 mt-2">
                         {el.titolo && <h2 className="text-2xl font-semibold prime-text">{el.titolo}</h2>}
 
-                        <div className={`flex flex-col gap-4 bg-white rounded-xl text-black p-4 my-4 ${layout === 'third' ? 'lg:h-[480px]' : ''}`}>
+                        <div className="flex flex-col gap-4 bg-white rounded-xl text-black p-4 my-4">
                             <img
                                 className="w-full h-[200px] object-cover rounded-xl"
                                 src={process.env.NEXT_PUBLIC_BASE_URL + el.immagine.url}
@@ -48,39 +36,35 @@ export default function TicketCard({
                                     : <h2 className={`${layout === 'fourth' ? 'text-base lg:line-clamp-3 lg:h-[72px]' : layout === 'half' ? 'text-2xl py-1 lg:line-clamp-2' : 'text-xl h-[56px] lg:line-clamp-2'} font-medium`}>{el.nome}</h2>
                                 }
                                 <p className={`${layout === 'fourth' ? 'text-sm' : ''} line-clamp-4 lato h-[96px]`}>{el.descrizione}</p>
-                                {!hidePurchaseActions ? (
-                                    <div className="flex items-center justify-between mt-4">
-                                        {el.prezzo
-                                            ? <div>
-                                                {el.infoPrezzo !== ""
-                                                    ? <p className="text-sm">{el.infoPrezzo}<br/><span
-                                                        className={`${layout === 'fourth' ? 'text-base' : 'text-xl'} font-medium`}>{new Intl.NumberFormat("de-DE", {
-                                                        style: "currency",
-                                                        currency: "EUR"
-                                                    }).format(el.prezzo)}</span></p>
-                                                    :
-                                                    <p className={`${layout === 'fourth' ? 'text-base' : 'text-xl'} font-medium`}>{new Intl.NumberFormat("de-DE", {
-                                                        style: "currency",
-                                                        currency: "EUR"
-                                                    }).format(el.prezzo)}</p>
-                                                }
-                                            </div>
-                                            :
-                                            <p className={`${layout === 'fourth' ? 'text-base' : 'text-xl'} font-medium`}>Gratuito</p>
-                                        }
-                                        <a aria-label={purchaseAriaLabel} target="_blank" rel="noopener noreferrer"
-                                           className={`${layout === 'fourth' ? 'text-sm px-3 py-1' : 'px-4 py-2'} flex items-center gap-2 text-lg font-medium prime-bg rounded-full`}
-                                           href={`https://shopbiglietteriamusei.comune.cremona.it/${lang}/products/${el.slug ?? ''}`}>
-                                            {lang === 'it'
-                                                ? 'Prenota'
-                                                : 'Book'
+                                <div className="flex items-center justify-between mt-4">
+                                    {el.prezzo
+                                        ? <div>
+                                            {el.infoPrezzo !== ""
+                                                ? <p className="text-sm">{el.infoPrezzo}<br/><span
+                                                    className={`${layout === 'fourth' ? 'text-base' : 'text-xl'} font-medium`}>{new Intl.NumberFormat("de-DE", {
+                                                    style: "currency",
+                                                    currency: "EUR"
+                                                }).format(el.prezzo)}</span></p>
+                                                :
+                                                <p className={`${layout === 'fourth' ? 'text-base' : 'text-xl'} font-medium`}>{new Intl.NumberFormat("de-DE", {
+                                                    style: "currency",
+                                                    currency: "EUR"
+                                                }).format(el.prezzo)}</p>
                                             }
-                                            <CircledArrow width={28} height={28}/>
-                                        </a>
-                                    </div>
-                                ) : (
-                                    <div aria-hidden="true" className="mt-4 h-[44px] shrink-0"/>
-                                )}
+                                        </div>
+                                        :
+                                        <p className={`${layout === 'fourth' ? 'text-base' : 'text-xl'} font-medium`}>Gratuito</p>
+                                    }
+                                    <a aria-label={purchaseAriaLabel} target="_blank" rel="noopener noreferrer"
+                                       className={`${layout === 'fourth' ? 'text-sm px-3 py-1' : 'px-4 py-2'} flex items-center gap-2 text-lg font-medium prime-bg rounded-full`}
+                                       href={`https://shopbiglietteriamusei.comune.cremona.it/${lang}/products/${el.slug ?? ''}`}>
+                                        {lang === 'it'
+                                            ? 'Prenota'
+                                            : 'Book'
+                                        }
+                                        <CircledArrow width={28} height={28}/>
+                                    </a>
+                                </div>
                             </div>
                         </div>
                     </div>

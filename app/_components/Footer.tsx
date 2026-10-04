@@ -54,7 +54,7 @@ export default function Footer() {
                             target="_blank" rel="noopener noreferrer">
                             Accessibilità
                         </a></li>
-                        <li>Condizioni di vendita</li>
+                        <li><Link href="/it/terms">Condizioni di vendita</Link></li>
                     </ul>
                 </div>
             </footer>

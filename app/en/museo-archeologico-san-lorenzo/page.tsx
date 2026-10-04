@@ -91,14 +91,13 @@ export default async function MuseoArcheologico() {
                     <TicketCard
                         lang="en"
                         layout="third"
+                        hidePurchaseActions
                         disabled={bundle?.disabled ?? false}
                         el={{
                         titolo: "All-Museum Pass",
                         nome: bundle?.title,
                         descrizione: bundle?.subtitle,
                         infoPrezzo: "",
-                        prezzo: bundle?.cheapest,
-                        slug: bundle?.slug,
                         immagine: content.data.immagine_biglietto_cumulativo
                     }}/>
 

@@ -30,7 +30,7 @@ export async function sendMail({sendTo, subject, text, html, replyTo}: {sendTo: 
             replyTo: replyTo ? replyTo : ''
         });
     } catch (error) {
-        console.error('Something Went Wrong', SMTP_SERVER_USERNAME, SMTP_SERVER_PASSWORD, error);
+        console.error('Something went wrong while sending email', error);
         return;
     }
 }

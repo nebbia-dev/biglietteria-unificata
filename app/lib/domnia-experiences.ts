@@ -8,6 +8,7 @@ import {
 import mockProductGroupsResponse from '@/app/lib/mocks/domnia-product-groups.json';
 import { getMockDomniaSalableProducts } from '@/app/lib/domnia-products';
 import type {
+    DomniaConnectedProduct,
     DomniaId,
     DomniaProductGroupResponse,
     ExperienceCardData,
@@ -19,6 +20,25 @@ import type {
 type GetExperiencesOptions = {
     locale?: string;
 };
+
+function normalizeConnectedProductIds(
+    connectedProducts?: DomniaConnectedProduct[],
+) {
+    if (!Array.isArray(connectedProducts)) {
+        return [];
+    }
+
+    return connectedProducts.flatMap((connectedProduct) => {
+        const productId =
+            typeof connectedProduct === 'object' && connectedProduct !== null
+                ? connectedProduct.productId
+                : connectedProduct;
+
+        return typeof productId === 'number' || typeof productId === 'string'
+            ? [productId]
+            : [];
+    });
+}
 
 const mockProductGroupLocations = [
     'Via Ugolani Dati, 4, Cremona',
@@ -67,9 +87,9 @@ function normalizeProductGroup(
 
     return {
         ...productGroup,
-        connectedProducts: Array.isArray(productGroup.connectedProducts)
-            ? productGroup.connectedProducts
-            : [],
+        connectedProducts: normalizeConnectedProductIds(
+            productGroup.connectedProducts,
+        ),
         description: normalizeExperienceDescription(productGroup.description),
         disabled: productGroup.disabled === true,
         id: typeof productGroup.id === 'number' ? productGroup.id : -1,

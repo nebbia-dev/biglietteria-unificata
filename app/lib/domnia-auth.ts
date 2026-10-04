@@ -8,20 +8,25 @@ import { decrypt, encrypt } from '@/app/lib/session';
 const ACCESS_TOKEN_COOKIE = 'access_token';
 const REFRESH_TOKEN_COOKIE = 'refresh_token';
 
-export const DOMNIA_API_BASE_URL =
-    process.env.DOMNIA_API_BASE_URL ?? 'https://api-cremona.domniapass.com';
-const DOMNIA_API_USERNAME =
-    process.env.DOMNIA_API_USERNAME ?? 'info@nebbialab.it';
-const DOMNIA_API_PASSWORD =
-    process.env.DOMNIA_API_PASSWORD ?? 'lbr2i8U4W4Gxfv';
-const DOMNIA_API_REALM = process.env.DOMNIA_API_REALM ?? 'production';
-const DOMNIA_API_RESOURCE = process.env.DOMNIA_API_RESOURCE ?? 'desk';
-const DOMNIA_API_SECRET =
-    process.env.DOMNIA_API_SECRET ?? 'kpiKdvEM6oRc2DHWDUDB6zRMShOiopSm';
+function getRequiredEnv(name: string) {
+    const value = process.env[name]?.trim();
 
-const DOMNIA_ORGANIZATION_CODE = process.env.DOMNIA_ORGANIZATION_CODE ?? 'CR';
-const DOMNIA_PARTNER_CODE = process.env.DOMNIA_PARTNER_CODE ?? 'MCC';
-const DOMNIA_ROLE_CODE = process.env.DOMNIA_ROLE_CODE ?? 'SELL_WEB_API';
+    if (!value) {
+        throw new Error(`${name} is not configured`);
+    }
+
+    return value;
+}
+
+export const DOMNIA_API_BASE_URL = getRequiredEnv('DOMNIA_API_BASE_URL');
+const DOMNIA_API_USERNAME = getRequiredEnv('DOMNIA_API_USERNAME');
+const DOMNIA_API_PASSWORD = getRequiredEnv('DOMNIA_API_PASSWORD');
+const DOMNIA_API_REALM = getRequiredEnv('DOMNIA_API_REALM');
+const DOMNIA_API_RESOURCE = getRequiredEnv('DOMNIA_API_RESOURCE');
+const DOMNIA_API_SECRET = getRequiredEnv('DOMNIA_API_SECRET');
+const DOMNIA_ORGANIZATION_CODE = getRequiredEnv('DOMNIA_ORGANIZATION_CODE');
+const DOMNIA_PARTNER_CODE = getRequiredEnv('DOMNIA_PARTNER_CODE');
+const DOMNIA_ROLE_CODE = getRequiredEnv('DOMNIA_ROLE_CODE');
 
 type TokenCookiePayload = {
     accessToken?: string;

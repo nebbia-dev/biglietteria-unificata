@@ -2,6 +2,14 @@ import type { StrapiImage } from '@/app/lib/strapi-types';
 
 export type DomniaId = number | string;
 
+export type DomniaConnectedProduct =
+    | DomniaId
+    | {
+        productId?: DomniaId;
+        sort?: number;
+        [key: string]: unknown;
+    };
+
 export type ExperienceDescriptionBlock = {
     children?: Array<{
         text?: string;
@@ -21,7 +29,7 @@ export type ExperienceLocation = {
 
 export type DomniaProductGroupResponse = {
     cheapest?: number;
-    connectedProducts?: DomniaId[];
+    connectedProducts?: DomniaConnectedProduct[];
     description?: ExperienceDescription;
     disabled?: boolean;
     documentId?: string;

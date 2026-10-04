@@ -54,7 +54,7 @@ export default function FooterEn() {
                             target="_blank" rel="noopener noreferrer">
                             Accessibility
                         </a></li>
-                        <li>Terms and conditions</li>
+                        <li><Link href="/en/terms">Terms and conditions</Link></li>
                     </ul>
                 </div>
             </footer>

@@ -120,7 +120,6 @@ export default async function Home() {
     }
 
     const homepage = content.data;
-    console.log(homepage)
     const mobileTitle = homepage.titolo_mobile || homepage.titolo;
     const mobileDescription = homepage.descrizione_mobile || homepage.descrizione;
 
@@ -230,7 +229,7 @@ export default async function Home() {
                         <h2 className="text-2xl font-semibold prime-text mt-4">Ticket Cumulativo</h2>
                         <p className="text-xl md:text-base font-medium mt-2">{homepage.biglietto_cumulativo_testo}</p>
                     </div>
-                    <div className="flex flex-col gap-4 bg-white rounded-xl text-black p-4 mt-8 mb-4">
+                    <div className="flex flex-col gap-4 bg-white rounded-xl text-black px-4 pt-4 pb-8 mt-8 mb-4">
                         <img src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine_biglietto_cumulativo.url}
                             className="w-full h-[200px] object-cover rounded-xl"
                              alt={content.data.immagine_biglietto_cumulativo.alternativeText} width={300} height={200}/>
@@ -238,16 +237,6 @@ export default async function Home() {
                             <h3 className="text-xl md:text-base font-medium">{bundle.title}: <br/>
                                 <span className="font-normal">{bundle.subtitle}</span>
                             </h3>
-                            <div className="w-full flex items-center justify-end mt-4">
-                                <a
-                                    aria-label="Vai alla pagina dedicata all'acquisto del biglietto cumulativo"
-                                    target="_blank" rel="noopener noreferrer"
-                                    className="flex items-center gap-2 text-lg md:text-base font-medium prime-bg rounded-full px-4 py-2"
-                                    href={`https://shopbiglietteriamusei.comune.cremona.it/it/products/${bundle.slug}`}>
-                                    Prenota
-                                    <CircledArrow width={28} height={28}/>
-                                </a>
-                            </div>
                         </div>
                     </div>
                 </div>

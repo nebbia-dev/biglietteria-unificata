@@ -14,7 +14,7 @@ export default function NewsletterPage() {
                 <p className="text-sm mb-8 font-light">Home / Newsletter</p>
                 <h1 className="text-4xl mb-4 font-semibold">Cremona Civic Museums Newsletter</h1>
                 <p className="max-w-3xl lato text-lg">
-                    Subscribe to the newsletter and don't miss a single event!
+                    Subscribe to the newsletter and don&apos;t miss a single event!
                 </p>
             </div>
 

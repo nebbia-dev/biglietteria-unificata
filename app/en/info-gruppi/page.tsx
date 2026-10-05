@@ -2,7 +2,6 @@ import TicketCard from "@/app/_components/TicketCard";
 import Link from "next/link";
 import {getExperiences} from "@/app/lib/domnia-experiences";
 import type { ExperienceCardData } from "@/app/lib/domnia-types";
-import EduPrograms from "@/app/_components/EduPrograms";
 
 export const dynamic = 'force-dynamic';
 
@@ -104,17 +103,27 @@ export default async function InfoGruppi() {
                             className="w-full h-[200px] object-cover rounded-xl"
                             src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine_servizi_educativi.url} alt={content.data.immagine_servizi_educativi.alternativeText} width={300} height={200}/>
 
-                        <p className="h-[100px] mt-8 text-base">{content.data.servizi_educativi_testo}</p>
+                        <p className="h-[124px] mt-8 text-base">{content.data.servizi_educativi_testo}</p>
                         <div className="flex items-center h-[64px] text-black w-full justify-end font-medium text-sm">
                             <Link aria-label="Go to the educational services page" href="/en/servizi-educativi" className="h-fit w-auto block text-center prime-bg rounded-full px-4 py-2">Find out more</Link>
                         </div>
                     </div>
+
+                    <div className="md:w-[calc(50%-0.5rem)] p-4 mt-4 md:mt-2 w-full text-white rounded-xl gradient">
+                        <h3 className="text-2xl font-semibold my-4 prime-text">Educational programs</h3>
+                        <img
+                            className="w-full h-[200px] object-cover rounded-xl"
+                            src={process.env.NEXT_PUBLIC_BASE_URL + content.data.immagine_proposte_educative.url} alt={content.data.immagine_proposte_educative.alternativeText} width={300} height={200}/>
+                        <p className="h-[124px] mt-8 text-base">{content.data.proposte_educative_testo}
+                        </p>
+                        <div className="flex items-center h-[64px] text-black w-full justify-end font-medium text-sm">
+                            <a aria-label="Go to the educational programs page" target="_blank"
+                               rel="noopener noreferrer" href={content.data.proposte_educative_link}
+                               className="h-fit w-auto block text-center prime-bg rounded-full px-4 py-2">Go to website</a>
+                        </div>
+                    </div>
                 </div>
             </section>
-
-            {/*Proposte educative*/}
-            <EduPrograms image={content.data.immagine_proposte_educative.url} alt={content.data.immagine_proposte_educative.alternativeText}/>
-
         </>
     )
 }

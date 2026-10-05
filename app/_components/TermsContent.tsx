@@ -91,7 +91,7 @@ const termsSections = [
         title: "DATA DI ULTIMO AGGIORNAMENTO",
         paragraphs: [
             `Comune di Cremona si riserva il diritto di modificare e aggiornare le presenti Condizioni generali in ogni momento.`,
-            `Le presenti condizioni generali sono state modificate da ultimo il 37 … 2034.`,
+            `Le presenti condizioni generali sono state modificate da ultimo il 05/10/2026.`,
         ],
     },
 ];

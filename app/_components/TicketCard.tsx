@@ -32,8 +32,8 @@ export default function TicketCard({el, layout, lang, disabled}: {el: TicketCard
                                 alt={el.immagine.alternativeText} width={300} height={200}/>
                             <div className="flex flex-col gap-2">
                                 {el.titolo
-                                    ? <h3 className={`${layout === 'fourth' ? 'text-base lg:line-clamp-3 lg:h-[72px]' : layout === 'half' ? 'text-2xl py-1 lg:line-clamp-2' : 'text-xl h-[56px] lg:line-clamp-2'} font-medium`}>{el.nome}</h3>
-                                    : <h2 className={`${layout === 'fourth' ? 'text-base lg:line-clamp-3 lg:h-[72px]' : layout === 'half' ? 'text-2xl py-1 lg:line-clamp-2' : 'text-xl h-[56px] lg:line-clamp-2'} font-medium`}>{el.nome}</h2>
+                                    ? <h3 className={`${layout === 'fourth' ? 'lg:text-base text-xl lg:line-clamp-3 lg:h-[72px]' : layout === 'half' ? 'text-2xl py-1 lg:line-clamp-2' : 'text-xl h-[56px] lg:line-clamp-2'} font-medium`}>{el.nome}</h3>
+                                    : <h2 className={`${layout === 'fourth' ? 'lg:text-base text-xl lg:line-clamp-3 lg:h-[72px]' : layout === 'half' ? 'text-2xl py-1 lg:line-clamp-2' : 'text-xl h-[56px] lg:line-clamp-2'} font-medium`}>{el.nome}</h2>
                                 }
                                 <p className={`${layout === 'fourth' ? 'text-sm' : ''} line-clamp-4 lato h-[96px]`}>{el.descrizione}</p>
                                 <div className="flex items-center justify-between mt-4">
@@ -41,22 +41,25 @@ export default function TicketCard({el, layout, lang, disabled}: {el: TicketCard
                                         ? <div>
                                             {el.infoPrezzo !== ""
                                                 ? <p className="text-sm">{el.infoPrezzo}<br/><span
-                                                    className={`${layout === 'fourth' ? 'text-base' : 'text-xl'} font-medium`}>{new Intl.NumberFormat("de-DE", {
+                                                    className={`${layout === 'fourth' ? 'lg:text-base text-xl' : 'text-xl'} font-medium`}>{new Intl.NumberFormat("de-DE", {
                                                     style: "currency",
                                                     currency: "EUR"
                                                 }).format(el.prezzo)}</span></p>
                                                 :
-                                                <p className={`${layout === 'fourth' ? 'text-base' : 'text-xl'} font-medium`}>{new Intl.NumberFormat("de-DE", {
+                                                <p className={`${layout === 'fourth' ? 'lg:text-base text-xl' : 'text-xl'} font-medium`}>{new Intl.NumberFormat("de-DE", {
                                                     style: "currency",
                                                     currency: "EUR"
                                                 }).format(el.prezzo)}</p>
                                             }
                                         </div>
                                         :
-                                        <p className={`${layout === 'fourth' ? 'text-base' : 'text-xl'} font-medium`}>Gratuito</p>
+                                        <p className={`${layout === 'fourth' ? 'lg:text-base text-xl' : 'text-xl'} font-medium`}>{lang === 'it'
+                                            ? 'Gratuito'
+                                            : 'Free'
+                                        }</p>
                                     }
                                     <a aria-label={purchaseAriaLabel} target="_blank" rel="noopener noreferrer"
-                                       className={`${layout === 'fourth' ? 'text-sm px-3 py-1' : 'px-4 py-2'} flex items-center gap-2 text-lg font-medium prime-bg rounded-full`}
+                                       className={`${layout === 'fourth' ? 'lg:text-sm px-3 py-1' : 'px-4 py-2'} flex items-center gap-2 text-lg font-medium prime-bg rounded-full`}
                                        href={`https://shopbiglietteriamusei.comune.cremona.it/${lang}/products/${el.slug ?? ''}`}>
                                         {lang === 'it'
                                             ? 'Prenota'

@@ -169,7 +169,7 @@ export default async function Home() {
                                 </div>
                                 <div className="p-4 mt-2">
                                     <div className="h-[56px]">
-                                        <h3 className="text-2xl md:text-lg font-medium md:line-clamp-2">{deleteTicket(el.title)}</h3>
+                                        <h3 className="text-2xl md:text-lg font-medium line-clamp-2">{deleteTicket(el.title)}</h3>
                                         {/*<p className="text-sm">{getAddress(el.locations[0]?.label)}</p>*/}
                                     </div>
 
@@ -179,7 +179,7 @@ export default async function Home() {
                                             src={process.env.NEXT_PUBLIC_BASE_URL + el.ticketImage.url}
                                             alt={`Interno del ${el.title}`} width={300} height={200}/>
                                         <div className="flex flex-col gap-2">
-                                            <h4 className="text-xl md:text-base font-medium md:line-clamp-2 h-[48px]">{el.title}</h4>
+                                            <h4 className="text-xl md:text-base font-medium line-clamp-2 h-[56px]">{el.title}</h4>
                                             <p className="line-clamp-6 md:text-sm lato md:h-[120px]">
                                                 {el.shortDescription?.replace(/<\/?[^>]+(>|$)/g, "")}
                                             </p>
@@ -191,7 +191,7 @@ export default async function Home() {
                                                         currency: "EUR"
                                                     }).format(el.cheapest)}</span></p>
 
-                                                    : <p className="text-base font-medium">Gratuito</p>
+                                                    : <p className="lg:text-base text-xl font-medium">Gratuito</p>
                                                 }
                                                 {/*<p className="text-sm">A partire da: <br/><span className="text-xl font-medium">{el.cheapest}</span></p>*/}
                                                 <a
@@ -234,8 +234,8 @@ export default async function Home() {
                             className="w-full h-[200px] object-cover rounded-xl"
                              alt={content.data.immagine_biglietto_cumulativo.alternativeText} width={300} height={200}/>
                         <div className="flex flex-col gap-2">
-                            <h3 className="text-xl md:text-base font-medium">{bundle.title}: <br/>
-                                <span className="font-normal">{bundle.subtitle}</span>
+                            <h3 className="text-lg font-medium">{bundle.title}: <br/>
+                                <span className="text-base font-normal leading-[10px]">{bundle.subtitle}</span>
                             </h3>
                             <div className="w-full flex items-center justify-end mt-4">
                                 <a

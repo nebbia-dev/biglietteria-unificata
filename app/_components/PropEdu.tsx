@@ -12,14 +12,13 @@ export default function PropEdu({image, alt} : {image:string, alt:string}) {
                 <div className="md:pr-8">
                     <h3 className="text-2xl font-semibold my-2 prime-text">Proposte educative</h3>
                     <p>Dalle scuole dell&apos;infanzia, fino agli adulti lavoriamo per aprire le porte dei musei e
-                        renderli
-                        accessibili al più ampio numero possibile di persone.</p>
+                        renderli accessibili al più ampio numero possibile di persone.</p>
                     <div className="mb-4 mt-8 text-black w-full text-end font-medium text-lg md:text-base">
                         <a
                             aria-label="Vai alla pagina dedicata alle nostre proposte educative"
                             target="_blank" rel="noopener noreferrer"
                             href="https://musei.comune.cremona.it/it/servizi-educativi/informazioni-didattica"
-                            className="w-fit prime-bg rounded-full px-4 py-2 md:text-sm">Scopri di più</a>
+                            className="w-fit prime-bg rounded-full px-4 py-2 text-sm">Scopri di più</a>
                     </div>
                 </div>
             </div>

@@ -145,7 +145,7 @@ export default async function Home() {
             </div>
 
             <h2 className="sr-only">Museums</h2>
-            <div className="flex flex-col lg:flex-row gap-4">
+            <div className="flex flex-col lg:flex-row lg:flex-wrap xl:flex-nowrap gap-4">
                 {filteredMuseums &&
                     filteredMuseums.map((el) => {
                         if (!el.heroImage || !el.ticketImage) {
@@ -153,7 +153,7 @@ export default async function Home() {
                         }
 
                         return (
-                            <div className="w-full lg:w-1/2 xl:w-1/4 text-white rounded-xl gradient"
+                            <div className="w-full lg:w-[calc(50%-8px)] xl:w-1/4 text-white rounded-xl gradient"
                                  key={el.title}>
                                 <div className="w-full h-[200px] block lg:hidden">
                                     <img
@@ -163,7 +163,7 @@ export default async function Home() {
                                 </div>
                                 <div className="p-4 mt-2">
                                     <div className="h-[56px]">
-                                        <h3 className="text-2xl md:text-lg font-medium md:line-clamp-2">{deleteTicket(el.title)}</h3>
+                                        <h3 className="text-2xl md:text-lg font-medium line-clamp-2">{deleteTicket(el.title)}</h3>
                                         {/*<p className="text-sm">{getAddress(el.locations[0]?.label)}</p>*/}
                                     </div>
 
@@ -173,8 +173,8 @@ export default async function Home() {
                                             src={process.env.NEXT_PUBLIC_BASE_URL + el.ticketImage.url}
                                             alt={`Interno del ${el.title}`} width={300} height={200}/>
                                         <div className="flex flex-col gap-2">
-                                            <h4 className="text-xl md:text-base font-medium md:line-clamp-2 h-[48px]">{el.title}</h4>
-                                            <p className="line-clamp-6 md:text-sm lato h-[120px]">
+                                            <h4 className="text-xl md:text-base font-medium line-clamp-2 h-[56px]">{el.title}</h4>
+                                            <p className="line-clamp-6 md:text-sm lato md:h-[120px]">
                                                 {el.shortDescription?.replace(/<\/?[^>]+(>|$)/g, "")}
                                             </p>
                                             <div className="flex items-center justify-between mt-4 h-[64px]">
@@ -185,7 +185,7 @@ export default async function Home() {
                                                         currency: "EUR"
                                                     }).format(el.cheapest)}</span></p>
 
-                                                    : <p className="text-base font-medium">Free</p>
+                                                    : <p className="lg:text-base text-xl font-medium">Free</p>
                                                 }
                                                 {/*<p className="text-sm">A partire da: <br/><span className="text-xl font-medium">{el.cheapest}</span></p>*/}
                                                 <a
@@ -230,8 +230,8 @@ export default async function Home() {
                             className="w-full h-[200px] object-cover rounded-xl"
                              alt={content.data.immagine_biglietto_cumulativo.alternativeText} width={300} height={200}/>
                         <div className="flex flex-col gap-2">
-                            <h3 className="text-xl md:text-base font-medium">{bundle.title}: <br/>
-                                <span className="font-normal">{bundle.subtitle}</span>
+                            <h3 className="text-lg font-medium">{bundle.title}: <br/>
+                                <span className="text-base font-normal leading-[10px]">{bundle.subtitle}</span>
                             </h3>
                             <div className="w-full flex items-center justify-end mt-4">
                                 <a

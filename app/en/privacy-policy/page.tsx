@@ -1,11 +1,11 @@
 import type {Metadata} from "next";
-import PrivacyPolicyContent from "@/app/_components/PrivacyPolicyContent";
+import PrivacyPolicyContentEn from "@/app/_components/PrivacyPolicyContentEn";
 
 export const metadata: Metadata = {
-    title: "Informativa sul trattamento dei dati personali",
-    description: "Informativa sul trattamento dei dati personali della Biglietteria Integrata Musei Civici.",
+    title: "Personal Data Processing Notice",
+    description: "Personal data processing notice for the integrated ticketing system of the Cremona Civic Museums.",
 };
 
 export default function PrivacyPolicyPage() {
-    return <PrivacyPolicyContent/>;
+    return <PrivacyPolicyContentEn/>;
 }

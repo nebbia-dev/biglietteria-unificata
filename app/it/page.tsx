@@ -179,7 +179,7 @@ export default async function Home() {
                                             src={process.env.NEXT_PUBLIC_BASE_URL + el.ticketImage.url}
                                             alt={`Interno del ${el.title}`} width={300} height={200}/>
                                         <div className="flex flex-col gap-2">
-                                            <h4 className="text-xl md:text-base font-medium line-clamp-2 h-[56px]">{el.title}</h4>
+                                            <h4 className="text-xl md:text-base font-medium line-clamp-2 h-[56px] md:h-[48px]">{el.title}</h4>
                                             <p className="line-clamp-6 md:text-sm lato md:h-[120px]">
                                                 {el.shortDescription?.replace(/<\/?[^>]+(>|$)/g, "")}
                                             </p>
